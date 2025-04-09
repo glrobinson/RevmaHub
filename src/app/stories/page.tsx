@@ -3,11 +3,16 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import emailjs from "@emailjs/browser";
+import { useQuery } from "@apollo/client";
+import { GET_STORIES_TESTIMONIALS } from "../../../lib/queries";
+import client from "../../../lib/apollo";
+import TeacherTestimonials from "../components/TeacherTestimonials";
 
 export default function TeachingRomaPage() {
-  const [showModal, setShowModal] = useState(false);
-  const [formData, setFormData] = useState({ email: "", message: "" });
-  const [visibleTestimonials, setVisibleTestimonials] = useState(2);
+    const { data, loading, error } = useQuery(GET_STORIES_TESTIMONIALS, { client });
+    const [showModal, setShowModal] = useState(false);
+    const [formData, setFormData] = useState({ email: "", message: "" });
+    const [visibleTestimonials, setVisibleTestimonials] = useState(2);
 
   const testimonials = [
     { id: 1, name: "Teacher 1" },
@@ -52,55 +57,8 @@ export default function TeachingRomaPage() {
       </section>
 
       {/* Teacher Testimonials Section */}
-      <section className="relative py-12">
-        <div className="absolute inset-0 -z-10 overflow-hidden">
-          <Image
-            src="/test.jpg"
-            alt="Blurred"
-            fill
-            className="object-cover filter blur-md opacity-50"
-          />
-        </div>
+      <TeacherTestimonials />
 
-        <div className="max-w-6xl mx-auto px-6 space-y-6">
-          <h2 className="text-xl sm:text-3xl font-semibold mb-4 text-center ">
-            Teacher Advice & Testimonials
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {testimonials.slice(0, visibleTestimonials).map((teacher) => (
-              <div
-                key={teacher.id}
-                className="bg-white/90 p-6 rounded-lg shadow-md backdrop-blur-sm"
-              >
-                <p className="italic text-gray-700 mb-4">
-                  “Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eu tincidunt congue, nisi nunc placerat justo.”
-                </p>
-                <p className="text-right font-medium">– {teacher.name}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Load More / Show Less Buttons */}
-          <div className="text-center space-x-4">
-            {visibleTestimonials < testimonials.length && (
-              <button
-                onClick={() => setVisibleTestimonials(visibleTestimonials + 2)}
-                className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200"
-              >
-                Load More
-              </button>
-            )}
-            {visibleTestimonials > 2 && (
-              <button
-                onClick={() => setVisibleTestimonials(2)}
-                className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200"
-              >
-                Show Less
-              </button>
-            )}
-          </div>
-        </div>
-      </section>
 
       {/* Submit Section */}
       <section className="bg-gray-50 px-6 py-10 text-center shadow-inner">

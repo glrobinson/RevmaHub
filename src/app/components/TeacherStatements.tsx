@@ -6,18 +6,16 @@ import { GET_TEACHER_STATEMENTS } from "../../../lib/queries";
 import client from "../../../lib/apollo";
 import { useEffect, useState } from "react";
 
-// Decode WPGraphQL global ID to numeric post ID
 const decodeWpId = (encodedId: string): number | null => {
   try {
-    const decoded = atob(encodedId); // e.g., "post:145"
-    const match = decoded.match(/:(\d+)$/); // extract number
+    const decoded = atob(encodedId);
+    const match = decoded.match(/:(\d+)$/);
     return match ? parseInt(match[1], 10) : null;
   } catch {
     return null;
   }
 };
 
-// Fetch image info using REST API
 const fetchImageDetails = async (imageId: number) => {
     const res = await fetch(`https://ed.hub.revmaorg.gr/wp-json/wp/v2/media/${imageId}`);
     if (!res.ok) throw new Error("Failed to fetch image data");

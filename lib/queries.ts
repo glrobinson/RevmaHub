@@ -17,5 +17,19 @@ export const GET_TEACHER_STATEMENTS = gql`
     }
   }
 }
-
 `;
+
+export const GET_STORIES_TESTIMONIALS = gql`
+  query {
+    testimonials {
+      nodes {
+        testimonialfields {
+          name
+          text
+        }
+      }
+    }
+  }
+`;
+
+
