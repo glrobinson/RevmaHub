@@ -1,103 +1,141 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+import useEmblaCarousel from "embla-carousel-react";
+import { useCallback, useEffect, useState } from "react";
+import { useQuery } from "@apollo/client";
+import client from "../../lib/apollo";
+import { GET_TEACHER_STATEMENTS } from "../../lib/queries";
+import TeacherStatements from "../app/components/TeacherStatements";
+
+
+const carouselImages = ["/activities4.jpg", "/activities2.jpg", "/activities3.jpg", "/activities1.jpg", "/activities5.jpg"];
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const { data, loading, error } = useQuery(GET_TEACHER_STATEMENTS, { client });
+  const statements = data?.statements?.nodes || [];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const scrollTo = useCallback((index: number) => {
+    if (emblaApi) emblaApi.scrollTo(index);
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    emblaApi.on("select", () => setSelectedIndex(emblaApi.selectedScrollSnap()));
+  }, [emblaApi]);
+
+  return (
+    <main className="space-y-16">
+      {/* Hero Section with Image + Text Overlay */}
+      <section className="relative h-[400px] w-full">
+        <Image
+          src="/roma.png"
+          alt=""
+          fill
+          priority
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-black/30 flex items-center justify-center px-4">
+          <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-bold text-center">
+            Roma Education Digital Hub
+          </h1>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+      </section>
+
+      {/* Mission Section */}
+      <section className="text-center">
+      <h2 className="text-xl sm:text-3xl font-semibold mb-4">Our Mission</h2>
+      <p className="text-gray-700 max-w-xl mx-auto mb-6 text-sm sm:text-base">
+        Revma is dedicated to supporting teachers with meaningful tools, resources, and community.
+      </p>
+
+      <div className="max-w-4xl mx-auto relative">
+        {/* Carousel Viewport */}
+        <div className="overflow-hidden rounded-lg" ref={emblaRef}>
+          <div className="flex">
+            {carouselImages.map((src, index) => (
+              <div
+                className="flex-shrink-0 relative w-full h-56 sm:h-64 md:h-80"
+                key={index}
+              >
+                <Image
+                  src={src}
+                  alt={`Carousel Image ${index + 1}`}
+                  fill
+                  className="object-cover rounded"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Left Arrow */}
+        <button
+          onClick={() => emblaApi && emblaApi.scrollPrev()}
+          className="absolute left-2 top-1/2 -translate-y-1/2 bg-white rounded-full shadow p-2 sm:p-3 hover:bg-gray-200 transition z-10"
+          aria-label="Previous"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          <span className="text-lg sm:text-xl">←</span>
+        </button>
+
+        {/* Right Arrow */}
+        <button
+          onClick={() => emblaApi && emblaApi.scrollNext()}
+          className="absolute right-2 top-1/2 -translate-y-1/2 bg-white rounded-full shadow p-2 sm:p-3 hover:bg-gray-200 transition z-10"
+          aria-label="Next"
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          <span className="text-lg sm:text-xl">→</span>
+        </button>
+
+        {/* Dots */}
+        <div className="flex justify-center gap-2 mt-4">
+          {carouselImages.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => scrollTo(index)}
+              className={`w-3 h-3 rounded-full transition ${
+                selectedIndex === index ? "bg-black" : "bg-gray-400"
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+
+
+    {/* Teacher & Staff Statements */}
+    <TeacherStatements />
+
+
+
+      {/* CTA Section */}
+      <section className="text-center py-16 bg-gray-50 px-4 mb-12">
+        <h4 className="text-2xl font-semibold mb-8 text-gray-800">
+          Start Exploring Resources
+        </h4>
+
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+          <Link href="/stories">
+            <button className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200">
+              Teaching Roma
+            </button>
+          </Link>
+          <Link href="/resources">
+            <button className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200">
+              Resource Archive
+            </button>
+          </Link>
+          <Link href="/info">
+            <button className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200">
+              Information
+            </button>
+          </Link>
+        </div>
+      </section>
+    </main>
   );
 }
