@@ -7,7 +7,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import client from "../../lib/apollo";
 import { GET_TEACHER_STATEMENTS } from "../../lib/queries";
-import TeacherStatements from "../app/components/TeacherStatements";
+import TeacherStatements from "./components/TeacherStatements";
 
 
 const carouselImages = ["/activities4.jpg", "/activities2.jpg", "/activities3.jpg", "/activities1.jpg", "/activities5.jpg"];
@@ -30,21 +30,28 @@ export default function Home() {
 
   return (
     <main className="space-y-16">
-      {/* Hero Section with Image + Text Overlay */}
-      <section className="relative h-[400px] w-full">
-        <Image
-          src="/roma.png"
-          alt=""
-          fill
-          priority
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-black/30 flex items-center justify-center px-4">
-          <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-bold text-center">
-            Roma Education Digital Hub
-          </h1>
-        </div>
-      </section>
+      
+
+      {/* Hero Section with Blurred Background */}
+              <section className="relative h-[400px] w-full overflow-hidden">
+              {/* Blurred background image layer */}
+              <div className="absolute inset-0 z-0">
+                  <Image
+                  src="/groupstaff.jpg"
+                  alt="Teaching Roma Students"
+                  fill
+                  priority
+                  className="object-cover filter blur-sm scale-105"
+                  />
+              </div>
+      
+              {/* Overlay and text */}
+              <div className="absolute inset-0 z-10 bg-black/30 flex flex-col items-center justify-center text-center px-4">
+                  <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-bold mb-4 drop-shadow">
+                  Roma Education Digital Hub
+                  </h1>
+              </div>
+              </section>
 
       {/* Mission Section */}
       <section className="text-center">

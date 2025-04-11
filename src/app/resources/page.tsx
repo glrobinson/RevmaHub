@@ -1,5 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import emailjs from "@emailjs/browser";
 
@@ -63,10 +64,10 @@ export default function ResourcesPage() {
 
     if (formRef.current) {
       emailjs.sendForm(
-        "your_service_id", // replace with your service ID
-        "your_template_id", // replace with your template ID
+        "service_fyjza4t", // replace with your service ID
+        "template_kse9rie", // replace with your template ID
         formRef.current,
-        "your_public_key" // replace with your public key
+        "_c4qW0hFnGM9EYoMZ" // replace with your public key
       )
       .then(() => {
         alert("Submission sent!");
@@ -80,17 +81,31 @@ export default function ResourcesPage() {
 
   return (
     <main className="space-y-5 text-sm">
-      {/* Header */}
-      <section className="relative h-[200px] sm:h-[200px] md:h-[200px] w-full">
-        <div className="absolute inset-0 bg-white flex flex-col justify-center items-center text-center px-4">
-            <h1 className="text-black text-3xl sm:text-4xl md:text-5xl font-bold mb-4 drop-shadow">
-                Explore Our Teaching Resources
-            </h1>
-            <p className="text-black text-sm sm:text-base md:text-lg max-w-2xl drop-shadow">
-                Lesson plans, activity guides, and cultural materials created to support Roma education.
-            </p>
-        </div>
-      </section>
+      
+
+      {/* Hero Section with Blurred Background */}
+                    <section className="relative h-[400px] w-full overflow-hidden">
+                    {/* Blurred background image layer */}
+                    <div className="absolute inset-0 z-0">
+                        <Image
+                        src="/activities2.jpg"
+                        alt="Teaching Roma Students"
+                        fill
+                        priority
+                        className="object-cover filter blur-sm scale-105"
+                        />
+                    </div>
+            
+                    {/* Overlay and text */}
+                    <div className="absolute inset-0 z-10 bg-black/30 flex flex-col items-center justify-center text-center px-4">
+                        <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-bold mb-4 drop-shadow">
+                        Explore Our Teaching Resources
+                        </h1>
+                        <p className="text-white text-sm sm:text-base md:text-lg max-w-2xl drop-shadow">
+                        Lesson plans, activity guides, and cultural materials created to support Roma education.
+                        </p>
+                    </div>
+                    </section>
 
       {/* Category Icons */}
       <section className="max-w-8xl mx-auto px-4">
@@ -184,7 +199,7 @@ export default function ResourcesPage() {
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div className="fixed inset-0 backdrop-blur-sm bg-black/30 flex justify-center items-center z-50">
           <div className="bg-white p-10 rounded-lg w-full max-w-lg relative">
             <button className="absolute top-4 right-4 text-black font-bold" onClick={() => setIsModalOpen(false)}>✕</button>
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
@@ -194,7 +209,7 @@ export default function ResourcesPage() {
               <input type="text" name="phone" placeholder="Phone Number" className="w-full border p-2 rounded" />
               <textarea name="description" placeholder="Resource Description" required className="w-full border p-2 rounded h-24" />
               <input type="text" name="resource_type" placeholder="Resource Type" className="w-full border p-2 rounded" />
-              <input type="file" name="image" accept="image/*" className="w-full border p-2 rounded" onChange={(e) => setUploadedImage(e.target.files?.[0] ?? null)} />
+              <input type="text" name="file_link" placeholder="Paste a download link (Google Drive, Dropbox, etc.)" className="w-full border p-2 rounded"/>
               <div className="flex justify-between">
                 <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">Cancel</button>
                 <button type="submit" className="px-4 py-2 bg-yellow-400 rounded hover:bg-yellow-500">Submit</button>

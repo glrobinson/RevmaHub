@@ -13,7 +13,7 @@ export function Footer() {
           <h5 className="text-base font-semibold mb-4 text-gray-900">Quick Links</h5>
           <ul className="space-y-2">
             <li>
-              <Link href="/" className="hover:underline text-gray-700">Main Page</Link>
+              <Link href="/" className="hover:underline text-gray-700">Home</Link>
             </li>
             <li>
               <Link href="/stories" className="hover:underline text-gray-700">Teaching Roma</Link>

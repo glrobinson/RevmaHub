@@ -4,17 +4,30 @@ export default function InfoPage() {
   return (
     <main className="space-y-5 text-sm">
 
-      {/* Header */}
-      <section className="relative h-[200px] sm:h-[200px] md:h-[200px] w-full">
-        <div className="absolute inset-0 bg-white flex flex-col justify-center items-center text-center px-4">
-            <h1 className="text-black text-3xl sm:text-4xl md:text-5xl font-bold mb-4 drop-shadow">
-                Learn More About Roma Experiences, History, and Education
-            </h1>
-            <p className="text-black text-sm sm:text-base md:text-lg max-w-2xl drop-shadow">
-                Explore key facts, concepts, and questions about Roma communities and education.
-            </p>
-        </div>
-      </section>
+
+      {/* Hero Section with Blurred Background */}
+                          <section className="relative h-[400px] w-full overflow-hidden">
+                          {/* Blurred background image layer */}
+                          <div className="absolute inset-0 z-0">
+                              <Image
+                              src="/classroom.jpg"
+                              alt="Teaching Roma Students"
+                              fill
+                              priority
+                              className="object-cover filter blur-sm scale-105"
+                              />
+                          </div>
+                  
+                          {/* Overlay and text */}
+                          <div className="absolute inset-0 z-10 bg-black/30 flex flex-col items-center justify-center text-center px-4">
+                              <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-bold mb-4 drop-shadow">
+                              Learn More About Roma Experiences, History, and Education
+                              </h1>
+                              <p className="text-white text-sm sm:text-base md:text-lg max-w-2xl drop-shadow">
+                              Explore key facts, concepts, and questions about Roma communities and education.
+                              </p>
+                          </div>
+                          </section>
 
       {/* Statistics Section */}
       <section className="bg-gray-100 px-6 py-10 max-w-6xl mx-auto">

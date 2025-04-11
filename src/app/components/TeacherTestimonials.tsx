@@ -14,15 +14,6 @@ export default function TeacherTestimonials() {
 
   return (
     <section className="relative py-12">
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <Image
-          src="/test.jpg"
-          alt="Blurred background"
-          fill
-          className="object-cover filter blur-md opacity-50"
-        />
-      </div>
-
       <div className="max-w-6xl mx-auto px-6 space-y-6">
         <h2 className="text-xl sm:text-3xl font-semibold mb-4 text-center">
           Teacher Advice & Testimonials
@@ -36,7 +27,7 @@ export default function TeacherTestimonials() {
             {testimonials.slice(0, visibleTestimonials).map((t: any, i: number) => (
               <div
                 key={i}
-                className="bg-white/90 p-6 rounded-lg shadow-md backdrop-blur-sm"
+                className="bg-gray-100 p-6 rounded-lg shadow-md"
               >
                 <p className="italic text-gray-700 mb-4">“{t.testimonialfields?.text}”</p>
                 <p className="text-right font-medium">

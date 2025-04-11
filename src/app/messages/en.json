@@ -1,0 +1,45 @@
+{
+    "NavBar": {
+      "home": "Home",
+      "teachingRoma": "Teaching Roma",
+      "resourceArchive": "Resource Archive",
+      "information": "Information",
+      "contactUs": "Contact Us"
+    },
+    "HomePage": {
+      "heroTitle": "Roma Education Digital Hub",
+      "missionTitle": "Our Mission",
+      "missionText": "Revma is dedicated to supporting teachers with meaningful tools, resources, and community.",
+      "ctaTitle": "Start Exploring Resources",
+      "teachingRomaBtn": "Teaching Roma",
+      "resourceArchiveBtn": "Resource Archive",
+      "infoBtn": "Information"
+    },
+    "StoriesPage": {
+      "heroTitle": "Supporting Teachers of Roma Students",
+      "heroSubtitle": "Revma is here to support educators with meaningful tools, resources, and real advice from teachers who have worked with Roma students across different communities.",
+      "submitTitle": "Want to Share Your Experience?",
+      "submitText": "If you’re a teacher of Roma students, we’d love to hear your story or advice for others.",
+      "submitBtn": "Submit Your Advice or Testimonial",
+      "communityCentersTitle": "Community Centers Supporting Roma Education",
+      "communityCentersText": "These centers offer valuable resources and support to teachers working with Roma students.",
+      "mapTitle": "Location Map",
+      "ctaTitle": "New to Teaching Roma Students?",
+      "ctaText": "If you’re a new teacher of Roma students, or simply looking for helpful educational materials and resources to better support your class, we’ve got you covered.",
+      "ctaBtn": "Explore Teaching Resources"
+    },
+    "InfoPage": {
+      "heroTitle": "Learn More About Roma Experiences, History, and Education",
+      "heroSubtitle": "Explore key facts, concepts, and questions about Roma communities and education.",
+      "statsTitle": "Statistics",
+      "infographicsTitle": "Important Pieces to Highlight"
+    },
+    "ContactModal": {
+      "emailPlaceholder": "Email",
+      "messagePlaceholder": "Message",
+      "cancel": "Cancel",
+      "submit": "Submit",
+      "alertSuccess": "Message sent!",
+      "alertFail": "Failed to send message."
+    }
+  }

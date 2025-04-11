@@ -7,7 +7,6 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: "Revma Education Hub",
-  description: "WPI IQP Project",
 };
 
 export default function RootLayout({
