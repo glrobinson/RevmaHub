@@ -172,11 +172,42 @@ export default function TeachingRomaPage() {
           <div className="bg-white p-10 rounded-lg w-full max-w-lg relative">
             <button className="absolute top-4 right-4 text-black font-bold" onClick={() => setIsModalOpen(false)}>✕</button>
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
-              <input type="email" name="email" placeholder="Email" required className="w-full border p-2 rounded" />
-              <textarea name="message" placeholder="Message" required className="w-full border p-2 rounded h-24" />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                required
+                className="w-full border p-2 rounded"
+              />
+
+              <input
+                type="text"
+                name="role"
+                placeholder="Your Role (e.g. Teacher, Principal, etc.)"
+                className="w-full border p-2 rounded"
+              />
+
+              <textarea
+                name="message"
+                placeholder="Message"
+                required
+                className="w-full border p-2 rounded h-24"
+              />
+
               <div className="flex justify-between">
-                <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">Cancel</button>
-                <button type="submit" className="px-4 py-2 bg-yellow-400 rounded hover:bg-yellow-500">Submit</button>
+                <button
+                  type="button"
+                  onClick={() => setIsModalOpen(false)}
+                  className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-yellow-400 rounded hover:bg-yellow-500"
+                >
+                  Submit
+                </button>
               </div>
             </form>
           </div>

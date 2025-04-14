@@ -32,4 +32,34 @@ export const GET_STORIES_TESTIMONIALS = gql`
   }
 `;
 
+export const GET_RESOURCES = gql`
+  query {
+  resources {
+    nodes {
+      title
+      uri
+      resourcefield {
+        description
+        category
+        link
+        image {
+          node {
+            databaseId
+          }
+        }
+        file {
+          node {
+            mediaItemUrl
+            title
+          }
+        }
+      }
+    }
+  }
+}
+`;
+
+
+
+
 

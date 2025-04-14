@@ -27,11 +27,11 @@ export function NavBar() {
           <Image
             src="/revma-logo.png"
             alt="Amke Revma Logo"
-            width={40}
-            height={40}
+            width={50}
+            height={50}
             className="rounded-full"
           />
-          <span className="text-xl font-bold whitespace-nowrap">Amke Revma</span>
+          <span className="text-2xl font-bold whitespace-nowrap">Amke Revma</span>
         </Link>
 
         {/* Hamburger Icon (Mobile) */}
@@ -55,7 +55,7 @@ export function NavBar() {
         </button>
 
         {/* Desktop Nav Links */}
-        <div className="hidden md:flex items-center space-x-4 text-sm">
+        <div className="hidden md:flex items-center space-x-4 text-base">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
@@ -83,7 +83,7 @@ export function NavBar() {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-black px-6 py-4 space-y-2 text-sm">
+        <div className="md:hidden bg-black px-6 py-4 space-y-2 text-base">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
