@@ -177,9 +177,9 @@ export default function ResourcesPage() {
       </section>
 
       {/* Submit CTA */}
-      <section className="text-center space-y-4 py-10 bg-gray-100 shadow-inner shadow-md">
-          <h2 className="text-lg font-semibold">Want to Share More Resources?</h2>
-          <p className="text-gray-700 max-w-xl mx-auto text-sm">
+      <section className="bg-gray-50 px-6 py-10 text-center shadow-md">
+          <h2 className="text-lg font-semibold mb-2">Want to Share More Resources?</h2>
+          <p className="text-sm text-gray-700 mb-4">
             If you're a teacher and have found resources that support your work with Roma students—such as lesson plans, tools, or platforms—you can share them here for others to benefit.
           </p>
           <button

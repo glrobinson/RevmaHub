@@ -39,23 +39,23 @@ export default function TeacherTestimonials() {
         )}
 
         {/* Load More / Show Less Buttons */}
-        <div className="text-center space-x-4">
-          {testimonials.length > visibleTestimonials && (
+        <div className="col-span-full mt-6 flex flex-col md:flex-row items-center justify-center gap-4 text-center">
+        {testimonials.length > visibleTestimonials && (
             <button
-              onClick={() => setVisibleTestimonials((prev) => prev + 4)}
-              className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200"
+            onClick={() => setVisibleTestimonials((prev) => prev + 2)}
+            className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200"
             >
-              Load More
+            Load More
             </button>
-          )}
-          {visibleTestimonials > 4 && (
+        )}
+        {visibleTestimonials > 2 && (
             <button
-              onClick={() => setVisibleTestimonials((prev) => Math.max(4, prev - 2))}
-              className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200"
+            onClick={() => setVisibleTestimonials((prev) => Math.max(2, prev - 2))}
+            className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200"
             >
-              Show Less
+            Show Less
             </button>
-          )}
+        )}
         </div>
       </div>
     </section>

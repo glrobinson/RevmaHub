@@ -170,7 +170,7 @@ export default function Resources({ selectedCategory, searchQuery }: Props) {
         );
       })}
       {/* Load More / Show Less Buttons */}
-        <div className="col-span-full text-center mt-6 space-x-4">
+      <div className="col-span-full mt-6 flex flex-col md:flex-row items-center justify-center gap-4 text-center">
         {filteredResources.length > visibleResources && (
             <button
             onClick={() => setVisibleResources((prev) => prev + 4)}

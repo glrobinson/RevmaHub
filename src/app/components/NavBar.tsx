@@ -15,7 +15,7 @@ export function NavBar() {
     { href: "/", label: "Home" },
     { href: "/stories", label: "Teaching Roma" },
     { href: "/resources", label: "Resource Archive" },
-    { href: "/info", label: "Information" },
+    { href: "/info", label: "Learn More" },
   ];
 
   return (
@@ -73,7 +73,7 @@ export function NavBar() {
           })}
           <button
           onClick={() => setIsContactOpen(true)}
-          className="px-3 py-2 rounded hover:bg-white hover:text-black text-sm transition duration-200"
+          className="px-3 py-2 rounded hover:bg-white hover:text-black text-base transition duration-200"
         >
           Contact Us
         </button>

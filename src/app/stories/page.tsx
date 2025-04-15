@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import emailjs from "@emailjs/browser";
 import { useQuery } from "@apollo/client";
-import { GET_STORIES_TESTIMONIALS } from "../../../lib/queries";
+import { GET_MEDIA_ITEMS, GET_STORIES_TESTIMONIALS, GET_TEACHING_ROMA_IMAGES } from "../../../lib/queries";
 import client from "../../../lib/apollo";
 import TeacherTestimonials from "../components/TeacherTestimonials";
 
@@ -13,6 +13,21 @@ export default function TeachingRomaPage() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [uploadedImage, setUploadedImage] = useState<File | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
+    const { data: imageData } = useQuery(GET_TEACHING_ROMA_IMAGES, { client });
+
+    const imageFields = imageData?.page?.teachingRomaImages || {};
+    const imageIds = Object.values(imageFields)
+      .map((img: any) => img?.node?.databaseId)
+      .filter(Boolean);
+
+    const { data: mediaData } = useQuery(GET_MEDIA_ITEMS, {
+      variables: { ids: imageIds },
+      skip: imageIds.length === 0,
+      client,
+    });
+
+    const imageRow = mediaData?.mediaItems?.nodes || [];
+
 
   const testimonials = [
     { id: 1, name: "Teacher 1" },
@@ -60,7 +75,7 @@ export default function TeachingRomaPage() {
         {/* Overlay and text */}
         <div className="absolute inset-0 z-10 bg-black/30 flex flex-col items-center justify-center text-center px-4">
             <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-bold mb-4 drop-shadow">
-            Supporting Teachers of Roma Students
+            Supporting Inclusive Education
             </h1>
             <p className="text-white text-sm sm:text-base md:text-lg max-w-2xl drop-shadow">
             Revma is here to support educators with meaningful tools, resources, and real advice from teachers who have worked with Roma students across different communities.
@@ -79,44 +94,29 @@ export default function TeachingRomaPage() {
         </p>
         <button
           onClick={() => setIsModalOpen(true)}
-          className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200"
-        >
+          className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200">
           Submit Your Advice or Testimonial
         </button>
       </section>
 
       {/* Image Row Section */}
-    <section className="px-6 py-3 bg-white">
-    <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div className="rounded overflow-hidden shadow">
-        <Image
-            src="/classroom.jpg"
-            alt="Roma Education 1"
-            width={500}
-            height={500}
-            className="object-cover w-full h-48"
-        />
+      <section className="px-6 py-3 bg-white">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
+        {imageRow.map((img: any, index: number) => (
+          img?.sourceUrl && (
+            <div key={img.databaseId || index} className="rounded overflow-hidden shadow">
+              <Image
+                src={img.sourceUrl}
+                alt={img.altText || `Roma Education Image ${index + 1}`}
+                width={500}
+                height={500}
+                className="object-cover w-full h-60"
+              />
+            </div>
+          )
+        ))}
         </div>
-        <div className="rounded overflow-hidden shadow">
-        <Image
-            src="/classroom2.jpg"
-            alt="Roma Education 2"
-            width={500}
-            height={500}
-            className="object-cover w-full h-48"
-        />
-        </div>
-        <div className="rounded overflow-hidden shadow">
-        <Image
-            src="/teaching.jpg"
-            alt="Roma Education 3"
-            width={500}
-            height={500}
-            className="object-cover w-full h-48"
-        />
-        </div>
-    </div>
-    </section>
+      </section>
 
       {/* Community Centers */}
       <section className="px-6 py-12 bg-white text-center">
@@ -154,9 +154,9 @@ export default function TeachingRomaPage() {
       </section>
 
       {/* CTA */}
-      <section className="text-center space-y-4 py-10 bg-gray-100 shadow-inner shadow-md">
-        <h2 className="text-lg font-semibold">New to Teaching Roma Students?</h2>
-        <p className="text-gray-700 max-w-xl mx-auto text-sm">
+      <section className="bg-gray-50 px-6 py-10 text-center shadow-md">
+        <h2 className="text-lg font-semibold mb-2">New to Teaching Roma Students?</h2>
+        <p className="text-sm text-gray-700 mb-4">
           If you’re a new teacher of Roma students, or simply looking for helpful educational materials and resources to better support your class, we’ve got you covered.
         </p>
         <Link href="/resources">

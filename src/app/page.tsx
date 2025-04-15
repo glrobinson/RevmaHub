@@ -4,17 +4,31 @@ import Image from "next/image";
 import Link from "next/link";
 import useEmblaCarousel from "embla-carousel-react";
 import { useCallback, useEffect, useState } from "react";
-import { useQuery } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import client from "../../lib/apollo";
-import { GET_TEACHER_STATEMENTS } from "../../lib/queries";
+import { GET_MEDIA_ITEMS, GET_HOMEPAGE_CAROUSEL_IMAGES, GET_TEACHER_STATEMENTS } from "../../lib/queries";
 import TeacherStatements from "./components/TeacherStatements";
-
 
 const carouselImages = ["/activities4.jpg", "/activities2.jpg", "/activities3.jpg", "/activities1.jpg", "/activities5.jpg"];
 
 export default function Home() {
   const { data, loading, error } = useQuery(GET_TEACHER_STATEMENTS, { client });
   const statements = data?.statements?.nodes || [];
+  const { data: idData, loading: idLoading } = useQuery(GET_HOMEPAGE_CAROUSEL_IMAGES, { client });
+  const imageFields = idData?.page?.homepageCarouselImages || {};
+
+  // Extract databaseIds
+  const imageIds = Object.values(imageFields)
+    .map((img: any) => img?.node?.databaseId)
+    .filter(Boolean);
+
+  const { data: mediaData, loading: mediaLoading } = useQuery(GET_MEDIA_ITEMS, {
+    variables: { ids: imageIds },
+    skip: imageIds.length === 0,
+    client,
+  });
+
+  const images = mediaData?.mediaItems?.nodes || [];
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -30,8 +44,6 @@ export default function Home() {
 
   return (
     <main className="space-y-16">
-      
-
       {/* Hero Section with Blurred Background */}
               <section className="relative h-[400px] w-full overflow-hidden">
               {/* Blurred background image layer */}
@@ -63,20 +75,20 @@ export default function Home() {
       <div className="max-w-4xl mx-auto relative">
         {/* Carousel Viewport */}
         <div className="overflow-hidden rounded-lg" ref={emblaRef}>
-          <div className="flex">
-            {carouselImages.map((src, index) => (
-              <div
-                className="flex-shrink-0 relative w-full h-56 sm:h-64 md:h-80"
-                key={index}
-              >
-                <Image
-                  src={src}
-                  alt={`Carousel Image ${index + 1}`}
-                  fill
-                  className="object-cover rounded"
-                />
-              </div>
-            ))}
+            <div className="flex">
+            {images.map((img: { databaseId: number; sourceUrl: string; altText?: string }, index: number) => (
+            <div
+              key={img.databaseId}
+              className="flex-shrink-0 relative w-full h-56 sm:h-64 md:h-80"
+            >
+              <Image
+                src={img.sourceUrl}
+                alt={img.altText || `Carousel image ${index + 1}`}
+                fill
+                className="object-cover rounded"
+              />
+            </div>
+          ))}
           </div>
         </div>
 
@@ -117,9 +129,7 @@ export default function Home() {
     {/* Teacher & Staff Statements */}
     <TeacherStatements />
 
-
-
-      {/* CTA Section */}
+    {/* CTA Section */}
       <section className="text-center py-16 bg-gray-50 px-4 mb-12">
         <h4 className="text-2xl font-semibold mb-8 text-gray-800">
           Start Exploring Resources
