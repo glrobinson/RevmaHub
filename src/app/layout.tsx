@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google';
 import "./globals.css";
 import { NavBar } from "@/app/components/NavBar";
 import { Footer } from "@/app/components/Footer";
+import { TranslationProvider } from './context/TranslationContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,11 +16,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en"> {/* Optional: Set this dynamically in each page */}
       <body className={`${inter.className} antialiased`}>
-        <NavBar />
-        <main className="pt-[80px]">{children}</main>
-        <Footer />
+        <TranslationProvider>
+          <NavBar />
+          <main className="pt-[80px]">{children}</main>
+          <Footer />
+        </TranslationProvider>
       </body>
     </html>
   );

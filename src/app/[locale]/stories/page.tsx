@@ -4,9 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 import emailjs from "@emailjs/browser";
 import { useQuery } from "@apollo/client";
-import { GET_MEDIA_ITEMS, GET_STORIES_TESTIMONIALS, GET_TEACHING_ROMA_IMAGES } from "../../../lib/queries";
-import client from "../../../lib/apollo";
-import TeacherTestimonials from "../components/TeacherTestimonials";
+import { GET_MEDIA_ITEMS, GET_STORIES_TESTIMONIALS, GET_TEACHING_ROMA_IMAGES } from "../../../../lib/queries";
+import client from "../../../../lib/apollo";
+import TeacherTestimonials from "../../components/TeacherTestimonials";
 
 export default function TeachingRomaPage() {
     const { data, loading, error } = useQuery(GET_STORIES_TESTIMONIALS, { client });

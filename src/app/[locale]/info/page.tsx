@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { useQuery } from "@apollo/client";
-import { GET_INFOGRAPHICS } from "../../../lib/queries";
-import client from "../../../lib/apollo";
+import { GET_INFOGRAPHICS } from "../../../../lib/queries";
+import client from "../../../../lib/apollo";
 import { useState } from "react";
 
 export default function InfoPage() {

@@ -2,10 +2,10 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import emailjs from "@emailjs/browser";
-import Resources from "../components/Resources";
+import Resources from "../../components/Resources";
 import { useQuery } from "@apollo/client";
-import { GET_RESOURCES } from "../../../lib/queries";
-import client from "../../../lib/apollo";
+import { GET_RESOURCES } from "../../../../lib/queries";
+import client from "../../../../lib/apollo";
 
 export default function ResourcesPage() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -15,12 +15,12 @@ export default function ResourcesPage() {
   const { data, loading, error, refetch } = useQuery(GET_RESOURCES, { client });
 
   const categories = [
-    { title: "Inclusive Practices", summary: "Quick sentence summary", img: "/inclusivity.png", tag: "inclusive practices" },
-    { title: "Linguistics", summary: "Quick sentence summary", img: "/translator.png", tag: "linguistics" },
-    { title: "Roma History", summary: "Quick sentence summary", img: "/history.png", tag: "roma history" },
-    { title: "Classroom Activities", summary: "Quick sentence summary", img: "/training.png", tag: "classroom activities" },
-    { title: "Interactive Game", summary: "Quick sentence summary", img: "/play.png", tag: "interactive game" },
-    { title: "Teaching Platform", summary: "Quick sentence summary", img: "/platform.png", tag: "teaching platform" },
+    { title: "Inclusive Practices", summary: "Resources that promote equitable and supportive teaching.", img: "/inclusivity.png", tag: "inclusive practices" },
+    { title: "Linguistics", summary: "Materials about language development, multilingual practices, and communication strategies.", img: "/translator.png", tag: "linguistics" },
+    { title: "Roma History", summary: "Content that explores the historical experiences of Roma communities.", img: "/history.png", tag: "roma history" },
+    { title: "Classroom Activities", summary: "Lesson plans, worksheets, and in-class exercises designed to engage students in hands-on learning.", img: "/training.png", tag: "classroom activities" },
+    { title: "Interactive Game", summary: "Educational games and digital tools to promote engaging learning experiences.", img: "/play.png", tag: "interactive game" },
+    { title: "Teaching Platform", summary: "Comprehensive platforms offering structured resources for educators.", img: "/platform.png", tag: "teaching platform" },
   ];
 
   const handleSubmit = (e: any) => {

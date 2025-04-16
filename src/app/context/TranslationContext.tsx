@@ -1,0 +1,74 @@
+'use client';
+
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+  ReactNode,
+} from 'react';
+import en from '../translations/en.json';
+import el from '../translations/el.json';
+
+type Language = 'en' | 'el';
+const translations = { en, el };
+
+interface TranslationContextProps {
+  language: Language;
+  changeLanguage: (lang: Language) => void;
+  t: (key: string) => string;
+}
+
+const TranslationContext = createContext<TranslationContextProps | undefined>(undefined);
+
+export const TranslationProvider = ({ children }: { children: ReactNode }) => {
+  const [language, setLanguage] = useState<Language>('en');
+
+  useEffect(() => {
+    const pathLocale = window.location.pathname.split('/')[1];
+    if (pathLocale === 'en' || pathLocale === 'el') {
+      setLanguage(pathLocale);
+      localStorage.setItem('language', pathLocale);
+    } else {
+      const saved = localStorage.getItem('language');
+      if (saved === 'en' || saved === 'el') {
+        setLanguage(saved);
+      }
+    }
+  }, []);
+  
+
+  const changeLanguage = (lang: Language) => {
+    setLanguage(lang);
+    localStorage.setItem('language', lang);
+  };
+
+  // Translation function that supports nested keys like "NavBar.home"
+  const t = useCallback((key: string): string => {
+    const langDict = translations[language] || en;
+    const keys = key.split('.');
+    let result: any = langDict;
+
+    for (const k of keys) {
+      result = result?.[k];
+      if (result === undefined) return key; // fallback to key if missing
+    }
+
+    return typeof result === 'string' ? result : key;
+  }, [language]);
+
+  return (
+    <TranslationContext.Provider value={{ language, changeLanguage, t }}>
+      {children}
+    </TranslationContext.Provider>
+  );
+};
+
+export const useTranslation = () => {
+  const context = useContext(TranslationContext);
+  if (!context) {
+    throw new Error('useTranslation must be used within a TranslationProvider');
+  }
+  return context;
+};

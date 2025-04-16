@@ -15,6 +15,11 @@
       "resourceArchiveBtn": "Resource Archive",
       "infoBtn": "Information"
     },
+    "TeacherStatements": {
+      "title": "Teacher and Revma Staff Statements",
+      "loadMore": "Load More",
+      "showLess": "Show Less"
+    },
     "StoriesPage": {
       "heroTitle": "Supporting Teachers of Roma Students",
       "heroSubtitle": "Revma is here to support educators with meaningful tools, resources, and real advice from teachers who have worked with Roma students across different communities.",
