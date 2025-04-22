@@ -129,30 +129,44 @@ export default function InfoPage() {
 
     {/* Image Modal */}
     {modalImage && (
+    <div
+      className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm overflow-y-auto"
+      onClick={() => setModalImage(null)}
+    >
       <div
-        className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center overflow-y-auto"
-        onClick={() => setModalImage(null)}
+        className="relative bg-white p-4 rounded-lg shadow-lg max-w-4xl w-[90%] mx-auto my-10 flex flex-col items-center"
+        onClick={(e) => e.stopPropagation()} // prevent close on click inside
       >
-        <div
-          className="relative bg-white p-4 rounded-lg shadow-lg max-w-4xl w-[90%] my-10"
-          onClick={(e) => e.stopPropagation()} // prevents modal from closing when clicking inside
+        {/* X Close Button */}
+        <button
+          onClick={() => setModalImage(null)}
+          className="absolute top-4 right-4 text-gray-700 text-3xl font-bold hover:text-black z-10"
         >
-          <Image
-            src={modalImage}
-            alt="Full-size infographic"
-            width={1200}
-            height={1200}
-            className="w-full h-auto rounded"
-          />
-          <button
-            onClick={() => setModalImage(null)}
-            className="absolute top-3 right-4 text-gray-700 text-3xl font-bold hover:text-black"
-          >
-            &times;
-          </button>
-        </div>
+          &times;
+        </button>
+
+        {/* Image */}
+        <Image
+          src={modalImage}
+          alt="Full-size infographic"
+          width={1200}
+          height={1200}
+          className="w-full h-auto rounded"
+        />
+
+        {/* Download Button at Bottom */}
+        <a
+          href={modalImage}
+          download
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200"
+        >
+          {t("InfoPage.download")}
+        </a>
       </div>
-    )}
+    </div>
+  )}
     </main>
   );
 }
