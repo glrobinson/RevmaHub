@@ -3,7 +3,7 @@
       "home": "Home",
       "teachingRoma": "Teaching Roma",
       "resourceArchive": "Resource Archive",
-      "information": "Information",
+      "information": "Learn More",
       "contactUs": "Contact Us"
     },
     "HomePage": {
@@ -20,31 +20,149 @@
       "loadMore": "Load More",
       "showLess": "Show Less"
     },
-    "StoriesPage": {
-      "heroTitle": "Supporting Teachers of Roma Students",
-      "heroSubtitle": "Revma is here to support educators with meaningful tools, resources, and real advice from teachers who have worked with Roma students across different communities.",
-      "submitTitle": "Want to Share Your Experience?",
-      "submitText": "If you’re a teacher of Roma students, we’d love to hear your story or advice for others.",
-      "submitBtn": "Submit Your Advice or Testimonial",
-      "communityCentersTitle": "Community Centers Supporting Roma Education",
-      "communityCentersText": "These centers offer valuable resources and support to teachers working with Roma students.",
-      "mapTitle": "Location Map",
+    "TeachingRoma": {
+      "heroTitle": "Supporting Inclusive Education",
+      "heroDescription": "Revma is here to support educators with meaningful tools, resources, and real advice from teachers who have worked with Roma students across different communities.",
+      "heroAlt": "Teaching Roma Students",
+
+      "submitSectionTitle": "Want to Share Your Experience?",
+      "submitSectionText": "If you’re a teacher of Roma students, we’d love to hear your story or advice for others.",
+      "submitButton": "Submit Your Advice or Testimonial",
+
+      "communitySectionTitle": "Community Centers Supporting Roma Education",
+      "communityDescription": "These centers offer valuable resources and support to teachers working with Roma students.",
+      "communityCentersAthenName": "Roma Inclusion Center – Athens",
+      "communityCentersAthenDescription": "Workshops, teaching guides, and mentorship.",
+
+      "communityCentersThessalonikiName": "Roma Education Hub – Thessaloniki",
+      "communityCentersThessalonikiDescription": "Interactive activities and multilingual tools.",
+
+      "communityCentersLarissaName": "Roma Culture Center – Larissa",
+      "communityCentersLarissaDescription": "Cultural support and professional development.",
+
       "ctaTitle": "New to Teaching Roma Students?",
-      "ctaText": "If you’re a new teacher of Roma students, or simply looking for helpful educational materials and resources to better support your class, we’ve got you covered.",
-      "ctaBtn": "Explore Teaching Resources"
-    },
+      "ctaDescription": "If you’re a new teacher of Roma students, or simply looking for helpful educational materials and resources to better support your class, we’ve got you covered.",
+      "ctaButton": "Explore Teaching Resources",
+
+      "formEmail": "Email",
+      "formRole": "Your Role (e.g. Teacher, Principal, etc.)",
+      "formMessage": "Message",
+      "formCancel": "Cancel",
+      "formSubmit": "Submit",
+      "successAlert": "Submission sent!"
+  },
+    "TeachingTestimonials": {
+      "testimonialsTitle": "Teacher Advice & Testimonials",
+      "loading": "Loading testimonials...",
+      "error": "Error loading testimonials.",
+      "loadMore": "Load More",
+      "showLess": "Show Less",
+      "anonymous": "Anonymous"
+  },
+    "ResourcesPage": {
+      "heroAlt": "Teaching Roma Students",
+      "heroTitle": "Explore Our Teaching Resources",
+      "heroDescription": "Lesson plans, activity guides, and cultural materials created to support Roma education.",
+      "categoryInclusive": "Inclusive Practices",
+      "categoryInclusiveDesc": "Resources that promote equitable and supportive teaching.",
+      "categoryLinguistics": "Linguistics",
+      "categoryLinguisticsDesc": "Materials about language development, multilingual practices, and communication strategies.",
+      "categoryRomaHistory": "Roma History",
+      "categoryRomaHistoryDesc": "Content that explores the historical experiences of Roma communities.",
+      "categoryClassroom": "Classroom Activities",
+      "categoryClassroomDesc": "Lesson plans, worksheets, and in-class exercises designed to engage students in hands-on learning.",
+      "categoryGame": "Interactive Game",
+      "categoryGameDesc": "Educational games and digital tools to promote engaging learning experiences.",
+      "categoryPlatform": "Teaching Platform",
+      "categoryPlatformDesc": "Comprehensive platforms offering structured resources for educators.",
+      "search": "Search",
+      "filterTitle": "Filter By:",
+      "filterAll": "All",
+      "filterClear": "Clear Filter",
+      "submitTitle": "Want to Share More Resources?",
+      "submitText": "If you're a teacher and have found resources that support your work with Roma students—such as lesson plans, tools, or platforms—you can share them here for others to benefit.",
+      "submitButton": "Submit Resource",
+      "modalInstructions": "If you have a link to a resource, please paste it below. If you don’t have a link but would like to upload a file instead, you can leave the download link field empty and submit the form. A member of the Revma team will reach out to you via email to coordinate getting the file.",
+      "modalFirstName": "First name",
+      "modalLastName": "Last name",
+      "modalEmail": "Email",
+      "modalPhone": "Phone Number",
+      "modalDescription": "Resource Description",
+      "modalType": "Resource Type",
+      "modalLink": "Paste a download link (Google Drive, Dropbox, etc.)",
+      "modalCancel": "Cancel",
+      "modalSubmit": "Submit"
+  },
+    "Resources": {
+      "loading": "Loading resources...",
+      "error": "Error loading resources.",
+      "noImage": "No Image",
+      "view": "View",
+      "download": "Download",
+      "loadMore": "Load More",
+      "showLess": "Show Less"
+  },
+    "CategoryTags": {
+      "inclusive practices": "Inclusive Practices",
+      "linguistics": "Linguistics",
+      "roma history": "Roma History",
+      "classroom activities": "Classroom Activities",
+      "interactive game": "Interactive Game",
+      "teaching platform": "Teaching Platform"
+  },
     "InfoPage": {
       "heroTitle": "Learn More About Roma Experiences, History, and Education",
-      "heroSubtitle": "Explore key facts, concepts, and questions about Roma communities and education.",
-      "statsTitle": "Statistics",
-      "infographicsTitle": "Important Pieces to Highlight"
-    },
+      "heroDescription": "Explore key facts, concepts, and questions about Roma communities and education.",
+      "heroAlt": "Teaching Roma Students",
+
+      "statsTitle": "Roma Education in Numbers",
+      "statsDescription": "These figures highlight the educational challenges and disparities faced by Roma communities across Europe. Understanding these statistics is crucial to fostering inclusive and equitable education.",
+      
+      "stat1Percent": "84%",
+      "stat1Text": "of Roma youth in Europe leave school early—before completing secondary education.",
+      "stat2Percent": "34%",
+      "stat2Text": "of Roma children in Greece attend segregated or Roma-majority schools.",
+      "stat3Percent": "10%",
+      "stat3Text": "of Roma children across the EU report facing discrimination in school environments.",
+      "stat4Percent": "20%",
+      "stat4Text": "of Romani guardians and students felt discriminated against when in contact with a school authority because of being Romani.",
+      "stat5Percent": "80%",
+      "stat5Text": "of Roma children live in households at risk of poverty or social exclusion.",
+      "stat6Percent": "57%",
+      "stat6Text": "of Roma that are school aged attend school.",
+
+      "infographicsTitle": "Important Pieces to Highlight",
+      "loadMore": "Load More",
+      "showLess": "Show Less"
+  },
     "ContactModal": {
-      "emailPlaceholder": "Email",
-      "messagePlaceholder": "Message",
+      "email": "Email",
+      "message": "Message",
       "cancel": "Cancel",
       "submit": "Submit",
-      "alertSuccess": "Message sent!",
-      "alertFail": "Failed to send message."
+      "success": "Message sent!",
+      "error": "Failed to send message."
+  },
+    "Footer": {
+      "quickLinks": "Quick Links",
+      "contributors": "Contributors",
+      "getConnected": "Get Connected",
+      "meetContributors": "Meet the Contributors from WPI",
+      "close": "Close",
+      "phone": "Phone",
+      "rights": "All rights reserved.",
+      "names": {
+        "GraceRobinson": "Grace Robinson",
+        "AnnaKelly": "Anna Kelly",
+        "MelicaZekavat": "Melica Zekavat",
+        "PrakritiPragya": "Prakriti Pragya"
+      },
+      "roles": {
+        "GraceRobinson": "BS/MS in Computer Science and Data Science",
+        "AnnaKelly": "BS in Electrical and Computer Engineering",
+        "MelicaZekavat": "BS in Biomedical Engineering with a Minor in Data Science and Computer Science",
+        "PrakritiPragya": "BS in Robotics Engineering with a Minor in Computer Science"
+      }
     }
+
   }

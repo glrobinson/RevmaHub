@@ -4,10 +4,23 @@ import Image from "next/image";
 import { useQuery } from "@apollo/client";
 import { GET_INFOGRAPHICS } from "../../../../lib/queries";
 import client from "../../../../lib/apollo";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useTranslation } from "../../context/TranslationContext";
 
 export default function InfoPage() {
-  const { data, loading, error } = useQuery(GET_INFOGRAPHICS, { client });
+  const [locale, setLocale] = useState("EN");
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const path = window.location.pathname;
+      const language = path.split("/")[1]?.toUpperCase() || "EN";
+      setLocale(language);
+    }
+  }, []);
+  const { t } = useTranslation();
+  const { data, loading, error } = useQuery(GET_INFOGRAPHICS, {
+      variables: { language: locale },
+      client,
+  });
   const infographics = data?.infographics?.nodes || [];
   const [visibleInfographics, setVisibleInfographics] = useState(6);
   const visibleItems = infographics.slice(0, visibleInfographics);
@@ -22,7 +35,7 @@ export default function InfoPage() {
           <div className="absolute inset-0 z-0">
             <Image
               src="/classroom.jpg"
-              alt="Teaching Roma Students"
+              alt={t("InfoPage.heroAlt")}
               fill
               priority
               className="object-cover filter blur-sm scale-105"
@@ -32,77 +45,43 @@ export default function InfoPage() {
             {/* Overlay and text */}
             <div className="absolute inset-0 z-10 bg-black/30 flex flex-col items-center justify-center text-center px-4">
               <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-bold mb-4 drop-shadow">
-                 Learn More About Roma Experiences, History, and Education
+              {t("InfoPage.heroTitle")}
               </h1>
               <p className="text-white text-sm sm:text-base md:text-lg max-w-2xl drop-shadow">
-                Explore key facts, concepts, and questions about Roma communities and education.
+              {t("InfoPage.heroDescription")}
               </p>
             </div>
           </section>
 
       {/* Statistics Section */}
-<section className="bg-gray-100 px-6 py-14 max-w-6xl mx-auto text-center space-y-10">
-  <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800">
-    Roma Education in Numbers
-  </h2>
-  <p className="text-gray-600 max-w-2xl mx-auto">
-    These figures highlight the educational challenges and disparities faced by Roma communities across Europe. Understanding these statistics is crucial to fostering inclusive and equitable education.
-  </p>
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    {/* Stat 1 */}
-    <div className="bg-white p-6 rounded shadow-md border border-gray-200 text-center">
-      <p className="text-4xl font-bold text-yellow-500">84%</p>
-      <p className="text-sm text-gray-700 mt-2">
-        of Roma youth in Europe leave school early—before completing secondary education.
-      </p>
-    </div>
-
-    {/* Stat 2 */}
-    <div className="bg-white p-6 rounded shadow-md border border-gray-200 text-center">
-      <p className="text-4xl font-bold text-yellow-500">34%</p>
-      <p className="text-sm text-gray-700 mt-2">
-        of Roma children in Greece attend segregated or Roma-majority schools.
-      </p>
-    </div>
-
-    {/* Stat 3 */}
-    <div className="bg-white p-6 rounded shadow-md border border-gray-200 text-center">
-      <p className="text-4xl font-bold text-yellow-500">10%</p>
-      <p className="text-sm text-gray-700 mt-2">
-        of Roma children across the EU report facing discrimination in school environments.
-      </p>
-    </div>
-
-    {/* Stat 4 */}
-    <div className="bg-white p-6 rounded shadow-md border border-gray-200 text-center">
-      <p className="text-4xl font-bold text-yellow-500">20%</p>
-      <p className="text-sm text-gray-700 mt-2">
-      of Romani guardians and students felt discriminated against when in contact with a school authority because of being Romani.
-      </p>
-    </div>
-
-    {/* Stat 5 */}
-    <div className="bg-white p-6 rounded shadow-md border border-gray-200 text-center">
-      <p className="text-4xl font-bold text-yellow-500">80%</p>
-      <p className="text-sm text-gray-700 mt-2">
-        of Roma children live in households at risk of poverty or social exclusion.
-      </p>
-    </div>
-
-    {/* Stat 6 */}
-    <div className="bg-white p-6 rounded shadow-md border border-gray-200 text-center">
-      <p className="text-4xl font-bold text-yellow-500">57%</p>
-      <p className="text-sm text-gray-700 mt-2">
-        of Roma that are school aged attend school.
-      </p>
-    </div>
-  </div>
-</section>
+      <section className="bg-gray-100 px-6 py-14 max-w-6xl mx-auto text-center space-y-10">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800">
+          {t("InfoPage.statsTitle")}
+        </h2>
+        <p className="text-gray-600 max-w-2xl mx-auto">
+          {t("InfoPage.statsDescription")}
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[1, 2, 3, 4, 5, 6].map((statNum) => (
+            <div
+              key={statNum}
+              className="bg-white p-6 rounded shadow-md border border-gray-200 text-center"
+            >
+              <p className="text-4xl font-bold text-yellow-500">
+                {t(`InfoPage.stat${statNum}Percent`)}
+              </p>
+              <p className="text-sm text-gray-700 mt-2">
+                {t(`InfoPage.stat${statNum}Text`)}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
 
     {/* Infographics Section */}
     <section className="py-10 px-6">
         <div className="max-w-6xl mx-auto space-y-6">
-          <h2 className="text-xl sm:text-3xl font-semibold mb-4">Important Pieces to Highlight</h2>
+          <h2 className="text-xl sm:text-3xl font-semibold mb-4">{t("InfoPage.infographicsTitle")}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {visibleItems.map((item: any, index: number) => {
               const image = item.infographicsimages?.infographicImage?.node;
@@ -133,7 +112,7 @@ export default function InfoPage() {
               onClick={() => setVisibleInfographics((prev) => prev + 3)}
               className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200"
             >
-              Load More
+              {t("InfoPage.loadMore")}
             </button>
           )}
           {visibleInfographics > 6 && (
@@ -141,7 +120,7 @@ export default function InfoPage() {
               onClick={() => setVisibleInfographics((prev) => Math.max(6, prev - 3))}
               className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200"
             >
-              Show Less
+              {t("InfoPage.showLess")}
             </button>
           )}
         </div>

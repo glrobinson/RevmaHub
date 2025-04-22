@@ -5,6 +5,7 @@ import { useQuery } from "@apollo/client";
 import { GET_RESOURCES } from "../../../lib/queries";
 import client from "../../../lib/apollo";
 import { useEffect, useState } from "react";
+import { useTranslation } from "../context/TranslationContext";
 
 type Props = {
     selectedCategory: string[];
@@ -39,7 +40,19 @@ type Resource = {
   
 
 export default function Resources({ selectedCategory, searchQuery }: Props) {
-  const { data, loading, error, refetch } = useQuery(GET_RESOURCES, { client });
+    const [locale, setLocale] = useState("EN");
+    useEffect(() => {
+      if (typeof window !== "undefined") {
+        const path = window.location.pathname;
+        const language = path.split("/")[1]?.toUpperCase() || "EN";
+        setLocale(language);
+      }
+    }, []);
+    const { t } = useTranslation();
+    const { data, loading, error } = useQuery(GET_RESOURCES, {
+        variables: { language: locale },
+        client,
+    });
   const resources: Resource[] = data?.resources?.nodes || [];
   const [visibleResources, setVisibleResources] = useState(8);
 
@@ -100,8 +113,8 @@ export default function Resources({ selectedCategory, searchQuery }: Props) {
     return matchesCategory && matchesSearch;
   });
 
-  if (loading) return <p className="text-center">Loading resources...</p>;
-  if (error) return <p className="text-center text-red-500">Error loading resources.</p>;
+  if (loading) return <p className="text-center">{t("Resources.loading")}</p>;
+  if (error) return <p className="text-center text-red-500">{t("Resources.error")}</p>;
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4 py-10">
@@ -116,8 +129,11 @@ export default function Resources({ selectedCategory, searchQuery }: Props) {
           >
             {/* Category */}
             <p className="text-xs text-gray-500">
-              {(res.resourcefield.category || []).join(", ")}
+            {(res.resourcefield.category || [])
+                .map((cat) => t(`CategoryTags.${cat.toLowerCase()}`) || cat)
+                .join(", ")}
             </p>
+
 
             {/* Title */}
             <p className="font-semibold">{res.title}</p>
@@ -135,7 +151,7 @@ export default function Resources({ selectedCategory, searchQuery }: Props) {
               </div>
             ) : (
               <div className="bg-gray-300 h-24 flex items-center justify-center text-xs text-gray-600">
-                No Image
+                {t("Resources.noImage")}
               </div>
             )}
 
@@ -151,7 +167,7 @@ export default function Resources({ selectedCategory, searchQuery }: Props) {
                 rel="noopener noreferrer"
                 className="bg-white border border-black hover:bg-gray-300 px-4 py-1 rounded text-sm"
                 >
-                View
+                {t("Resources.view")}
                 </a>
             )}
 
@@ -162,7 +178,7 @@ export default function Resources({ selectedCategory, searchQuery }: Props) {
                 rel="noopener noreferrer"
                 className="bg-white border border-black hover:bg-gray-300 px-4 py-1 rounded text-sm"
                 >
-                Download
+                {t("Resources.download")}
                 </a>
             )}
             </div>
@@ -176,7 +192,7 @@ export default function Resources({ selectedCategory, searchQuery }: Props) {
             onClick={() => setVisibleResources((prev) => prev + 4)}
             className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200"
             >
-            Load More
+            {t("Resources.loadMore")}
             </button>
         )}
         {visibleResources > 8 && (
@@ -184,7 +200,7 @@ export default function Resources({ selectedCategory, searchQuery }: Props) {
             onClick={() => setVisibleResources((prev) => Math.max(8, prev - 4))}
             className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200"
             >
-            Show Less
+            {t("Resources.showLess")}
             </button>
         )}
         </div>

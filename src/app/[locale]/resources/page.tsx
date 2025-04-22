@@ -6,6 +6,8 @@ import Resources from "../../components/Resources";
 import { useQuery } from "@apollo/client";
 import { GET_RESOURCES } from "../../../../lib/queries";
 import client from "../../../../lib/apollo";
+import { useTranslation } from "../../context/TranslationContext";
+
 
 export default function ResourcesPage() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -13,15 +15,18 @@ export default function ResourcesPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const { data, loading, error, refetch } = useQuery(GET_RESOURCES, { client });
+  const { t } = useTranslation();
+
 
   const categories = [
-    { title: "Inclusive Practices", summary: "Resources that promote equitable and supportive teaching.", img: "/inclusivity.png", tag: "inclusive practices" },
-    { title: "Linguistics", summary: "Materials about language development, multilingual practices, and communication strategies.", img: "/translator.png", tag: "linguistics" },
-    { title: "Roma History", summary: "Content that explores the historical experiences of Roma communities.", img: "/history.png", tag: "roma history" },
-    { title: "Classroom Activities", summary: "Lesson plans, worksheets, and in-class exercises designed to engage students in hands-on learning.", img: "/training.png", tag: "classroom activities" },
-    { title: "Interactive Game", summary: "Educational games and digital tools to promote engaging learning experiences.", img: "/play.png", tag: "interactive game" },
-    { title: "Teaching Platform", summary: "Comprehensive platforms offering structured resources for educators.", img: "/platform.png", tag: "teaching platform" },
+    { title: t("ResourcesPage.categoryInclusive"), summary: t("ResourcesPage.categoryInclusiveDesc"), img: "/inclusivity.png", tag: "inclusive practices" },
+    { title: t("ResourcesPage.categoryLinguistics"), summary: t("ResourcesPage.categoryLinguisticsDesc"), img: "/translator.png", tag: "linguistics" },
+    { title: t("ResourcesPage.categoryRomaHistory"), summary: t("ResourcesPage.categoryRomaHistoryDesc"), img: "/history.png", tag: "roma history" },
+    { title: t("ResourcesPage.categoryClassroom"), summary: t("ResourcesPage.categoryClassroomDesc"), img: "/training.png", tag: "classroom activities" },
+    { title: t("ResourcesPage.categoryGame"), summary: t("ResourcesPage.categoryGameDesc"), img: "/play.png", tag: "interactive game" },
+    { title: t("ResourcesPage.categoryPlatform"), summary: t("ResourcesPage.categoryPlatformDesc"), img: "/platform.png", tag: "teaching platform" },
   ];
+  
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -50,7 +55,7 @@ export default function ResourcesPage() {
         <div className="absolute inset-0 z-0">
           <Image
             src="/activities2.jpg"
-            alt="Teaching Roma Students"
+            alt={t("ResourcesPage.heroAlt")}
             fill
             priority
             className="object-cover filter blur-sm scale-105"
@@ -58,10 +63,10 @@ export default function ResourcesPage() {
         </div>
         <div className="absolute inset-0 z-10 bg-black/30 flex flex-col items-center justify-center text-center px-4">
           <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-bold mb-4 drop-shadow">
-            Explore Our Teaching Resources
+          {t("ResourcesPage.heroTitle")}
           </h1>
           <p className="text-white text-sm sm:text-base md:text-lg max-w-2xl drop-shadow">
-            Lesson plans, activity guides, and cultural materials created to support Roma education.
+          {t("ResourcesPage.heroDescription")}
           </p>
         </div>
       </section>
@@ -104,7 +109,7 @@ export default function ResourcesPage() {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search"
+            placeholder={t("ResourcesPage.search")}
             className="w-full py-3 pl-6 pr-12 border border-black rounded-full shadow-sm placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-black transition"
           />
           <button className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-600 hover:text-black transition">
@@ -117,7 +122,7 @@ export default function ResourcesPage() {
 
       {/* Filter Tags */}
       <section className="px-6 max-w-6xl mx-auto space-y-6 text-sm">
-        <h2 className="text-lg font-bold">Filter By:</h2>
+        <h2 className="text-lg font-bold">{t("ResourcesPage.filterTitle")}</h2>
         <div className="flex flex-wrap gap-2 mt-4">
           <button
             onClick={() => setSelectedCategories([])}
@@ -127,7 +132,7 @@ export default function ResourcesPage() {
                 : "text-black hover:bg-black hover:text-white"
             }`}
           >
-            All
+            {t("ResourcesPage.filterAll")}
           </button>
 
           {categories.map((cat, idx) => (
@@ -155,7 +160,7 @@ export default function ResourcesPage() {
               onClick={() => setSelectedCategories([])}
               className="ml-4 px-4 py-1 text-sm underline text-black hover:text-red-600 transition"
             >
-              Clear Filter
+              {t("ResourcesPage.filterClear")}
             </button>
           )}
         </div>
@@ -178,14 +183,14 @@ export default function ResourcesPage() {
 
       {/* Submit CTA */}
       <section className="bg-gray-50 px-6 py-10 text-center shadow-md">
-          <h2 className="text-lg font-semibold mb-2">Want to Share More Resources?</h2>
+          <h2 className="text-lg font-semibold mb-2">{t("ResourcesPage.submitTitle")}</h2>
           <p className="text-sm text-gray-700 mb-4">
-            If you're a teacher and have found resources that support your work with Roma students—such as lesson plans, tools, or platforms—you can share them here for others to benefit.
+          {t("ResourcesPage.submitText")}
           </p>
           <button
             onClick={() => setIsModalOpen(true)}
             className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200">
-            Submit Resource
+            {t("ResourcesPage.submitButton")}
           </button>
       </section>
 
@@ -202,51 +207,51 @@ export default function ResourcesPage() {
             </button>
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
               <p className="text-sm text-gray-700">
-                If you have a link to a resource, please paste it below. If you don’t have a link but would like to upload a file instead, you can leave the download link field empty and submit the form. A member of the Revma team will reach out to you via email to coordinate getting the file.
+              {t("ResourcesPage.modalInstructions")}
               </p>
               <input
                 type="text"
                 name="first_name"
-                placeholder="First name"
+                placeholder={t("ResourcesPage.modalFirstName")}
                 required
                 className="w-full border p-2 rounded"
               />
               <input
                 type="text"
                 name="last_name"
-                placeholder="Last name"
+                placeholder={t("ResourcesPage.modalLastName")}
                 required
                 className="w-full border p-2 rounded"
               />
               <input
                 type="email"
                 name="email"
-                placeholder="Email"
+                placeholder={t("ResourcesPage.modalEmail")}
                 required
                 className="w-full border p-2 rounded"
               />
               <input
                 type="text"
                 name="phone"
-                placeholder="Phone Number"
+                placeholder={t("ResourcesPage.modalPhone")}
                 className="w-full border p-2 rounded"
               />
               <textarea
                 name="description"
-                placeholder="Resource Description"
+                placeholder={t("ResourcesPage.modalDescription")}
                 required
                 className="w-full border p-2 rounded h-24"
               />
               <input
                 type="text"
                 name="resource_type"
-                placeholder="Resource Type"
+                placeholder={t("ResourcesPage.modalType")}
                 className="w-full border p-2 rounded"
               />
               <input
                 type="text"
                 name="file_link"
-                placeholder="Paste a download link (Google Drive, Dropbox, etc.)"
+                placeholder={t("ResourcesPage.modalLink")}
                 className="w-full border p-2 rounded"
               />
               <div className="flex justify-between">
@@ -255,13 +260,13 @@ export default function ResourcesPage() {
                   onClick={() => setIsModalOpen(false)}
                   className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
                 >
-                  Cancel
+                  {t("ResourcesPage.modalCancel")}
                 </button>
                 <button
                   type="submit"
                   className="px-4 py-2 bg-yellow-400 rounded hover:bg-yellow-500"
                 >
-                  Submit
+                  {t("ResourcesPage.modalSubmit")}
                 </button>
               </div>
             </form>

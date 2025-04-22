@@ -7,6 +7,7 @@ import { useQuery } from "@apollo/client";
 import { GET_MEDIA_ITEMS, GET_STORIES_TESTIMONIALS, GET_TEACHING_ROMA_IMAGES } from "../../../../lib/queries";
 import client from "../../../../lib/apollo";
 import TeacherTestimonials from "../../components/TeacherTestimonials";
+import { useTranslation } from "../../context/TranslationContext";
 
 export default function TeachingRomaPage() {
     const { data, loading, error } = useQuery(GET_STORIES_TESTIMONIALS, { client });
@@ -14,6 +15,8 @@ export default function TeachingRomaPage() {
     const [uploadedImage, setUploadedImage] = useState<File | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
     const { data: imageData } = useQuery(GET_TEACHING_ROMA_IMAGES, { client });
+    const { t } = useTranslation();
+
 
     const imageFields = imageData?.page?.teachingRomaImages || {};
     const imageIds = Object.values(imageFields)
@@ -57,6 +60,24 @@ export default function TeachingRomaPage() {
     }
   };
 
+  const centers = [
+    {
+      name: t("TeachingRoma.communityCentersAthenName"),
+      description: t("TeachingRoma.communityCentersAthenDescription"),
+      link: "#",
+    },
+    {
+      name: t("TeachingRoma.communityCentersThessalonikiName"),
+      description: t("TeachingRoma.communityCentersThessalonikiDescription"),
+      link: "#",
+    },
+    {
+      name: t("TeachingRoma.communityCentersLarissaName"),
+      description: t("TeachingRoma.communityCentersLarissaDescription"),
+      link: "#",
+    },
+  ];
+
   return (
     <main className="space-y-2 text-sm ">
         {/* Hero Section with Blurred Background */}
@@ -65,7 +86,7 @@ export default function TeachingRomaPage() {
         <div className="absolute inset-0 z-0">
             <Image
             src="/teaching.jpg"
-            alt="Teaching Roma Students"
+            alt={t("TeachingRoma.heroAlt")}
             fill
             priority
             className="object-cover filter blur-sm scale-105"
@@ -75,10 +96,10 @@ export default function TeachingRomaPage() {
         {/* Overlay and text */}
         <div className="absolute inset-0 z-10 bg-black/30 flex flex-col items-center justify-center text-center px-4">
             <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-bold mb-4 drop-shadow">
-            Supporting Inclusive Education
+            {t("TeachingRoma.heroTitle")}
             </h1>
             <p className="text-white text-sm sm:text-base md:text-lg max-w-2xl drop-shadow">
-            Revma is here to support educators with meaningful tools, resources, and real advice from teachers who have worked with Roma students across different communities.
+            {t("TeachingRoma.heroDescription")}
             </p>
         </div>
         </section>
@@ -88,14 +109,14 @@ export default function TeachingRomaPage() {
 
       {/* Submit Section */}
       <section className="bg-gray-50 px-6 py-10 text-center shadow-md">
-        <h2 className="text-lg font-semibold mb-2">Want to Share Your Experience?</h2>
+        <h2 className="text-lg font-semibold mb-2">{t("TeachingRoma.submitSectionTitle")}?</h2>
         <p className="text-sm text-gray-700 mb-4">
-          If you’re a teacher of Roma students, we’d love to hear your story or advice for others.
+        {t("TeachingRoma.submitSectionText")}
         </p>
         <button
           onClick={() => setIsModalOpen(true)}
           className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200">
-          Submit Your Advice or Testimonial
+          {t("TeachingRoma.submitButton")}
         </button>
       </section>
 
@@ -120,16 +141,12 @@ export default function TeachingRomaPage() {
 
       {/* Community Centers */}
       <section className="px-6 py-12 bg-white text-center">
-        <h2 className="text-xl sm:text-3xl font-semibold mb-4">Community Centers Supporting Roma Education</h2>
+        <h2 className="text-xl sm:text-3xl font-semibold mb-4">{t("TeachingRoma.communitySectionTitle")}</h2>
         <p className="max-w-xl mx-auto text-gray-700 mb-8">
-          These centers offer valuable resources and support to teachers working with Roma students.
+        {t("TeachingRoma.communityDescription")}
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {[
-            { name: "Roma Inclusion Center – Athens", description: "Workshops, teaching guides, and mentorship.", link: "#" },
-            { name: "Roma Education Hub – Thessaloniki", description: "Interactive activities and multilingual tools.", link: "#" },
-            { name: "Roma Culture Center – Larissa", description: "Cultural support and professional development.", link: "#" },
-          ].map((center, idx) => (
+          {centers.map((center, idx) => (
             <a
               key={idx}
               href={center.link}
@@ -155,13 +172,13 @@ export default function TeachingRomaPage() {
 
       {/* CTA */}
       <section className="bg-gray-50 px-6 py-10 text-center shadow-md">
-        <h2 className="text-lg font-semibold mb-2">New to Teaching Roma Students?</h2>
+        <h2 className="text-lg font-semibold mb-2">{t("TeachingRoma.ctaTitle")}</h2>
         <p className="text-sm text-gray-700 mb-4">
-          If you’re a new teacher of Roma students, or simply looking for helpful educational materials and resources to better support your class, we’ve got you covered.
+        {t("TeachingRoma.ctaDescription")}
         </p>
         <Link href="/resources">
           <button className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200">
-            Explore Teaching Resources
+          {t("TeachingRoma.ctaButton")}
           </button>
         </Link>
       </section>
@@ -175,7 +192,7 @@ export default function TeachingRomaPage() {
               <input
                 type="email"
                 name="email"
-                placeholder="Email"
+                placeholder={t("TeachingRoma.formEmail")}
                 required
                 className="w-full border p-2 rounded"
               />
@@ -183,13 +200,13 @@ export default function TeachingRomaPage() {
               <input
                 type="text"
                 name="role"
-                placeholder="Your Role (e.g. Teacher, Principal, etc.)"
+                placeholder={t("TeachingRoma.formRole")}
                 className="w-full border p-2 rounded"
               />
 
               <textarea
                 name="message"
-                placeholder="Message"
+                placeholder={t("TeachingRoma.formMessage")}
                 required
                 className="w-full border p-2 rounded h-24"
               />
@@ -200,13 +217,13 @@ export default function TeachingRomaPage() {
                   onClick={() => setIsModalOpen(false)}
                   className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
                 >
-                  Cancel
+                  {t("TeachingRoma.formCancel")}
                 </button>
                 <button
                   type="submit"
                   className="px-4 py-2 bg-yellow-400 rounded hover:bg-yellow-500"
                 >
-                  Submit
+                  {t("TeachingRoma.formSubmit")}
                 </button>
               </div>
             </form>

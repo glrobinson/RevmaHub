@@ -20,43 +20,43 @@ export const GET_TEACHER_STATEMENTS = gql`
 `;
 
 export const GET_STORIES_TESTIMONIALS = gql`
-  query {
-    testimonials {
-      nodes {
-        testimonialfields {
-          name
-          text
-        }
-      }
-    }
-  }
-`;
-
-export const GET_RESOURCES = gql`
-  query {
-  resources {
+  query GetTestimonials($language: LanguageCodeFilterEnum!) {
+  testimonials(where: { language: $language }) {
     nodes {
-      title
-      uri
-      resourcefield {
-        description
-        category
-        link
-        image {
-          node {
-            databaseId
-          }
-        }
-        file {
-          node {
-            mediaItemUrl
-            title
-          }
-        }
+      testimonialfields {
+        name
+        text
       }
     }
   }
 }
+`;
+
+export const GET_RESOURCES = gql`
+  query GetResources($language: LanguageCodeFilterEnum!) {
+    resources(where: { language: $language }) {
+      nodes {
+        title
+        uri
+        resourcefield {
+          description
+          category
+          link
+          image {
+            node {
+              databaseId
+            }
+          }
+          file {
+            node {
+              mediaItemUrl
+              title
+            }
+          }
+        }
+      }
+    }
+  }
 `;
 
 export const GET_HOMEPAGE_CAROUSEL_IMAGES = gql`
@@ -133,23 +133,23 @@ export const GET_TEACHING_ROMA_IMAGES = gql`
 `;
 
 export const GET_INFOGRAPHICS = gql`
-  query GetInfographics {
-  infographics {
-    nodes {
-      id
-      title
-      infographicsimages {
-        infographicImage {
-          node {
-            databaseId
-            sourceUrl
-            altText
+  query GetInfographics($language: LanguageCodeFilterEnum!) {
+    infographics(where: { language: $language }) {
+      nodes {
+        id
+        title
+        infographicsimages {
+          infographicImage {
+            node {
+              databaseId
+              sourceUrl
+              altText
+            }
           }
         }
       }
     }
   }
-}
 `;
 
 export const GET_MEDIA_ITEMS = gql`

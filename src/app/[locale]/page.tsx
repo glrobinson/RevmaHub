@@ -25,9 +25,14 @@ const carouselImages = [
 
 export default function Home() {
   const { t } = useTranslation();
-  const { pathname } = window.location;
-  const locale = pathname.split("/")[1]?.toUpperCase() || "EN";
-
+  const [locale, setLocale] = useState("EN");
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const path = window.location.pathname;
+      const language = path.split("/")[1]?.toUpperCase() || "EN";
+      setLocale(language);
+    }
+  }, []);
   const { data } = useQuery(GET_TEACHER_STATEMENTS, {
     variables: { language: locale },
     client,
@@ -152,7 +157,7 @@ export default function Home() {
     <TeacherStatements />
 
 {/* CTA Section */}
-<section className="text-center py-16 bg-gray-50 px-4 mb-12">
+<section className="text-center py-16 bg-gray-50 px-4 mb-12 shadow-md">
         <h4 className="text-2xl font-semibold mb-8 text-gray-800">
           {t("HomePage.ctaTitle")}
         </h4>

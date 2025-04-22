@@ -29,9 +29,15 @@ const fetchImageDetails = async (imageId: number) => {
   };
 
 export default function TeacherStatements() {
-  const { pathname } = window.location;
+    const [locale, setLocale] = useState("EN");
+    useEffect(() => {
+      if (typeof window !== "undefined") {
+        const path = window.location.pathname;
+        const language = path.split("/")[1]?.toUpperCase() || "EN";
+        setLocale(language);
+      }
+    }, []);
   const { t } = useTranslation();
-  const locale = pathname.split("/")[1]?.toUpperCase() || "EN";
   const { data, error, loading } = useQuery(GET_TEACHER_STATEMENTS, {
     variables: { language: locale },
     client,

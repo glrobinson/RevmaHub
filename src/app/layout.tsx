@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en"> {/* Optional: Set this dynamically in each page */}
+    <html lang="en">
       <body className={`${inter.className} antialiased`}>
         <TranslationProvider>
           <NavBar />

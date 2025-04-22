@@ -1,6 +1,8 @@
 'use client';
 import { useRef } from 'react';
 import emailjs from '@emailjs/browser';
+import { useTranslation } from '../context/TranslationContext';
+
 
 type Props = {
   isOpen: boolean;
@@ -9,6 +11,7 @@ type Props = {
 
 export default function ContactModal({ isOpen, onClose }: Props) {
   const formRef = useRef<HTMLFormElement>(null);
+  const { t } = useTranslation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,12 +23,12 @@ export default function ContactModal({ isOpen, onClose }: Props) {
         '_c4qW0hFnGM9EYoMZ'
       )
       .then(() => {
-        alert('Message sent!');
+        alert(t("ContactModal.success"));
         onClose();
       })
       .catch((err) => {
         console.error('EmailJS Error:', err);
-        alert('Failed to send message.');
+        alert(t("ContactModal.error"));
       });
     }
   };
@@ -46,13 +49,13 @@ export default function ContactModal({ isOpen, onClose }: Props) {
         <input
         type="email"
         name="email"
-        placeholder="Email"
+        placeholder={t("ContactModal.email")}
         required
         className="w-full border p-2 rounded text-black"
         />
         <textarea
         name="message"
-        placeholder="Message"
+        placeholder={t("ContactModal.message")}
         required
         className="w-full border p-2 rounded h-24 text-black"
         />
@@ -62,13 +65,13 @@ export default function ContactModal({ isOpen, onClose }: Props) {
               onClick={onClose}
               className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 text-black"
             >
-              Cancel
+              {t("ContactModal.cancel")}
             </button>
             <button
               type="submit"
               className="px-4 py-2 bg-yellow-400 rounded hover:bg-yellow-500 text-black"
             >
-              Submit
+              {t("ContactModal.submit")}
             </button>
           </div>
         </form>
