@@ -25,6 +25,14 @@ export default function InfoPage() {
   const [visibleInfographics, setVisibleInfographics] = useState(6);
   const visibleItems = infographics.slice(0, visibleInfographics);
   const [modalImage, setModalImage] = useState<string | null>(null);
+  const statSources = [
+    "https://fra.europa.eu/sites/default/files/fra_uploads/fra-2014-roma-survey-dif-education-1_en.pdf",       // stat 1
+    "https://fra.europa.eu/sites/default/files/fra_uploads/fra-2014-roma-survey-dif-education-1_en.pdf",    // stat 2
+    "https://fra.europa.eu/sites/default/files/fra_uploads/fra-2014-roma-survey-dif-education-1_en.pdf",    // stat 3
+    "https://tinyurl.com/2ayykjea",      // stat 4
+    "https://fra.europa.eu/sites/default/files/fra_uploads/fra-2014-roma-survey-dif-education-1_en.pdf",      // stat 5
+    "https://fra.europa.eu/sites/default/files/fra_uploads/fra-2014-roma-survey-dif-education-1_en.pdf" // stat 6
+  ];
   return (
     <main className="space-y-5 text-sm">
 
@@ -55,51 +63,65 @@ export default function InfoPage() {
 
       {/* Statistics Section */}
       <section className="bg-gray-100 px-6 py-14 max-w-6xl mx-auto text-center space-y-10">
-        <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800">
+        <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-2">
           {t("InfoPage.statsTitle")}
         </h2>
-        <p className="text-gray-600 max-w-2xl mx-auto">
+        <p className="text-base text-gray-700">
           {t("InfoPage.statsDescription")}
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[1, 2, 3, 4, 5, 6].map((statNum) => (
-            <div
-              key={statNum}
-              className="bg-white p-6 rounded shadow-md border border-gray-200 text-center"
-            >
-              <p className="text-4xl font-bold text-yellow-500">
-                {t(`InfoPage.stat${statNum}Percent`)}
-              </p>
-              <p className="text-sm text-gray-700 mt-2">
-                {t(`InfoPage.stat${statNum}Text`)}
-              </p>
-            </div>
-          ))}
-        </div>
+        {[1, 2, 3, 4, 5, 6].map((statNum, index) => (
+          <a
+          key={statNum}
+          href={statSources[index]}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block bg-white p-6 rounded shadow-md border border-gray-200 text-center transition duration-200 ease-in-out hover:shadow-xl hover:scale-[1.02] hover:border-yellow-500 hover:bg-yellow-50 cursor-pointer group"
+        >
+          <p className="text-4xl font-bold text-yellow-500 group-hover:text-yellow-600 transition">
+            {t(`InfoPage.stat${statNum}Percent`)}
+          </p>
+          <p className="text-sm text-gray-700 mt-2 group-hover:text-gray-900 transition">
+            {t(`InfoPage.stat${statNum}Text`)}
+          </p>
+          <p className="text-xs text-gray-500 mt-2 md:hidden">
+            {t("InfoPage.tapToSource")}
+          </p>
+        </a>  
+        ))}
+      </div>
       </section>
 
     {/* Infographics Section */}
     <section className="py-10 px-6">
         <div className="max-w-6xl mx-auto space-y-6">
-          <h2 className="text-xl sm:text-3xl font-semibold mb-4">{t("InfoPage.infographicsTitle")}</h2>
+        <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900">{t("InfoPage.infographicsTitle")}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {visibleItems.map((item: any, index: number) => {
               const image = item.infographicsimages?.infographicImage?.node;
               if (!image?.sourceUrl) return null;
 
               return (
-                <div
+                  <div
                   key={image.databaseId || index}
-                  className="rounded overflow-hidden shadow cursor-pointer"
+                  className="relative rounded overflow-hidden shadow cursor-pointer transform transition duration-300 hover:scale-[1.02] hover:shadow-lg group"
                   onClick={() => setModalImage(image.sourceUrl)}
                 >
+                  {/* Image */}
                   <Image
                     src={image.sourceUrl}
                     alt={image.altText || `Infographic ${index + 1}`}
                     width={700}
                     height={700}
-                    className="object-cover w-full h-full"
+                    className="object-cover w-full h-full transition duration-300 group-hover:opacity-90"
                   />
+
+                  {/* Tap to view message for mobile */}
+                  <div className="absolute inset-0 flex items-end justify-center md:hidden pointer-events-none z-10">
+                    <div className="bg-black/80 text-black text-sm font-semibold px-4 py-2 rounded-t-md w-full text-center shadow-lg tracking-wide">
+                      {t("InfoPage.tapToView")}
+                    </div>
+                  </div>
                 </div>
               );
             })}
@@ -135,7 +157,7 @@ export default function InfoPage() {
     >
       <div
         className="relative bg-white p-4 rounded-lg shadow-lg max-w-4xl w-[90%] mx-auto my-10 flex flex-col items-center"
-        onClick={(e) => e.stopPropagation()} // prevent close on click inside
+        onClick={(e) => e.stopPropagation()}
       >
         {/* X Close Button */}
         <button
@@ -160,7 +182,7 @@ export default function InfoPage() {
           download
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200"
+          className="bg-white border border-black hover:bg-gray-300 px-4 py-1 rounded text-sm"
         >
           {t("InfoPage.download")}
         </a>

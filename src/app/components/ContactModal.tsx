@@ -36,9 +36,14 @@ export default function ContactModal({ isOpen, onClose }: Props) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 backdrop-blur-sm bg-black/30 flex justify-center items-center z-50">
-
-          <div className="bg-white p-10 rounded-lg w-full max-w-lg relative">
+    <div
+        className="fixed inset-0 backdrop-blur-sm bg-black/30 flex justify-center items-center z-50"
+        onClick={onClose}
+    >
+        <div
+        className="bg-white p-10 rounded-lg w-full max-w-lg relative"
+        onClick={(e) => e.stopPropagation()}
+        >
         <button
           className="absolute top-4 right-4 text-black font-bold"
           onClick={onClose}

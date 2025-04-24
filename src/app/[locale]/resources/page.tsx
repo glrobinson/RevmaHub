@@ -182,23 +182,31 @@ export default function ResourcesPage() {
       </section>
 
       {/* Submit CTA */}
-      <section className="bg-gray-50 px-6 py-10 text-center shadow-md">
-          <h2 className="text-lg font-semibold mb-2">{t("ResourcesPage.submitTitle")}</h2>
-          <p className="text-sm text-gray-700 mb-4">
+      <section className="bg-white px-6 py-16">
+        <div className="max-w-3xl mx-auto text-center bg-gray-50 rounded-2xl p-10 shadow-sm">
+          <h2 className="text-2xl font-bold text-gray-900 mb-3">{t("ResourcesPage.submitTitle")}</h2>
+          <p className="text-base text-gray-700 mb-6">
           {t("ResourcesPage.submitText")}
           </p>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200">
+            className="px-6 py-3 rounded-lg bg-yellow-400 text-black font-semibold shadow hover:bg-yellow-500 transition">
             {t("ResourcesPage.submitButton")}
           </button>
+        </div>
       </section>
 
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 backdrop-blur-sm bg-black/30 flex justify-center items-center z-50">
-          <div className="bg-white p-10 rounded-lg w-full max-w-lg relative">
+        <div
+          className="fixed inset-0 backdrop-blur-sm bg-black/30 flex justify-center items-center z-50"
+          onClick={() => setIsModalOpen(false)}
+        >
+          <div
+            className="bg-white p-10 rounded-lg w-full max-w-lg relative"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
               className="absolute top-4 right-4 text-black font-bold"
               onClick={() => setIsModalOpen(false)}

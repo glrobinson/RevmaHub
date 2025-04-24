@@ -1,7 +1,7 @@
 {
     "NavBar": {
       "home": "Home",
-      "teachingRoma": "Teaching Roma",
+      "teachingRoma": "Supporting Teaching",
       "resourceArchive": "Resource Archive",
       "information": "Learn More",
       "contactUs": "Contact Us"
@@ -11,9 +11,9 @@
       "missionTitle": "Our Mission",
       "missionText": "Revma is dedicated to supporting teachers with meaningful tools, resources, and community.",
       "ctaTitle": "Start Exploring Resources",
-      "teachingRomaBtn": "Teaching Roma",
+      "teachingRomaBtn": "Supporting Teaching",
       "resourceArchiveBtn": "Resource Archive",
-      "infoBtn": "Information"
+      "infoBtn": "Learn More"
     },
     "TeacherStatements": {
       "title": "Teacher and Revma Staff Statements",
@@ -29,16 +29,15 @@
       "submitSectionText": "If you’re a teacher of Roma students, we’d love to hear your story or advice for others.",
       "submitButton": "Submit Your Advice or Testimonial",
 
-      "communitySectionTitle": "Community Centers Supporting Roma Education",
-      "communityDescription": "These centers offer valuable resources and support to teachers working with Roma students.",
-      "communityCentersAthenName": "Roma Inclusion Center – Athens",
-      "communityCentersAthenDescription": "Workshops, teaching guides, and mentorship.",
+      "communitySectionTitle": "Community Centers with a Roma Branch",
+      "communityDescription": "These centers corporate with schools and offer support for Roma communities.",
 
-      "communityCentersThessalonikiName": "Roma Education Hub – Thessaloniki",
-      "communityCentersThessalonikiDescription": "Interactive activities and multilingual tools.",
-
-      "communityCentersLarissaName": "Roma Culture Center – Larissa",
-      "communityCentersLarissaDescription": "Cultural support and professional development.",
+      "communityCentersPavlosMelasName": "Community Center with Roma Branch of Pavlos Melas",
+      "communityCentersAmpelokipiName": "Community Center with Roma Branch of Ampelokipi Menemeni",
+      "communityCentersIrakleiaName": "Community Center of Irakleia Serres",
+      "communityCentersKateriniName": "Community Center with Roma Branch of Katerini",
+      "communityCentersKarditsaName": "Community Center with Roma Branch of Karditsa",
+      "communityCentersTrikalaName": "Community Center with Roma Branch of Trikala",
 
       "ctaTitle": "New to Teaching Roma Students?",
       "ctaDescription": "If you’re a new teacher of Roma students, or simply looking for helpful educational materials and resources to better support your class, we’ve got you covered.",
@@ -52,12 +51,14 @@
       "successAlert": "Submission sent!"
   },
     "TeachingTestimonials": {
-      "testimonialsTitle": "Teacher Advice & Testimonials",
+      "testimonialsTitle": "Teaching Network",
       "loading": "Loading testimonials...",
       "error": "Error loading testimonials.",
       "loadMore": "Load More",
       "showLess": "Show Less",
-      "anonymous": "Anonymous"
+      "anonymous": "Anonymous",
+      "expand": "Expand",
+      "subtitle": "Shared insights and experiences from teachers."
   },
     "ResourcesPage": {
       "heroAlt": "Teaching Roma Students",
@@ -111,27 +112,29 @@
       "teaching platform": "Teaching Platform"
   },
     "InfoPage": {
-      "heroTitle": "Learn More About Roma Experiences, History, and Education",
+      "heroTitle": "Learn More About Student Experiences, History, and Education",
       "heroDescription": "Explore key facts, concepts, and questions about Roma communities and education.",
       "heroAlt": "Teaching Roma Students",
 
       "statsTitle": "Roma Education in Numbers",
-      "statsDescription": "These figures highlight the educational challenges and disparities faced by Roma communities across Europe. Understanding these statistics is crucial to fostering inclusive and equitable education.",
+      "statsDescription": "These figures highlight the educational challenges and disparities faced by Roma communities in Greece. Understanding these statistics is crucial to fostering inclusive and equitable education.",
       
-      "stat1Percent": "84%",
-      "stat1Text": "of Roma youth in Europe leave school early—before completing secondary education.",
-      "stat2Percent": "34%",
+      "stat1Percent": "16%",
+      "stat1Text": "of Greek Roma students complete upper secondary education compared to 95% of non-Roma Greek students.",
+      "stat2Percent": "35%",
       "stat2Text": "of Roma children in Greece attend segregated or Roma-majority schools.",
-      "stat3Percent": "10%",
-      "stat3Text": "of Roma children across the EU report facing discrimination in school environments.",
+      "stat3Percent": "20%",
+      "stat3Text": "of Roma children attend preschool compared to 90% of Greek non-Roma children.",
       "stat4Percent": "20%",
       "stat4Text": "of Romani guardians and students felt discriminated against when in contact with a school authority because of being Romani.",
-      "stat5Percent": "80%",
-      "stat5Text": "of Roma children live in households at risk of poverty or social exclusion.",
-      "stat6Percent": "57%",
-      "stat6Text": "of Roma that are school aged attend school.",
+      "stat5Percent": "75%",
+      "stat5Text": "of Romani women in the EU aged 45+ have never attended school.",
+      "stat6Percent": "43%",
+      "stat6Text": "of school-aged Roma children do not attend school.",
+      "tapToSource": "Tap to View",
 
       "infographicsTitle": "Important Pieces to Highlight",
+      "tapToView": "Tap to View",
       "loadMore": "Load More",
       "showLess": "Show Less",
       "download": "Download"
@@ -145,6 +148,8 @@
       "error": "Failed to send message."
   },
     "Footer": {
+      "reportText": "View Contributor Report",
+      "reportLink": "https://wpi0-my.sharepoint.com/:w:/g/personal/mzekavat_wpi_edu/EXitGuFrN3NBrrhNlIyCKXYBs0lEsTMtR34zZ-RQDNRUeA?e=j2CEuH",
       "quickLinks": "Quick Links",
       "contributors": "Contributors",
       "getConnected": "Get Connected",

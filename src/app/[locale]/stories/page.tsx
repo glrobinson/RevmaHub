@@ -108,17 +108,23 @@ export default function TeachingRomaPage() {
       <TeacherTestimonials />
 
       {/* Submit Section */}
-      <section className="bg-gray-50 px-6 py-10 text-center shadow-md">
-        <h2 className="text-lg font-semibold mb-2">{t("TeachingRoma.submitSectionTitle")}?</h2>
-        <p className="text-sm text-gray-700 mb-4">
-        {t("TeachingRoma.submitSectionText")}
-        </p>
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200">
-          {t("TeachingRoma.submitButton")}
-        </button>
+      <section className="bg-white px-6 py-16 text-center border-t border-gray-200">
+        <div className="max-w-2xl mx-auto space-y-4">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900">
+            {t("TeachingRoma.submitSectionTitle")}
+          </h2>
+          <p className="text-base text-gray-700">
+            {t("TeachingRoma.submitSectionText")}
+          </p>
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="inline-block mt-4 px-8 py-3 bg-yellow-400 text-black font-semibold rounded-lg shadow hover:bg-yellow-500 transition-all"
+          >
+            {t("TeachingRoma.submitButton")}
+          </button>
+        </div>
       </section>
+
 
       {/* Image Row Section */}
       <section className="px-6 py-3 bg-white">
@@ -139,97 +145,148 @@ export default function TeachingRomaPage() {
         </div>
       </section>
 
+      {/* Divider Line */}
+      <div className="border-t border-gray-200 mx-auto w-full my-10" />
+
       {/* Community Centers */}
-      <section className="px-6 py-12 bg-white text-center">
-        <h2 className="text-xl sm:text-3xl font-semibold mb-4">{t("TeachingRoma.communitySectionTitle")}</h2>
-        <p className="max-w-xl mx-auto text-gray-700 mb-8">
-        {t("TeachingRoma.communityDescription")}
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {centers.map((center, idx) => (
-            <a
-              key={idx}
-              href={center.link}
-              className="p-6 rounded-lg border hover:shadow-lg transition text-left bg-gray-50 hover:bg-white"
-            >
-              <h3 className="font-semibold text-md mb-1">{center.name}</h3>
-              <p className="text-gray-600 text-sm">{center.description}</p>
-            </a>
-          ))}
-        </div>
-       {/* Embedded Google Map - with spacing! */}
-        <div className="mt-10 max-w-4xl mx-auto w-full rounded-lg overflow-hidden shadow-lg">
-            <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3094.4807064375937!2d22.944419915689427!3d40.64006397933806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a838f3c6b37b69%3A0x400bd2ce2b97450!2sThessaloniki%2C%20Greece!5e0!3m2!1sen!2sus!4v1649849102016!5m2!1sen!2sus"
-            width="100%"
-            height="400"
-            allowFullScreen
-            loading="lazy"
-            style={{ border: 0 }}
-            ></iframe>
+      <section className="bg-gray-50 px-6 py-16">
+        <div className="max-w-7xl mx-auto text-center space-y-6">
+          <h2 className="text-2xl sm:text-4xl font-bold text-gray-900">
+            {t("TeachingRoma.communitySectionTitle")}
+          </h2>
+          <p className="text-base text-gray-700 max-w-2xl mx-auto">
+            {t("TeachingRoma.communityDescription")}
+          </p>
+
+          {/* Grid of Community Centers */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 text-left">
+            {[
+              {
+                name: t("TeachingRoma.communityCentersPavlosMelasName"),
+                link: "#",
+              },
+              {
+                name: t("TeachingRoma.communityCentersAmpelokipiName"),
+                link: "#",
+              },
+              {
+                name: t("TeachingRoma.communityCentersIrakleiaName"),
+                link: "#",
+              },
+              {
+                name: t("TeachingRoma.communityCentersKateriniName"),
+                link: "#",
+              },
+              {
+                name: t("TeachingRoma.communityCentersKarditsaName"),
+                link: "#",
+              },
+              {
+                name: t("TeachingRoma.communityCentersTrikalaName"),
+                link: "#",
+              },
+            ].map((center, idx) => (
+              <a
+                key={idx}
+                href={center.link}
+                className="p-6 rounded-xl border bg-white hover:shadow-lg transition-all border-gray-200 shadow-sm"
+              >
+                <h3 className="font-semibold text-md text-gray-800">{center.name}</h3>
+              </a>
+            ))}
+          </div>
+
+          {/* Embedded Google Map - with spacing! */}
+          <div className="mt-10 max-w-4xl mx-auto w-full rounded-lg overflow-hidden shadow-lg">
+                  <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3094.4807064375937!2d22.944419915689427!3d40.64006397933806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a838f3c6b37b69%3A0x400bd2ce2b97450!2sThessaloniki%2C%20Greece!5e0!3m2!1sen!2sus!4v1649849102016!5m2!1sen!2sus"
+                  width="100%"
+                  height="400"
+                  allowFullScreen
+                  loading="lazy"
+                  style={{ border: 0 }}
+                  ></iframe>
+              </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="bg-gray-50 px-6 py-10 text-center shadow-md">
-        <h2 className="text-lg font-semibold mb-2">{t("TeachingRoma.ctaTitle")}</h2>
-        <p className="text-sm text-gray-700 mb-4">
-        {t("TeachingRoma.ctaDescription")}
-        </p>
-        <Link href="/resources">
-          <button className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200">
-          {t("TeachingRoma.ctaButton")}
-          </button>
-        </Link>
+      <section className="bg-white px-6 py-16">
+        <div className="max-w-3xl mx-auto text-center bg-gray-50 rounded-2xl p-10 shadow-sm">
+          <h2 className="text-2xl font-bold text-gray-900 mb-3">
+            {t("TeachingRoma.ctaTitle")}
+          </h2>
+          <p className="text-base text-gray-700 mb-6">
+            {t("TeachingRoma.ctaDescription")}
+          </p>
+          <Link href="/resources">
+            <button className="px-6 py-3 rounded-lg bg-yellow-400 text-black font-semibold shadow hover:bg-yellow-500 transition">
+              {t("TeachingRoma.ctaButton")}
+            </button>
+          </Link>
+        </div>
       </section>
+
 
       {/* Testimonial Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 backdrop-blur-sm bg-black/30 flex justify-center items-center z-50">
-          <div className="bg-white p-10 rounded-lg w-full max-w-lg relative">
-            <button className="absolute top-4 right-4 text-black font-bold" onClick={() => setIsModalOpen(false)}>✕</button>
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
-              <input
-                type="email"
-                name="email"
-                placeholder={t("TeachingRoma.formEmail")}
-                required
-                className="w-full border p-2 rounded"
-              />
+      <div
+        className="fixed inset-0 backdrop-blur-sm bg-black/30 flex justify-center items-center z-50"
+        onClick={() => setIsModalOpen(false)}
+      >
+        <div
+          className="bg-white p-10 rounded-lg w-full max-w-lg relative"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
+            className="absolute top-4 right-4 text-black font-bold"
+            onClick={() => setIsModalOpen(false)}
+          >
+            ✕
+          </button>
 
-              <input
-                type="text"
-                name="role"
-                placeholder={t("TeachingRoma.formRole")}
-                className="w-full border p-2 rounded"
-              />
+          <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+            <input
+              type="email"
+              name="email"
+              placeholder={t("TeachingRoma.formEmail")}
+              required
+              className="w-full border p-2 rounded"
+            />
 
-              <textarea
-                name="message"
-                placeholder={t("TeachingRoma.formMessage")}
-                required
-                className="w-full border p-2 rounded h-24"
-              />
+            <input
+              type="text"
+              name="role"
+              placeholder={t("TeachingRoma.formRole")}
+              className="w-full border p-2 rounded"
+            />
 
-              <div className="flex justify-between">
-                <button
-                  type="button"
-                  onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
-                >
-                  {t("TeachingRoma.formCancel")}
-                </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-yellow-400 rounded hover:bg-yellow-500"
-                >
-                  {t("TeachingRoma.formSubmit")}
-                </button>
-              </div>
-            </form>
-          </div>
+            <textarea
+              name="message"
+              placeholder={t("TeachingRoma.formMessage")}
+              required
+              className="w-full border p-2 rounded h-24"
+            />
+
+            <div className="flex justify-between">
+              <button
+                type="button"
+                onClick={() => setIsModalOpen(false)}
+                className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+              >
+                {t("TeachingRoma.formCancel")}
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-yellow-400 rounded hover:bg-yellow-500"
+              >
+                {t("TeachingRoma.formSubmit")}
+              </button>
+            </div>
+          </form>
         </div>
-      )}
+      </div>
+    )}
     </main>
   );
 }

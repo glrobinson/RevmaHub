@@ -82,9 +82,9 @@ export default function TeacherStatements() {
 
   return (
     <section className="px-6">
-      <h3 className="text-xl sm:text-3xl font-semibold mb-4 text-center">
+      <h2 className="text-2xl sm:text-3xl font-semibold mb-4 text-center text-gray-900">
         {t("TeacherStatements.title")}
-        </h3>
+        </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
       {statements.slice(0, visibleStatements).map((item: any, index: number) => {
@@ -112,11 +112,11 @@ export default function TeacherStatements() {
       })}
 
       {/* Load More / Show Less Buttons */}
-      <div className="col-span-full mt-6 flex flex-col md:flex-row items-center justify-center gap-4 text-center">
+      <div className="mt-8 flex flex-wrap justify-center gap-4">
         {statements.length > visibleStatements && (
             <button
             onClick={() => setVisibleStatements((prev) => prev + 3)}
-            className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200"
+            className="px-6 py-2 bg-yellow-400 text-black font-semibold rounded-lg shadow hover:bg-yellow-500 transition"
           >
             {t("TeacherStatements.loadMore")}
           </button>          
@@ -124,7 +124,7 @@ export default function TeacherStatements() {
         {visibleStatements > 3 && (
             <button
             onClick={() => setVisibleStatements((prev) => Math.max(3, prev - 3))}
-            className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200"
+            className="px-6 py-2 text-gray-800 font-semibold rounded-lg border bg-white text-yellow-600 border border-yellow-400 shadow hover:bg-yellow-50 transition"
           >
             {t("TeacherStatements.showLess")}
           </button>          

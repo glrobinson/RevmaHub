@@ -11,6 +11,7 @@
   "dependencies": {
     "@apollo/client": "^3.13.6",
     "@emailjs/browser": "^4.4.1",
+    "@headlessui/react": "^2.2.2",
     "emailjs-com": "^3.2.0",
     "embla-carousel-react": "^8.6.0",
     "graphql": "^16.10.0",

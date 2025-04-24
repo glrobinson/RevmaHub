@@ -92,7 +92,7 @@ export default function Home() {
 
       {/* Mission Section */}
       <section className="text-center">
-        <h2 className="text-xl sm:text-3xl font-semibold mb-4">
+      <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-2">
           {t("HomePage.missionTitle")}
         </h2>
         <p className="text-gray-700 max-w-xl mx-auto mb-6 text-sm sm:text-base">
@@ -156,30 +156,32 @@ export default function Home() {
     {/* Teacher & Staff Statements */}
     <TeacherStatements />
 
-{/* CTA Section */}
-<section className="text-center py-16 bg-gray-50 px-4 mb-12 shadow-md">
-        <h4 className="text-2xl font-semibold mb-8 text-gray-800">
+    {/* CTA Section */}
+    <section className="bg-white px-6 py-16">
+      <div className="max-w-3xl mx-auto text-center bg-gray-50 rounded-2xl p-10 shadow-sm">
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">
           {t("HomePage.ctaTitle")}
-        </h4>
+        </h2>
 
         <div className="flex flex-col md:flex-row items-center justify-center gap-4">
           <Link href="/stories">
-            <button className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200">
+            <button className="px-6 py-3 rounded-lg bg-yellow-400 text-black font-semibold shadow hover:bg-yellow-500 transition">
               {t("HomePage.teachingRomaBtn")}
             </button>
           </Link>
           <Link href="/resources">
-            <button className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200">
+            <button className="px-6 py-3 rounded-lg bg-yellow-400 text-black font-semibold shadow hover:bg-yellow-500 transition">
               {t("HomePage.resourceArchiveBtn")}
             </button>
           </Link>
           <Link href="/info">
-            <button className="w-full md:w-auto px-6 py-3 rounded-lg bg-white text-gray-800 font-medium border border-gray-300 shadow hover:shadow-md hover:bg-gray-100 transition-all duration-200">
+            <button className="px-6 py-3 rounded-lg bg-yellow-400 text-black font-semibold shadow hover:bg-yellow-500 transition">
               {t("HomePage.infoBtn")}
             </button>
           </Link>
         </div>
-      </section>
+      </div>
+    </section>
     </main>
   );
 }
