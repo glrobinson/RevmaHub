@@ -16,7 +16,7 @@
       "infoBtn": "Learn More"
     },
     "TeacherStatements": {
-      "title": "Teacher and Revma Staff Statements",
+      "title": "Revma Staff Statements",
       "loadMore": "Load More",
       "showLess": "Show Less"
     },
@@ -32,12 +32,12 @@
       "communitySectionTitle": "Community Centers with a Roma Branch",
       "communityDescription": "These centers corporate with schools and offer support for Roma communities.",
 
-      "communityCentersPavlosMelasName": "Community Center with Roma Branch of Pavlos Melas",
-      "communityCentersAmpelokipiName": "Community Center with Roma Branch of Ampelokipi Menemeni",
-      "communityCentersIrakleiaName": "Community Center of Irakleia Serres",
-      "communityCentersKateriniName": "Community Center with Roma Branch of Katerini",
-      "communityCentersKarditsaName": "Community Center with Roma Branch of Karditsa",
-      "communityCentersTrikalaName": "Community Center with Roma Branch of Trikala",
+      "communityCentersPavlosMelasName": "Pavlos Melas",
+      "communityCentersAmpelokipiName": "Ampelokipi Menemeni",
+      "communityCentersIrakleiaName": "Irakleia Serres",
+      "communityCentersKateriniName": "Katerini",
+      "communityCentersKarditsaName": "Karditsa",
+      "communityCentersTrikalaName": "Trikala",
 
       "ctaTitle": "New to Teaching Roma Students?",
       "ctaDescription": "If you’re a new teacher of Roma students, or simply looking for helpful educational materials and resources to better support your class, we’ve got you covered.",

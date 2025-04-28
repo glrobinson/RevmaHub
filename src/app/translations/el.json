@@ -16,7 +16,7 @@
       "infoBtn": "Μάθετε περισσότερα"
     },
     "TeacherStatements": {
-      "title": "Μαρτυρίες Εκπαιδευτικών και Προσωπικού της Revma",
+      "title": "Δηλώσεις προσωπικού της Revma",
       "loadMore": "Φόρτωση Περισσότερων",
       "showLess": "Εμφάνιση Λιγότερων"
     },
@@ -32,12 +32,12 @@
     "communitySectionTitle": "Κέντρα Κοινότητας με Παράρτημα Ρομά",
     "communityDescription": "Αυτά τα κέντρα συνεργάζονται με σχολεία και προσφέρουν υποστήριξη στις κοινότητες των Ρομά.",
 
-    "communityCentersPavlosMelasName": "Κέντρο Κοινότητας με Παράρτημα Ρομά του Δήμου Παύλου Μελά",
-    "communityCentersAmpelokipiName": "Κέντρο Κοινότητας με Παράρτημα Ρομά του Δήμου Αμπελοκήπων-Μενεμένης",
-    "communityCentersIrakleiaName": "Κέντρο Κοινότητας Δήμου Ηράκλειας Σερρών",
-    "communityCentersKateriniName": "Κέντρο Κοινότητας με Παράρτημα Ρομά του Δήμου Κατερίνης",
-    "communityCentersKarditsaName": "Κέντρο Κοινότητας με Παράρτημα Ρομά του Δήμου Καρδίτσας",
-    "communityCentersTrikalaName": "Κέντρο Κοινότητας με Παράρτημα Ρομά του Δήμου Τρικκαίων",
+    "communityCentersPavlosMelasName": "Παύλου Μελά",
+    "communityCentersAmpelokipiName": "Αμπελοκήπων-Μενεμένης",
+    "communityCentersIrakleiaName": "Ηράκλειας Σερρών",
+    "communityCentersKateriniName": "Κατερίνης",
+    "communityCentersKarditsaName": "Καρδίτσας",
+    "communityCentersTrikalaName": "Τρικκαίων",
 
     "ctaTitle": "Νέος/Νέα στη Διδασκαλία Μαθητών Ρομά;",
     "ctaDescription": "Αν είστε νέος/νέα δάσκαλος/δάσκαλα ή αναζητάτε εκπαιδευτικό υλικό για να υποστηρίξετε την τάξη σας, είμαστε εδώ για να βοηθήσουμε.",

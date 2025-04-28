@@ -159,7 +159,7 @@ export default function TeachingRomaPage() {
           </p>
 
           {/* Grid of Community Centers */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 text-left">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 text-center font-bold text-base">
             {[
               {
                 name: t("TeachingRoma.communityCentersPavlosMelasName"),

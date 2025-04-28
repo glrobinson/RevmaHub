@@ -85,7 +85,7 @@ export default function ResourcesPage() {
                 );
               }}
               
-              className={`flex flex-col items-center w-[160px] p-4 rounded transition transform hover:scale-105 hover:bg-gray-100 ${
+              className={`flex flex-col items-center w-[160px] p-4 rounded transition transform hover:bg-yellow-50 ${
                 selectedCategories.includes(item.tag) ? "bg-gray-200" : ""
               }`}
             >

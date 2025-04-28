@@ -118,7 +118,7 @@ export default function InfoPage() {
 
                   {/* Tap to view message for mobile */}
                   <div className="absolute inset-0 flex items-end justify-center md:hidden pointer-events-none z-10">
-                    <div className="bg-black/80 text-black text-sm font-semibold px-4 py-2 rounded-t-md w-full text-center shadow-lg tracking-wide">
+                    <div className="text-black text-sm font-semibold px-4 py-2 rounded-t-md w-full text-center shadow-lg tracking-wide">
                       {t("InfoPage.tapToView")}
                     </div>
                   </div>

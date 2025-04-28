@@ -21,7 +21,7 @@ export const GET_TEACHER_STATEMENTS = gql`
 
 export const GET_STORIES_TESTIMONIALS = gql`
   query GetTestimonials($language: LanguageCodeFilterEnum!) {
-  testimonials(where: { language: $language }) {
+  testimonials(first: 1000, where: { language: $language }) {
     nodes {
       testimonialfields {
         name
@@ -34,7 +34,7 @@ export const GET_STORIES_TESTIMONIALS = gql`
 
 export const GET_RESOURCES = gql`
   query GetResources($language: LanguageCodeFilterEnum!) {
-    resources(where: { language: $language }) {
+    resources(first: 1000, where: { language: $language }) {
       nodes {
         title
         uri
@@ -134,7 +134,7 @@ export const GET_TEACHING_ROMA_IMAGES = gql`
 
 export const GET_INFOGRAPHICS = gql`
   query GetInfographics($language: LanguageCodeFilterEnum!) {
-    infographics(where: { language: $language }) {
+    infographics(first: 100, where: { language: $language }) {
       nodes {
         id
         title
