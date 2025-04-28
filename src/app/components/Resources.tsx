@@ -33,8 +33,10 @@ type Resource = {
       image: {
         node: {
           databaseId: number;
+          sourceUrl: string;
+          altText: string;
         };
-      };
+      };      
     };
   };
   
@@ -55,42 +57,7 @@ export default function Resources({ selectedCategory, searchQuery }: Props) {
     });
   const resources: Resource[] = data?.resources?.nodes || [];
   const [visibleResources, setVisibleResources] = useState(8);
-
-
   const [imageData, setImageData] = useState<{ [key: string]: { url: string; alt: string } }>({});
-
-  // Load image URLs from WP media endpoint
-  useEffect(() => {
-    const loadImages = async () => {
-      const loadedImages = await Promise.all(
-        resources.map(async (res: Resource) => {
-          const id = res.resourcefield?.image?.node?.databaseId;
-          if (!id) return { id: null, url: "", alt: "Image not found" };
-
-          try {
-            const res = await fetch(
-              `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wp-json/wp/v2/media/${id}`
-            );
-            if (!res.ok) throw new Error("Failed to fetch image");
-            const data = await res.json();
-            return { id, url: data.source_url, alt: data.alt_text || "Image" };
-          } catch {
-            return { id, url: "", alt: "Failed to load" };
-          }
-        })
-      );
-
-      const imageMap: { [key: string]: { url: string; alt: string } } = {};
-      loadedImages.forEach(({ id, url, alt }) => {
-        if (id) imageMap[id] = { url, alt };
-      });
-
-      setImageData(imageMap);
-    };
-
-    if (resources.length > 0) loadImages();
-  }, [resources]);
-
   const filteredResources = resources.filter((res) => {
     const categories = res.resourcefield?.category || [];
 
@@ -102,7 +69,6 @@ export default function Resources({ selectedCategory, searchQuery }: Props) {
         )
       )
     : true;
-
 
       const matchesSearch = searchQuery
       ? res.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -119,72 +85,71 @@ export default function Resources({ selectedCategory, searchQuery }: Props) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4 py-10">
       {filteredResources.slice(0, visibleResources).map((res, idx) => {
-        const id = res.resourcefield?.image?.node?.databaseId;
-        const img = imageData[id];
+            const imgUrl = res.resourcefield?.image?.node?.sourceUrl;
+            const imgAlt = res.resourcefield?.image?.node?.altText || "Image";
 
-        return (
-          <div
-            key={idx}
-            className="bg-gray-100 p-4 shadow text-center space-y-2 rounded"
-          >
-            {/* Category */}
-            <p className="text-xs text-gray-500">
-            {(res.resourcefield.category || [])
-                .map((cat) => t(`CategoryTags.${cat.toLowerCase()}`) || cat)
-                .join(", ")}
-            </p>
-
-
-            {/* Title */}
-            <p className="font-semibold">{res.title}</p>
-
-            {/* Image */}
-            {img?.url ? (
-              <div className="h-24 w-full relative">
-                <Image
-                  src={img.url}
-                  alt={img.alt}
-                  width={300}
-                  height={200}
-                  className="object-contain w-full h-24 rounded"
-                />
+            return (
+                <div
+                key={idx}
+                className="bg-white border border-gray-200 p-6 shadow-md hover:shadow-lg rounded-xl transition-all duration-300 flex flex-col justify-between"
+              >
+                {/* Title */}
+                <p className="text-md font-bold text-gray-900 mb-1">{res.title}</p>
+              
+                {/* Category */}
+                <p className="text-xs text-yellow-600 font-semibold mb-3">
+                  {(res.resourcefield.category || [])
+                    .map((cat) => t(`CategoryTags.${cat.toLowerCase()}`) || cat)
+                    .join(", ")}
+                </p>
+              
+                {/* Image */}
+                {imgUrl ? (
+                  <div className="h-40 w-full relative mb-4 rounded-lg overflow-hidden">
+                    <Image
+                      src={imgUrl}
+                      alt={imgAlt}
+                      width={300}
+                      height={200}
+                      className="object-cover w-full h-40"
+                    />
+                  </div>
+                ) : (
+                  <div className="bg-gray-300 h-40 flex items-center justify-center text-xs text-gray-600 mb-4 rounded-lg">
+                    {t("Resources.noImage")}
+                  </div>
+                )}
+              
+                {/* Description */}
+                <p className="text-sm text-gray-700 mb-4 line-clamp-3">{res.resourcefield.description}</p>
+              
+                {/* Buttons */}
+                <div className="mt-auto flex flex-wrap justify-center gap-3 pt-2">
+                  {res.resourcefield.link && (
+                    <a
+                      href={res.resourcefield.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 bg-white text-black border border-black rounded-lg text-sm hover:bg-gray-200 transition"
+                      >
+                      {t("Resources.view")}
+                    </a>
+                  )}
+                  {res.resourcefield.file?.node?.mediaItemUrl && (
+                    <a
+                      href={res.resourcefield.file.node.mediaItemUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 bg-white text-black border border-black rounded-lg text-sm hover:bg-gray-200 transition"
+                      >
+                      {t("Resources.download")}
+                    </a>
+                  )}
+                </div>
               </div>
-            ) : (
-              <div className="bg-gray-300 h-24 flex items-center justify-center text-xs text-gray-600">
-                {t("Resources.noImage")}
-              </div>
-            )}
-
-            {/* Description */}
-            <p className="text-xs text-gray-700">{res.resourcefield.description}</p>
-
-            {/* Link and/or Download Buttons */}
-            <div className="flex justify-center gap-2 pt-2">
-            {res.resourcefield.link && (
-                <a
-                href={res.resourcefield.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white border border-black hover:bg-gray-300 px-4 py-1 rounded text-sm"
-                >
-                {t("Resources.view")}
-                </a>
-            )}
-
-            {res.resourcefield.file?.node?.mediaItemUrl && (
-                <a
-                href={res.resourcefield.file.node.mediaItemUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white border border-black hover:bg-gray-300 px-4 py-1 rounded text-sm"
-                >
-                {t("Resources.download")}
-                </a>
-            )}
-            </div>
-          </div>
-        );
-      })}
+              
+            );
+        })}
       {/* Load More / Show Less Buttons */}
       <div className="col-span-full mt-6 flex flex-col md:flex-row items-center justify-center gap-4 text-center">
         {filteredResources.length > visibleResources && (

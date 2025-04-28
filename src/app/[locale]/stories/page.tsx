@@ -8,6 +8,8 @@ import { GET_MEDIA_ITEMS, GET_STORIES_TESTIMONIALS, GET_TEACHING_ROMA_IMAGES } f
 import client from "../../../../lib/apollo";
 import TeacherTestimonials from "../../components/TeacherTestimonials";
 import { useTranslation } from "../../context/TranslationContext";
+import { useParams } from "next/navigation";
+
 
 export default function TeachingRomaPage() {
     const { data, loading, error } = useQuery(GET_STORIES_TESTIMONIALS, { client });
@@ -16,6 +18,9 @@ export default function TeachingRomaPage() {
     const formRef = useRef<HTMLFormElement>(null);
     const { data: imageData } = useQuery(GET_TEACHING_ROMA_IMAGES, { client });
     const { t } = useTranslation();
+    const params = useParams();
+    const locale = params.locale;
+
 
 
     const imageFields = imageData?.page?.teachingRomaImages || {};
@@ -210,6 +215,25 @@ export default function TeachingRomaPage() {
         </div>
       </section>
 
+      {/* Learn More Video Section */}
+      <section className="px-6 py-16">
+        <div className="max-w-6xl mx-auto text-center space-y-8">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
+            {t("TeachingRoma.learnMoreTitle")}
+          </h2>
+          <p className="text-gray-600 max-w-2xl mx-auto text-base">
+            {t("TeachingRoma.learnMoreDescription")}
+          </p>
+
+          <div className="relative w-full h-0 pb-[56.25%] rounded-xl overflow-hidden shadow-2xl mt-8">
+          <div className="flex justify-center mt-8">
+          <iframe width="760" height="515" src="https://www.youtube.com/embed/W-BodPznjBY" frameBorder="0" allowFullScreen></iframe>
+          </div>
+          </div>
+        </div>
+      </section>
+
+
       {/* CTA */}
       <section className="bg-white px-6 py-16">
         <div className="max-w-3xl mx-auto text-center bg-gray-50 rounded-2xl p-10 shadow-sm">
@@ -219,7 +243,7 @@ export default function TeachingRomaPage() {
           <p className="text-base text-gray-700 mb-6">
             {t("TeachingRoma.ctaDescription")}
           </p>
-          <Link href="/resources">
+          <Link href={`/${locale}/resources`}>
             <button className="px-6 py-3 rounded-lg bg-yellow-400 text-black font-semibold shadow hover:bg-yellow-500 transition">
               {t("TeachingRoma.ctaButton")}
             </button>

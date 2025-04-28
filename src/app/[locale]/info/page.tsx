@@ -6,6 +6,7 @@ import { GET_INFOGRAPHICS } from "../../../../lib/queries";
 import client from "../../../../lib/apollo";
 import { useEffect, useState } from "react";
 import { useTranslation } from "../../context/TranslationContext";
+import TimelinePreviewCard from "../../components/TimelinePreviewCard";
 
 export default function InfoPage() {
   const [locale, setLocale] = useState("EN");
@@ -125,6 +126,7 @@ export default function InfoPage() {
                 </div>
               );
             })}
+            <TimelinePreviewCard />
           </div>
 
         {/* Load More / Show Less Buttons */}

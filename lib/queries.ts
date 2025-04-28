@@ -45,6 +45,8 @@ export const GET_RESOURCES = gql`
           image {
             node {
               databaseId
+              sourceUrl
+              altText
             }
           }
           file {

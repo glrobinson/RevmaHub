@@ -23,16 +23,16 @@ interface TranslationContextProps {
 const TranslationContext = createContext<TranslationContextProps | undefined>(undefined);
 
 export const TranslationProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<Language>('en');
+  const [language, setLanguage] = useState<Language>('el');
 
   useEffect(() => {
     const pathLocale = window.location.pathname.split('/')[1];
-    if (pathLocale === 'en' || pathLocale === 'el') {
+    if (pathLocale === 'el' || pathLocale === 'en') {
       setLanguage(pathLocale);
       localStorage.setItem('language', pathLocale);
     } else {
       const saved = localStorage.getItem('language');
-      if (saved === 'en' || saved === 'el') {
+      if (saved === 'el' || saved === 'en') {
         setLanguage(saved);
       }
     }

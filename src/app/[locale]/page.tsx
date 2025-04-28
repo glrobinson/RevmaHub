@@ -13,6 +13,7 @@ import {
 } from "../../../lib/queries";
 import TeacherStatements from "../components/TeacherStatements";
 import { useTranslation } from "../context/TranslationContext";
+import { useParams } from "next/navigation";
 
 
 const carouselImages = [
@@ -37,6 +38,7 @@ export default function Home() {
     variables: { language: locale },
     client,
   });
+  const params = useParams();
 
   const statements = data?.statements?.nodes || [];
 
@@ -164,17 +166,17 @@ export default function Home() {
         </h2>
 
         <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-          <Link href="/stories">
+          <Link href={`/${locale}/stories`}>
             <button className="px-6 py-3 rounded-lg bg-yellow-400 text-black font-semibold shadow hover:bg-yellow-500 transition">
               {t("HomePage.teachingRomaBtn")}
             </button>
           </Link>
-          <Link href="/resources">
+          <Link href={`/${locale}/resources`}>
             <button className="px-6 py-3 rounded-lg bg-yellow-400 text-black font-semibold shadow hover:bg-yellow-500 transition">
               {t("HomePage.resourceArchiveBtn")}
             </button>
           </Link>
-          <Link href="/info">
+          <Link href={`/${locale}/info`}>
             <button className="px-6 py-3 rounded-lg bg-yellow-400 text-black font-semibold shadow hover:bg-yellow-500 transition">
               {t("HomePage.infoBtn")}
             </button>

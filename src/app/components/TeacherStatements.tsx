@@ -90,29 +90,36 @@ export default function TeacherStatements() {
       {statements.slice(0, visibleStatements).map((item: any, index: number) => {
         const id = item.teacherFields?.image?.node?.databaseId;
         const img = imageData[id];
-        const name = item.author?.node?.name || "Anonymous";
-      
+        const text = item.teacherFields?.text || "";
+        const name = item.teacherFields?.name || "Anonymous";
+
         return (
-          <div key={index} className="bg-gray-100 rounded p-4 text-center shadow">
+            <div
+            key={index}
+            className="bg-white border border-gray-200 p-6 shadow-md hover:shadow-lg rounded-xl transition-all duration-200"
+            >
             {img?.url && (
-              <div className="h-40 w-full relative mb-4">
+                <div className="h-40 w-full relative mb-4">
                 <Image
-                  src={img.url}
-                  alt={img.alt}
-                  width={300}
-                  height={200}
-                  className="object-cover w-full h-40 rounded"
+                    src={img.url}
+                    alt={img.alt}
+                    width={300}
+                    height={200}
+                    className="object-cover w-full h-40 rounded"
                 />
-              </div>
+                </div>
             )}
-            <p className="text-sm text-gray-700 italic mb-2">"{item.teacherFields.text}"</p>
-            <p className="text-sm text-gray-600 mt-2">— {item.teacherFields.name}</p>
-          </div>
+            <p className="italic text-gray-800 mb-4 flex items-start gap-2">
+                <span className="text-yellow-500 text-2xl leading-none">“</span>
+                <span>{text}</span>
+            </p>
+            <p className="text-right text-sm font-semibold text-gray-700 mt-2">– {name}</p>
+            </div>
         );
-      })}
+        })}
 
       {/* Load More / Show Less Buttons */}
-      <div className="mt-8 flex flex-wrap justify-center gap-4">
+      <div className="col-span-full mt-6 flex flex-col md:flex-row items-center justify-center gap-4 text-center">
         {statements.length > visibleStatements && (
             <button
             onClick={() => setVisibleStatements((prev) => prev + 3)}
