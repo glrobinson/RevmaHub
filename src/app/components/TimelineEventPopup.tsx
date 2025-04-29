@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useRef } from 'react';
+import { useTranslation } from "../context/TranslationContext";
 
 type Props = {
     isOpen: boolean;
@@ -13,6 +14,7 @@ type Props = {
 
 export default function TimelineEventPopup({ isOpen, onClose, event, date, description, link, linkDescription }: Props) {
     const popupRef = useRef<HTMLDivElement>(null);
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (isOpen && popupRef.current) {
@@ -45,7 +47,7 @@ export default function TimelineEventPopup({ isOpen, onClose, event, date, descr
                     <h1 className='text-3xl font-bold text-center pb-2'>{event}</h1>
                     <h1 className='text-xl text-center text-gray-700 pb-15'>{description}</h1>
                 </div>
-                <h1 className='text-xl text-left'>Further Reading:</h1>
+                <h1 className='text-xl text-left'>{t("Timeline.furtherReading")}</h1>
                 <div className='text-blue-500 underline'>
                     <a
                         href={link}

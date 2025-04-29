@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import TimelineEventPopup from './TimelineEventPopup';
+import { useTranslation } from "../context/TranslationContext";
 
 interface TimelineEventProps {
   imageSrc: string;
@@ -31,6 +32,7 @@ const TimelineEventRight: React.FC<TimelineEventProps> = ({
   const handleClosePopup = () => {
     setShowDetails(false);
   };
+  const { t } = useTranslation();
 
   return (
     <div className="flex flex-row justify-end items-center w-full gap-6">
@@ -56,7 +58,7 @@ const TimelineEventRight: React.FC<TimelineEventProps> = ({
           />
         </div>
         <div className="text-xs text-gray-500">
-          Click to View Details
+            {t("Timeline.clickToView")}
         </div>
       </div>
 

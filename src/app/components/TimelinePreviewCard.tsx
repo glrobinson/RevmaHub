@@ -3,9 +3,13 @@
 import Image from "next/image";
 import { useState } from "react";
 import TimelineInfographic from "../components/TimelineInfographic";
+import { useTranslation } from "../context/TranslationContext";
 
 export default function TimelinePreviewCard() {
   const [isOpen, setIsOpen] = useState(false);
+  const { t, language } = useTranslation();
+  const imageSrc = language === "el" ? "/timeline_gr.png" : "/timeline.png";
+
 
   return (
     <>
@@ -15,7 +19,7 @@ export default function TimelinePreviewCard() {
         onClick={() => setIsOpen(true)}
       >
         <Image
-          src="/timeline.png"
+          src={imageSrc}
           alt="Timeline of Greek Roma Policies"
           width={700}
           height={700}
@@ -24,7 +28,7 @@ export default function TimelinePreviewCard() {
         {/* Mobile "tap to view" */}
         <div className="absolute inset-0 flex items-end justify-center md:hidden pointer-events-none z-10">
           <div className="text-black text-sm font-semibold px-4 py-2 rounded-t-md w-full text-center shadow-lg tracking-wide">
-            Tap to View
+            {t("Timeline.tapToView")}
           </div>
         </div>
       </div>
