@@ -44,18 +44,20 @@ export const TranslationProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem('language', lang);
   };
 
-  // Translation function that supports nested keys like "NavBar.home"
   const t = useCallback((key: string): string => {
     const langDict = translations[language] || en;
     const keys = key.split('.');
-    let result: any = langDict;
+    let result: unknown = langDict;
 
     for (const k of keys) {
-      result = result?.[k];
-      if (result === undefined) return key; // fallback to key if missing
-    }
-
-    return typeof result === 'string' ? result : key;
+        if (typeof result === 'object' && result !== null && k in result) {
+          result = (result as Record<string, unknown>)[k];
+        } else {
+          return key;
+        }
+      }
+      
+      return typeof result === 'string' ? result : key;
   }, [language]);
 
   return (

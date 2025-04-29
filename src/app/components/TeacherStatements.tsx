@@ -6,6 +6,19 @@ import { GET_TEACHER_STATEMENTS } from "../../../lib/queries";
 import client from "../../../lib/apollo";
 import { useEffect, useState } from "react";
 import { useTranslation } from "../context/TranslationContext";
+import { useMemo } from "react";
+
+type TeacherStatement = {
+    teacherFields?: {
+      text?: string;
+      name?: string;
+      image?: {
+        node?: {
+          databaseId?: number;
+        };
+      };
+    };
+  };  
 
 export default function TeacherStatements() {
     const [locale, setLocale] = useState("EN");
@@ -21,7 +34,7 @@ export default function TeacherStatements() {
     variables: { language: locale },
     client,
   });
-  const statements = data?.statements?.nodes || [];
+  const statements: TeacherStatement[] = useMemo(() => data?.statements?.nodes || [], [data]);
   const [visibleStatements, setVisibleStatements] = useState(3);
 
   const [imageData, setImageData] = useState<{ [key: string]: { url: string; alt: string } }>({});
@@ -29,7 +42,7 @@ export default function TeacherStatements() {
   useEffect(() => {
   const loadImages = async () => {
     const loadedImages = await Promise.all(
-        statements.map(async (t: any) => {
+        statements.map(async (t: TeacherStatement) => {
         const id = t.teacherFields?.image?.node?.databaseId;
         if (!id) return { id: null, url: "", alt: "Image not found" };
 
@@ -66,9 +79,9 @@ export default function TeacherStatements() {
         </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      {statements.slice(0, visibleStatements).map((item: any, index: number) => {
+      {statements.slice(0, visibleStatements).map((item: TeacherStatement, index: number) => {
         const id = item.teacherFields?.image?.node?.databaseId;
-        const img = imageData[id];
+        const img = id !== undefined ? imageData[id] : undefined;        
         const text = item.teacherFields?.text || "";
         const name = item.teacherFields?.name || "Anonymous";
 

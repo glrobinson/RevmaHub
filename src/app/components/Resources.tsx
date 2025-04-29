@@ -10,11 +10,16 @@ import { useTranslation } from "../context/TranslationContext";
 type Props = {
     selectedCategory: string[];
     searchQuery: string;
-    data: any;
+    data: {
+      resources?: {
+        nodes: Resource[];
+      };
+    } | undefined;
     loading: boolean;
-    error: any;
+    error: Error | undefined;
     refetch: () => void;
   };
+  
   
 
 type Resource = {

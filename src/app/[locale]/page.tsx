@@ -38,10 +38,6 @@ export default function Home() {
       setLocale(language);
     }
   }, []);
-  const { data } = useQuery(GET_TEACHER_STATEMENTS, {
-    variables: { language: locale },
-    client,
-  });
 
   const { data: idData } = useQuery(GET_HOMEPAGE_CAROUSEL_IMAGES, { client });
   const imageFields = idData?.page?.homepageCarouselImages || {};

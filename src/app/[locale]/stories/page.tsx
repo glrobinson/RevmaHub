@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useQuery } from "@apollo/client";
-import { GET_MEDIA_ITEMS, GET_STORIES_TESTIMONIALS, GET_TEACHING_ROMA_IMAGES } from "../../../../lib/queries";
+import { GET_MEDIA_ITEMS, GET_TEACHING_ROMA_IMAGES } from "../../../../lib/queries";
 import client from "../../../../lib/apollo";
 import TeacherTestimonials from "../../components/TeacherTestimonials";
 import { useTranslation } from "../../context/TranslationContext";

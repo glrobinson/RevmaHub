@@ -7,6 +7,13 @@ import client from "../../../lib/apollo";
 import { useTranslation } from "../context/TranslationContext";
 import { Dialog } from "@headlessui/react";
 
+type Testimonial = {
+    testimonialfields?: {
+      text?: string;
+      name?: string;
+    };
+  };  
+
 export default function TeacherTestimonials() {
   const [locale, setLocale] = useState("EN");
   const [visibleTestimonials, setVisibleTestimonials] = useState(2);
@@ -48,7 +55,7 @@ export default function TeacherTestimonials() {
           <p className="text-center text-red-500">{t("TeachingTestimonials.error")}</p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {testimonials.slice(0, visibleTestimonials).map((testimonial: any, i: number) => {
+            {testimonials.slice(0, visibleTestimonials).map((testimonial: Testimonial, i: number) => {
               const text = testimonial.testimonialfields?.text || "";
               const name = testimonial.testimonialfields?.name || t("TeachingTestimonials.anonymous");
               const isLong = text.length > 200;
