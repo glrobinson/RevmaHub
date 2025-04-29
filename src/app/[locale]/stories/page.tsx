@@ -168,32 +168,34 @@ export default function TeachingRomaPage() {
             {[
               {
                 name: t("TeachingRoma.communityCentersPavlosMelasName"),
-                link: "#",
+                link: "https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Fpavlosmelas.gr%2F&data=05%7C02%7Cglrobinson%40wpi.edu%7C05af3cde864f48d09fcb08dd87161d9f%7C589c76f5ca1541f9884b55ec15a0672a%7C0%7C0%7C638815251282428123%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=vw7VtPdEKrI%2B43Kx%2FPAxzmmyT7uPXb8QizCz8zaqmEI%3D&reserved=0",
               },
               {
                 name: t("TeachingRoma.communityCentersAmpelokipiName"),
-                link: "#",
+                link: "https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.ampelokipi-menemeni.gr%2Fstructures%2Fdiefthynsi-ygeias-pronoias-koinonikis-politikis%2Ftmima-askisis-koinonikis-politikis-koinonikis-prostasias%2Fkentro-koinotitas%2F&data=05%7C02%7Cglrobinson%40wpi.edu%7C05af3cde864f48d09fcb08dd87161d9f%7C589c76f5ca1541f9884b55ec15a0672a%7C0%7C0%7C638815251282451109%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=aBXjGe9XPCLu2Wr964zKZfDywo6wTgVMhRAhehRWoXs%3D&reserved=0",
               },
               {
                 name: t("TeachingRoma.communityCentersIrakleiaName"),
-                link: "#",
+                link: "https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Fweb.facebook.com%2Fkkirakleias%2F%3Flocale%3Del_GR%26_rdc%3D1%26_rdr%23&data=05%7C02%7Cglrobinson%40wpi.edu%7C05af3cde864f48d09fcb08dd87161d9f%7C589c76f5ca1541f9884b55ec15a0672a%7C0%7C0%7C638815251282464669%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=rA1t2UHmp%2BZG7NdiuathgABspUVaQVvORqovVpsRWGU%3D&reserved=0",
               },
               {
                 name: t("TeachingRoma.communityCentersKateriniName"),
-                link: "#",
+                link: "https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.google.com%2Fmaps%2Fplace%2F%2Fdata%3D!4m2!3m1!1s0x13580320efa91ad1%3A0x514042ffefb7053c%3Fsa%3DX%26ved%3D1t%3A8290%26ictx%3D111&data=05%7C02%7Cglrobinson%40wpi.edu%7C05af3cde864f48d09fcb08dd87161d9f%7C589c76f5ca1541f9884b55ec15a0672a%7C0%7C0%7C638815251282477953%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=eMImEAcKcqZ5DxBhF6fhe6%2BvOFzkHNlMBFUTCtYG%2BLE%3D&reserved=0",
               },
               {
                 name: t("TeachingRoma.communityCentersKarditsaName"),
-                link: "#",
+                link: "https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Fdimoskarditsas.gov.gr%2Fkentro-stirixis-roma-ke-efpathon-kinonikon-omadon%2F&data=05%7C02%7Cglrobinson%40wpi.edu%7C05af3cde864f48d09fcb08dd87161d9f%7C589c76f5ca1541f9884b55ec15a0672a%7C0%7C0%7C638815251282491033%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=SqFeqvc2sf5TDUlpSCNlj%2FvrnQisezWI60YFQWp3Ld0%3D&reserved=0",
               },
               {
                 name: t("TeachingRoma.communityCentersTrikalaName"),
-                link: "#",
+                link: "https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.vrisko.gr%2Fdetails%2Fmap%2F0idd7dbk7_4k2c5cd5145022104_5i33%3FLogEntryType%3DShowMap&data=05%7C02%7Cglrobinson%40wpi.edu%7C05af3cde864f48d09fcb08dd87161d9f%7C589c76f5ca1541f9884b55ec15a0672a%7C0%7C0%7C638815251282503859%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=nd69bU2bYY6cFmBM9owFVKsxSui7qbBDodk9y6z6lZ4%3D&reserved=0",
               },
             ].map((center, idx) => (
               <a
                 key={idx}
+                target="_blank"
                 href={center.link}
+                rel="noopener noreferrer"
                 className="p-6 rounded-xl border bg-white hover:shadow-lg transition-all border-gray-200 shadow-sm"
               >
                 <h3 className="font-semibold text-md text-gray-800">{center.name}</h3>
@@ -204,7 +206,7 @@ export default function TeachingRomaPage() {
           {/* Embedded Google Map - with spacing! */}
           <div className="mt-10 max-w-4xl mx-auto w-full rounded-lg overflow-hidden shadow-lg">
                   <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3094.4807064375937!2d22.944419915689427!3d40.64006397933806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a838f3c6b37b69%3A0x400bd2ce2b97450!2sThessaloniki%2C%20Greece!5e0!3m2!1sen!2sus!4v1649849102016!5m2!1sen!2sus"
+                  src="https://www.google.com/maps/d/u/0/embed?mid=1C1zbT63k3IXL5pQNfj0r-ZcSvOs41d0&ehbc=2E312F&noprof=1"
                   width="100%"
                   height="400"
                   allowFullScreen
