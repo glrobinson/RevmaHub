@@ -108,7 +108,7 @@ export default function TeacherTestimonials() {
       {/* Expand Modal */}
       {expandedTestimonial && (
         <Dialog open={true} onClose={() => setExpandedTestimonial(null)} className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-            <Dialog.Panel className="bg-white max-w-xl w-full mx-4 rounded-lg p-6 shadow-xl relative">
+            <Dialog.Panel className="bg-white max-w-xl w-full mx-4 rounded-lg p-6 shadow-xl relative max-h-[80vh] overflow-y-auto">
             <button
                 onClick={() => setExpandedTestimonial(null)}
                 className="absolute top-3 right-4 text-gray-500 hover:text-black text-xl font-bold"
