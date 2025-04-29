@@ -29,12 +29,11 @@ export function NavBar() {
 
   const switchLanguage = (targetLocale: "en" | "el") => {
     const segments = pathname.split("/");
-    segments[1] = targetLocale; // Replace the locale segment
+    segments[1] = targetLocale;
     const newPath = segments.join("/") || `/${targetLocale}`;
     router.push(newPath);
     setLanguageDropdownOpen(false);
   
-    // 🛠️ Force a full page reload to trigger language re-init
     setTimeout(() => {
       window.location.href = newPath;
     }, 10);
@@ -179,7 +178,7 @@ export function NavBar() {
 
           {/* Mobile Language Switch */}
           <div className="pt-4">
-            <div className="font-semibold mb-1">Language</div>
+            <div className="font-semibold mb-1">{t("NavBar.language")}</div>
             <div className="flex flex-col space-y-2 text-xl">
               <button onClick={() => switchLanguage("en")} title="English">
                 🇬🇧 English
