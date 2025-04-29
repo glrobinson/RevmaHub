@@ -39,6 +39,7 @@ export const GET_RESOURCES = gql`
         title
         uri
         resourcefield {
+          text
           description
           category
           link

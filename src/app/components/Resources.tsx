@@ -21,6 +21,7 @@ type Resource = {
     title: string;
     uri: string;
     resourcefield: {
+      text: string;
       description: string;
       category: string[];
       link: string;
@@ -94,7 +95,7 @@ export default function Resources({ selectedCategory, searchQuery }: Props) {
                 className="bg-white border border-gray-200 p-6 shadow-md hover:shadow-lg rounded-xl transition-all duration-300 flex flex-col justify-between"
               >
                 {/* Title */}
-                <p className="text-md font-bold text-gray-900 mb-1">{res.title}</p>
+                <p className="text-md font-bold text-gray-900 mb-1">{res.resourcefield.text}</p>
               
                 {/* Category */}
                 <p className="text-xs text-yellow-600 font-semibold mb-3">
