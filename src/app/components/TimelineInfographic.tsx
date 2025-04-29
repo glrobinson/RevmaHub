@@ -31,7 +31,7 @@ export default function Home() {
 <TimelineEventRight imageSrc="/backpack.png" altText="outdoor scene"
                     date="1981" event={t("Timeline.events.1981.event")}
                     description={t("Timeline.events.1981.description")}
-                    link=""
+                    link="https://www.researchgate.net/publication/277043537_Teacher_training_in_Roma_education_in_Greece_Intercultural_and_critical_educational_necessities"
                     linkDescription={t("Timeline.events.1981.linkDescription")}
                               />
 {/* Event 3  */}
