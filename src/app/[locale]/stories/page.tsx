@@ -199,6 +199,7 @@ export default function TeachingRomaPage() {
                 className="p-6 rounded-xl border bg-white hover:shadow-lg transition-all border-gray-200 shadow-sm"
               >
                 <h3 className="font-semibold text-md text-gray-800">{center.name}</h3>
+                <div className="text-xs text-gray-500">{t("TeachingRoma.clickToView")}</div>
               </a>
             ))}
           </div>
@@ -227,10 +228,14 @@ export default function TeachingRomaPage() {
             {t("TeachingRoma.learnMoreDescription")}
           </p>
 
-          <div className="relative w-full h-0 pb-[56.25%] rounded-xl overflow-hidden shadow-2xl mt-8">
-          <div className="flex justify-center mt-8">
-          <iframe width="760" height="515" src="https://www.youtube.com/embed/W-BodPznjBY" frameBorder="0" allowFullScreen></iframe>
-          </div>
+          {/* Responsive YouTube Embed */}
+          <div className="relative w-full pb-[56.25%] mt-8 rounded-xl overflow-hidden shadow-2xl">
+            <iframe
+              src="https://www.youtube.com/embed/W-BodPznjBY"
+              frameBorder="0"
+              allowFullScreen
+              className="absolute top-0 left-0 w-full h-full"
+            ></iframe>
           </div>
         </div>
       </section>

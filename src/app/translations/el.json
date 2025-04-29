@@ -38,6 +38,7 @@
     "communityCentersKateriniName": "Κατερίνης",
     "communityCentersKarditsaName": "Καρδίτσας",
     "communityCentersTrikalaName": "Τρικκαίων",
+    "clickToView": "Κάντε κλικ για προβολή",
 
     "learnMoreTitle": "Μάθετε περισσότερα για τα Κέντρα Κοινότητας",
     "learnMoreDescription": "Παρακολουθήστε αυτό το σύντομο βίντεο για να καταλάβετε γιατί τα κοινοτικά κέντρα είναι τόσο σημαντικά.",
@@ -112,7 +113,9 @@
       "view": "Προβολή",
       "download": "Λήψη",
       "loadMore": "Φόρτωση περισσότερων",
-      "showLess": "Εμφάνιση λιγότερων"
+      "showLess": "Εμφάνιση λιγότερων",
+      "readMore": "Διαβάστε περισσότερα",
+      "showLessText": "Εμφάνιση λιγότερων"
   },
     "CategoryTags": {
       "inclusive practices": "Συμπεριληπτικές Πρακτικές",

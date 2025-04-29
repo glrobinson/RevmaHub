@@ -38,6 +38,7 @@
       "communityCentersKateriniName": "Katerini",
       "communityCentersKarditsaName": "Karditsa",
       "communityCentersTrikalaName": "Trikala",
+      "clickToView": "Click to View",
 
       "learnMoreTitle": "Learn More About Community Centers",
       "learnMoreDescription": "Watch this short video to understand why community centers are so important.",
@@ -104,7 +105,9 @@
       "view": "View",
       "download": "Download",
       "loadMore": "Load More",
-      "showLess": "Show Less"
+      "showLess": "Show Less",
+      "readMore": "Read More",
+      "showLessText": "Show Less"
   },
     "CategoryTags": {
       "inclusive practices": "Inclusive Practices",

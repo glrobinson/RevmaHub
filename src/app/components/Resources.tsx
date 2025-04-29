@@ -59,6 +59,7 @@ export default function Resources({ selectedCategory, searchQuery }: Props) {
   const resources: Resource[] = data?.resources?.nodes || [];
   const [visibleResources, setVisibleResources] = useState(8);
   const [imageData, setImageData] = useState<{ [key: string]: { url: string; alt: string } }>({});
+  const [expandedDescriptions, setExpandedDescriptions] = useState<{ [key: number]: boolean }>({});
   const filteredResources = resources.filter((res) => {
     const categories = res.resourcefield?.category || [];
 
@@ -71,14 +72,27 @@ export default function Resources({ selectedCategory, searchQuery }: Props) {
       )
     : true;
 
-      const matchesSearch = searchQuery
-      ? res.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        res.resourcefield.description.toLowerCase().includes(searchQuery.toLowerCase())
-      : true;
+    const matchesSearch = searchQuery
+    ? (
+        res.resourcefield.text?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        res.resourcefield.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (res.resourcefield.category || [])
+          .some(cat => cat.toLowerCase().includes(searchQuery.toLowerCase()))
+      )
+    : true;
+  
     
 
     return matchesCategory && matchesSearch;
   });
+
+  const toggleDescription = (index: number) => {
+    setExpandedDescriptions((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
+  
 
   if (loading) return <p className="text-center">{t("Resources.loading")}</p>;
   if (error) return <p className="text-center text-red-500">{t("Resources.error")}</p>;
@@ -122,7 +136,18 @@ export default function Resources({ selectedCategory, searchQuery }: Props) {
                 )}
               
                 {/* Description */}
-                <p className="text-sm text-gray-700 mb-4 line-clamp-3">{res.resourcefield.description}</p>
+                <p className={`text-sm text-gray-700 mb-2 ${!expandedDescriptions[idx] ? "line-clamp-3" : ""}`}>
+                {res.resourcefield.description}
+                </p>
+                {res.resourcefield.description.length > 150 && (
+                <button
+                    onClick={() => toggleDescription(idx)}
+                    className="text-xs text-yellow-700 underline focus:outline-none"
+                >
+                    {expandedDescriptions[idx] ? t("Resources.showLessText") : t("Resources.readMore")}
+                </button>
+                )}
+
               
                 {/* Buttons */}
                 <div className="mt-auto flex flex-wrap justify-center gap-3 pt-2">
