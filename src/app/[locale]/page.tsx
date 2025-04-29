@@ -6,11 +6,7 @@ import Link from "next/link";
 import useEmblaCarousel from "embla-carousel-react";
 import { useQuery } from "@apollo/client";
 import client from "../../../lib/apollo";
-import {
-  GET_MEDIA_ITEMS,
-  GET_HOMEPAGE_CAROUSEL_IMAGES,
-  GET_TEACHER_STATEMENTS,
-} from "../../../lib/queries";
+import { GET_MEDIA_ITEMS, GET_HOMEPAGE_CAROUSEL_IMAGES, } from "../../../lib/queries";
 import TeacherStatements from "../components/TeacherStatements";
 import { useTranslation } from "../context/TranslationContext";
 
