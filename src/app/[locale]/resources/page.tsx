@@ -1,7 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
 import Image from "next/image";
-import emailjs from "@emailjs/browser";
 import Resources from "../../components/Resources";
 import { useQuery } from "@apollo/client";
 import { GET_RESOURCES } from "../../../../lib/queries";
@@ -28,23 +27,27 @@ export default function ResourcesPage() {
   ];
   
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (formRef.current) {
-      emailjs.sendForm(
-        "service_fyjza4t",
-        "template_kse9rie",
-        formRef.current,
-        "_c4qW0hFnGM9EYoMZ"
-      )
-      .then(() => {
-        alert("Submission sent!");
-        setIsModalOpen(false);
-      })
-      .catch((err) => {
-        console.error("Failed to send:", err);
-      });
+    const formData = new FormData(formRef.current!);
+    const response = await fetch("/api/send-resource-email", {
+      method: "POST",
+      body: JSON.stringify({
+        first_name: formData.get("first_name"),
+        last_name: formData.get("last_name"),
+        email: formData.get("email"),
+        phone: formData.get("phone"),
+        description: formData.get("description"),
+        resource_type: formData.get("resource_type"),
+        file_link: formData.get("file_link"),
+      }),
+      headers: { "Content-Type": "application/json" },
+    });
+    if (response.ok) {
+      alert("Submission sent!");
+      setIsModalOpen(false);
+    } else {
+      alert("Failed to send submission.");
     }
   };
 

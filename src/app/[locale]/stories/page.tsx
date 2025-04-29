@@ -2,7 +2,6 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import emailjs from "@emailjs/browser";
 import { useQuery } from "@apollo/client";
 import { GET_MEDIA_ITEMS, GET_STORIES_TESTIMONIALS, GET_TEACHING_ROMA_IMAGES } from "../../../../lib/queries";
 import client from "../../../../lib/apollo";
@@ -45,25 +44,39 @@ export default function TeachingRomaPage() {
     { id: 5, name: "Teacher 5" },
   ];
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-
+  
     if (formRef.current) {
-      emailjs.sendForm(
-        "service_fyjza4t",
-        "template_1a8pq99",
-        formRef.current,
-        "_c4qW0hFnGM9EYoMZ"
-      )
-      .then(() => {
-        alert("Submission sent!");
-        setIsModalOpen(false);
-      })
-      .catch((err) => {
-        console.error("Failed to send:", err);
-      });
+      const formData = new FormData(formRef.current);
+      const email = formData.get('email');
+      const role = formData.get('role');
+      const message = formData.get('message');
+  
+      try {
+        const res = await fetch('/api/send-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, role, message }),
+        });
+  
+        const result = await res.json();
+  
+        if (result.success) {
+          alert('Submission sent!');
+          setIsModalOpen(false);
+        } else {
+          alert('Failed to send submission.');
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('An error occurred. Please try again.');
+      }
     }
   };
+  
 
   const centers = [
     {

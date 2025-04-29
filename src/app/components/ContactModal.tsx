@@ -1,6 +1,5 @@
 'use client';
 import { useRef } from 'react';
-import emailjs from '@emailjs/browser';
 import { useTranslation } from '../context/TranslationContext';
 
 
@@ -13,23 +12,32 @@ export default function ContactModal({ isOpen, onClose }: Props) {
   const formRef = useRef<HTMLFormElement>(null);
   const { t } = useTranslation();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (formRef.current) {
-      emailjs.sendForm(
-        'service_fyjza4t',
-        'template_1a8pq99',
-        formRef.current,
-        '_c4qW0hFnGM9EYoMZ'
-      )
-      .then(() => {
-        alert(t("ContactModal.success"));
-        onClose();
-      })
-      .catch((err) => {
-        console.error('EmailJS Error:', err);
-        alert(t("ContactModal.error"));
+
+    if (!formRef.current) return;
+
+    const formData = new FormData(formRef.current);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      const response = await fetch('/api/send-contact-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
       });
+
+      if (response.ok) {
+        alert(t('ContactModal.success'));
+        onClose();
+      } else {
+        throw new Error('Email failed');
+      }
+    } catch (err) {
+      console.error('API Error:', err);
+      alert(t('ContactModal.error'));
     }
   };
 
