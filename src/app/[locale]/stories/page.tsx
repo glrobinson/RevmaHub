@@ -9,23 +9,31 @@ import TeacherTestimonials from "../../components/TeacherTestimonials";
 import { useTranslation } from "../../context/TranslationContext";
 import { useParams } from "next/navigation";
 
+interface ImageNode {
+  node?: {
+    databaseId?: number;
+  };
+}
+
+interface MediaImage {
+  sourceUrl?: string;
+  altText?: string;
+  databaseId?: number;
+}
+
 
 export default function TeachingRomaPage() {
-    const { data, loading, error } = useQuery(GET_STORIES_TESTIMONIALS, { client });
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [uploadedImage, setUploadedImage] = useState<File | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
     const { data: imageData } = useQuery(GET_TEACHING_ROMA_IMAGES, { client });
     const { t } = useTranslation();
     const params = useParams();
     const locale = params.locale;
-
-
-
     const imageFields = imageData?.page?.teachingRomaImages || {};
-    const imageIds = Object.values(imageFields)
-      .map((img: any) => img?.node?.databaseId)
-      .filter(Boolean);
+    const imageIds = (Object.values(imageFields) as ImageNode[])
+      .map((img) => img?.node?.databaseId)
+      .filter((id): id is number => typeof id === "number");
+
 
     const { data: mediaData } = useQuery(GET_MEDIA_ITEMS, {
       variables: { ids: imageIds },
@@ -35,16 +43,7 @@ export default function TeachingRomaPage() {
 
     const imageRow = mediaData?.mediaItems?.nodes || [];
 
-
-  const testimonials = [
-    { id: 1, name: "Teacher 1" },
-    { id: 2, name: "Teacher 2" },
-    { id: 3, name: "Teacher 3" },
-    { id: 4, name: "Teacher 4" },
-    { id: 5, name: "Teacher 5" },
-  ];
-
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   
     if (formRef.current) {
@@ -76,31 +75,11 @@ export default function TeachingRomaPage() {
       }
     }
   };
-  
-
-  const centers = [
-    {
-      name: t("TeachingRoma.communityCentersAthenName"),
-      description: t("TeachingRoma.communityCentersAthenDescription"),
-      link: "#",
-    },
-    {
-      name: t("TeachingRoma.communityCentersThessalonikiName"),
-      description: t("TeachingRoma.communityCentersThessalonikiDescription"),
-      link: "#",
-    },
-    {
-      name: t("TeachingRoma.communityCentersLarissaName"),
-      description: t("TeachingRoma.communityCentersLarissaDescription"),
-      link: "#",
-    },
-  ];
 
   return (
     <main className="space-y-2 text-sm ">
-        {/* Hero Section with Blurred Background */}
+        {/* Hero Section */}
         <section className="relative h-[400px] w-full overflow-hidden">
-        {/* Blurred background image layer */}
         <div className="absolute inset-0 z-0">
             <Image
             src="/teaching.jpg"
@@ -110,8 +89,6 @@ export default function TeachingRomaPage() {
             className="object-cover filter blur-sm scale-105"
             />
         </div>
-
-        {/* Overlay and text */}
         <div className="absolute inset-0 z-10 bg-black/30 flex flex-col items-center justify-center text-center px-4">
             <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-bold mb-4 drop-shadow">
             {t("TeachingRoma.heroTitle")}
@@ -147,7 +124,7 @@ export default function TeachingRomaPage() {
       {/* Image Row Section */}
       <section className="px-6 py-3 bg-white">
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
-        {imageRow.map((img: any, index: number) => (
+        {imageRow.map((img: MediaImage, index: number) => (
           img?.sourceUrl && (
             <div key={img.databaseId || index} className="rounded overflow-hidden shadow">
               <Image

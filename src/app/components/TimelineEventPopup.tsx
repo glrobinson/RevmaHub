@@ -12,7 +12,7 @@ type Props = {
     linkDescription: string;
 }
 
-export default function TimelineEventPopup({ isOpen, onClose, event, date, description, link, linkDescription }: Props) {
+export default function TimelineEventPopup({ isOpen, onClose, event, description, link, linkDescription }: Props) {
     const popupRef = useRef<HTMLDivElement>(null);
     const { t } = useTranslation();
 

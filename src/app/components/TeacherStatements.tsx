@@ -7,27 +7,6 @@ import client from "../../../lib/apollo";
 import { useEffect, useState } from "react";
 import { useTranslation } from "../context/TranslationContext";
 
-
-const decodeWpId = (encodedId: string): number | null => {
-  try {
-    const decoded = atob(encodedId);
-    const match = decoded.match(/:(\d+)$/);
-    return match ? parseInt(match[1], 10) : null;
-  } catch {
-    return null;
-  }
-};
-
-const fetchImageDetails = async (imageId: number) => {
-    const res = await fetch(`https://ed.hub.revmaorg.gr/wp-json/wp/v2/media/${imageId}`);
-    if (!res.ok) throw new Error("Failed to fetch image data");
-    const data = await res.json();
-    return {
-      url: data.source_url,
-      alt: data.alt_text || "Testimonial image",
-    };
-  };
-
 export default function TeacherStatements() {
     const [locale, setLocale] = useState("EN");
     useEffect(() => {

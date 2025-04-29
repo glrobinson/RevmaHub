@@ -13,8 +13,12 @@ import {
 } from "../../../lib/queries";
 import TeacherStatements from "../components/TeacherStatements";
 import { useTranslation } from "../context/TranslationContext";
-import { useParams } from "next/navigation";
 
+interface ImageFieldNode {
+  node?: {
+    databaseId?: number;
+  };
+}
 
 const carouselImages = [
   "/activities4.jpg",
@@ -38,16 +42,14 @@ export default function Home() {
     variables: { language: locale },
     client,
   });
-  const params = useParams();
-
-  const statements = data?.statements?.nodes || [];
 
   const { data: idData } = useQuery(GET_HOMEPAGE_CAROUSEL_IMAGES, { client });
   const imageFields = idData?.page?.homepageCarouselImages || {};
 
-  const imageIds = Object.values(imageFields)
-    .map((img: any) => img?.node?.databaseId)
-    .filter(Boolean);
+  const imageIds = (Object.values(imageFields) as ImageFieldNode[])
+    .map((img) => img?.node?.databaseId)
+    .filter((id): id is number => typeof id === "number");
+
 
   const { data: mediaData } = useQuery(GET_MEDIA_ITEMS, {
     variables: { ids: imageIds },

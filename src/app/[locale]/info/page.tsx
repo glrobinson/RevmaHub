@@ -8,6 +8,21 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "../../context/TranslationContext";
 import TimelinePreviewCard from "../../components/TimelinePreviewCard";
 
+interface InfographicImageNode {
+  sourceUrl: string;
+  altText?: string;
+  databaseId?: number;
+}
+
+interface InfographicItem {
+  infographicsimages: {
+    infographicImage: {
+      node: InfographicImageNode;
+    };
+  };
+}
+
+
 export default function InfoPage() {
   const [locale, setLocale] = useState("EN");
   useEffect(() => {
@@ -18,7 +33,7 @@ export default function InfoPage() {
     }
   }, []);
   const { t } = useTranslation();
-  const { data, loading, error } = useQuery(GET_INFOGRAPHICS, {
+  const { data  } = useQuery(GET_INFOGRAPHICS, {
       variables: { language: locale },
       client,
   });
@@ -36,11 +51,8 @@ export default function InfoPage() {
   ];
   return (
     <main className="space-y-5 text-sm">
-
-
-      {/* Hero Section with Blurred Background */}
+      {/* Hero Section */}
         <section className="relative h-[400px] w-full overflow-hidden">
-          {/* Blurred background image layer */}
           <div className="absolute inset-0 z-0">
             <Image
               src="/classroom.jpg"
@@ -50,8 +62,6 @@ export default function InfoPage() {
               className="object-cover filter blur-sm scale-105"
               />
             </div>
-                  
-            {/* Overlay and text */}
             <div className="absolute inset-0 z-10 bg-black/30 flex flex-col items-center justify-center text-center px-4">
               <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-bold mb-4 drop-shadow">
               {t("InfoPage.heroTitle")}
@@ -98,7 +108,7 @@ export default function InfoPage() {
         <div className="max-w-6xl mx-auto space-y-6">
         <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900">{t("InfoPage.infographicsTitle")}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {visibleItems.map((item: any, index: number) => {
+          {visibleItems.map((item: InfographicItem, index: number) => {
               const image = item.infographicsimages?.infographicImage?.node;
               if (!image?.sourceUrl) return null;
 

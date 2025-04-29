@@ -58,10 +58,8 @@ export default function Resources({ selectedCategory, searchQuery }: Props) {
     });
   const resources: Resource[] = data?.resources?.nodes || [];
   const [visibleResources, setVisibleResources] = useState(8);
-  const [imageData, setImageData] = useState<{ [key: string]: { url: string; alt: string } }>({});
   const [expandedDescriptions, setExpandedDescriptions] = useState<{ [key: number]: boolean }>({});
   const filteredResources = resources.filter((res) => {
-    const categories = res.resourcefield?.category || [];
 
     const matchesCategory =
   selectedCategory.length > 0
@@ -81,8 +79,6 @@ export default function Resources({ selectedCategory, searchQuery }: Props) {
       )
     : true;
   
-    
-
     return matchesCategory && matchesSearch;
   });
 

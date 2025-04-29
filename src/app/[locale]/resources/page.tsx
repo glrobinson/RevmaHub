@@ -27,7 +27,7 @@ export default function ResourcesPage() {
   ];
   
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(formRef.current!);
     const response = await fetch("/api/send-resource-email", {
