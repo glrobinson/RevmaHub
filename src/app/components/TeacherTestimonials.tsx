@@ -15,7 +15,7 @@ type Testimonial = {
   };  
 
 export default function TeacherTestimonials() {
-  const [locale, setLocale] = useState("EN");
+  const [locale, setLocale] = useState("EL");
   const [visibleTestimonials, setVisibleTestimonials] = useState(2);
   const [expandedTestimonial, setExpandedTestimonial] = useState<string | null>(null);
   const { t } = useTranslation();
@@ -23,7 +23,7 @@ export default function TeacherTestimonials() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const path = window.location.pathname;
-      const language = path.split("/")[1]?.toUpperCase() || "EN";
+      const language = path.split("/")[1]?.toUpperCase() || "EL";
       setLocale(language);
     }
   }, []);
@@ -31,6 +31,7 @@ export default function TeacherTestimonials() {
   const { data, loading, error } = useQuery(GET_STORIES_TESTIMONIALS, {
     variables: { language: locale },
     client,
+    skip: !locale || locale === "",
   });
 
   const testimonials = data?.testimonials?.nodes || [];

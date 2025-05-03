@@ -24,11 +24,11 @@ interface InfographicItem {
 
 
 export default function InfoPage() {
-  const [locale, setLocale] = useState("EN");
+  const [locale, setLocale] = useState("EL");
   useEffect(() => {
     if (typeof window !== "undefined") {
       const path = window.location.pathname;
-      const language = path.split("/")[1]?.toUpperCase() || "EN";
+      const language = path.split("/")[1]?.toUpperCase() || "EL";
       setLocale(language);
     }
   }, []);
@@ -36,19 +36,32 @@ export default function InfoPage() {
   const { data  } = useQuery(GET_INFOGRAPHICS, {
       variables: { language: locale },
       client,
+      skip: !locale || locale === "",
   });
   const infographics = data?.infographics?.nodes || [];
   const [visibleInfographics, setVisibleInfographics] = useState(6);
   const visibleItems = infographics.slice(0, visibleInfographics);
   const [modalImage, setModalImage] = useState<string | null>(null);
   const statSources = [
-    "https://fra.europa.eu/sites/default/files/fra_uploads/fra-2014-roma-survey-dif-education-1_en.pdf",       // stat 1
-    "https://fra.europa.eu/sites/default/files/fra_uploads/fra-2014-roma-survey-dif-education-1_en.pdf",    // stat 2
-    "https://fra.europa.eu/sites/default/files/fra_uploads/fra-2014-roma-survey-dif-education-1_en.pdf",    // stat 3
-    "https://tinyurl.com/2ayykjea",      // stat 4
-    "https://fra.europa.eu/sites/default/files/fra_uploads/fra-2014-roma-survey-dif-education-1_en.pdf",      // stat 5
-    "https://fra.europa.eu/sites/default/files/fra_uploads/fra-2014-roma-survey-dif-education-1_en.pdf" // stat 6
+    "https://fra.europa.eu/sites/default/files/fra_uploads/fra-2014-roma-survey-dif-education-1_en.pdf",
+    "https://fra.europa.eu/sites/default/files/fra_uploads/fra-2014-roma-survey-dif-education-1_en.pdf",
+    "https://fra.europa.eu/sites/default/files/fra_uploads/fra-2014-roma-survey-dif-education-1_en.pdf",
+    "https://tinyurl.com/2ayykjea",
+    "https://fra.europa.eu/sites/default/files/fra_uploads/fra-2014-roma-survey-dif-education-1_en.pdf",
+    "https://fra.europa.eu/sites/default/files/fra_uploads/fra-2014-roma-survey-dif-education-1_en.pdf"
   ];
+
+  useEffect(() => {
+    const sectionId = sessionStorage.getItem("scrollToSection");
+    if (sectionId) {
+      const el = document.querySelector(sectionId);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      sessionStorage.removeItem("scrollToSection");
+    }
+  }, []);
+
   return (
     <main className="space-y-5 text-sm">
       {/* Hero Section */}
@@ -72,6 +85,7 @@ export default function InfoPage() {
             </div>
           </section>
 
+      <section id="stats" className="scroll-mt-24">
       {/* Statistics Section */}
       <section className="bg-gray-100 px-6 py-14 max-w-6xl mx-auto text-center space-y-10">
         <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-2">
@@ -102,7 +116,9 @@ export default function InfoPage() {
         ))}
       </div>
       </section>
+      </section>
 
+    <section id="infographics" className="scroll-mt-24">
     {/* Infographics Section */}
     <section className="py-10 px-6">
         <div className="max-w-6xl mx-auto space-y-6">
@@ -159,6 +175,7 @@ export default function InfoPage() {
           )}
         </div>
       </div>
+    </section>
     </section>
 
     {/* Image Modal */}

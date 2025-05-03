@@ -21,18 +21,19 @@ type TeacherStatement = {
   };  
 
 export default function TeacherStatements() {
-    const [locale, setLocale] = useState("EN");
+    const [locale, setLocale] = useState("EL");
     useEffect(() => {
-      if (typeof window !== "undefined") {
-        const path = window.location.pathname;
-        const language = path.split("/")[1]?.toUpperCase() || "EN";
-        setLocale(language);
-      }
-    }, []);
+        if (typeof window !== "undefined") {
+          const path = window.location.pathname;
+          const language = path.split("/")[1]?.toUpperCase() || "EL";
+          setLocale(language);
+        }
+      }, []);      
   const { t } = useTranslation();
   const { data, error, loading } = useQuery(GET_TEACHER_STATEMENTS, {
     variables: { language: locale },
     client,
+    skip: !locale || locale === "",
   });
   const statements: TeacherStatement[] = useMemo(() => data?.statements?.nodes || [], [data]);
   const [visibleStatements, setVisibleStatements] = useState(3);
@@ -40,33 +41,37 @@ export default function TeacherStatements() {
   const [imageData, setImageData] = useState<{ [key: string]: { url: string; alt: string } }>({});
 
   useEffect(() => {
-  const loadImages = async () => {
-    const loadedImages = await Promise.all(
-        statements.map(async (t: TeacherStatement) => {
-        const id = t.teacherFields?.image?.node?.databaseId;
-        if (!id) return { id: null, url: "", alt: "Image not found" };
-
-        try {
-          const res = await fetch(`${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wp-json/wp/v2/media/${id}`);
-          if (!res.ok) throw new Error("Failed to fetch image");
-          const data = await res.json();
-          return { id, url: data.source_url, alt: data.alt_text || "Image" };
-        } catch {
-          return { id, url: "", alt: "Failed to load" };
-        }
-      })
-    );
-
-    const imageMap: { [key: string]: { url: string; alt: string } } = {};
-    loadedImages.forEach(({ id, url, alt }) => {
-      if (id) imageMap[id] = { url, alt };
-    });
-
-    setImageData(imageMap);
-  };
-
-  if (statements.length > 0) loadImages();
-}, [statements]);
+    if (!data || !data.statements?.nodes?.length) return;
+  
+    const loadImages = async () => {
+      const loadedImages = await Promise.all(
+        data.statements.nodes.map(async (t: TeacherStatement) => {
+          const id = t.teacherFields?.image?.node?.databaseId;
+          if (!id) return { id: null, url: "", alt: "Image not found" };
+  
+          try {
+            const res = await fetch(
+              `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wp-json/wp/v2/media/${id}`
+            );
+            if (!res.ok) throw new Error("Failed to fetch image");
+            const data = await res.json();
+            return { id, url: data.source_url, alt: data.alt_text || "Image" };
+          } catch {
+            return { id, url: "", alt: "Failed to load" };
+          }
+        })
+      );
+  
+      const imageMap: { [key: string]: { url: string; alt: string } } = {};
+      loadedImages.forEach(({ id, url, alt }) => {
+        if (id) imageMap[id] = { url, alt };
+      });
+  
+      setImageData(imageMap);
+    };
+  
+    loadImages();
+  }, [data]);  
 
 
   if (loading) return <p className="text-center">Loading...</p>;

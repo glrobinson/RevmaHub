@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useQuery } from "@apollo/client";
@@ -20,6 +20,7 @@ interface MediaImage {
   altText?: string;
   databaseId?: number;
 }
+
 
 
 export default function TeachingRomaPage() {
@@ -76,6 +77,17 @@ export default function TeachingRomaPage() {
     }
   };
 
+  useEffect(() => {
+    const sectionId = sessionStorage.getItem("scrollToSection");
+    if (sectionId) {
+      const el = document.querySelector(sectionId);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      sessionStorage.removeItem("scrollToSection");
+    }
+  }, []);
+
   return (
     <main className="space-y-2 text-sm ">
         {/* Hero Section */}
@@ -99,50 +111,54 @@ export default function TeachingRomaPage() {
         </div>
         </section>
 
+      <section id="testimonials" className="scroll-mt-24">
       {/* Teacher Testimonials Section */}
       <TeacherTestimonials />
-
-      {/* Submit Section */}
-      <section className="bg-white px-6 py-16 text-center border-t border-gray-200">
-        <div className="max-w-2xl mx-auto space-y-4">
-          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900">
-            {t("TeachingRoma.submitSectionTitle")}
-          </h2>
-          <p className="text-base text-gray-700">
-            {t("TeachingRoma.submitSectionText")}
-          </p>
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="inline-block mt-4 px-8 py-3 bg-yellow-400 text-black font-semibold rounded-lg shadow hover:bg-yellow-500 transition-all"
-          >
-            {t("TeachingRoma.submitButton")}
-          </button>
-        </div>
       </section>
 
+      <section id="submit" className="scroll-mt-24">
+      {/* Submit Section */}
+        <section className="bg-white px-6 py-16 text-center border-t border-gray-200">
+          <div className="max-w-2xl mx-auto space-y-4">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900">
+              {t("TeachingRoma.submitSectionTitle")}
+            </h2>
+            <p className="text-base text-gray-700">
+              {t("TeachingRoma.submitSectionText")}
+            </p>
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="inline-block mt-4 px-8 py-3 bg-yellow-400 text-black font-semibold rounded-lg shadow hover:bg-yellow-500 transition-all"
+            >
+              {t("TeachingRoma.submitButton")}
+            </button>
+          </div>
+        </section>
+      </section>
 
       {/* Image Row Section */}
-      <section className="px-6 py-3 bg-white">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
-        {imageRow.map((img: MediaImage, index: number) => (
-          img?.sourceUrl && (
-            <div key={img.databaseId || index} className="rounded overflow-hidden shadow">
-              <Image
-                src={img.sourceUrl}
-                alt={img.altText || `Roma Education Image ${index + 1}`}
-                width={500}
-                height={500}
-                className="object-cover w-full h-60"
-              />
-            </div>
-          )
-        ))}
-        </div>
-      </section>
+        <section className="px-6 py-3 bg-white">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {imageRow.map((img: MediaImage, index: number) => (
+            img?.sourceUrl && (
+              <div key={img.databaseId || index} className="rounded overflow-hidden shadow">
+                <Image
+                  src={img.sourceUrl}
+                  alt={img.altText || `Roma Education Image ${index + 1}`}
+                  width={500}
+                  height={500}
+                  className="object-cover w-full h-60"
+                />
+              </div>
+            )
+          ))}
+          </div>
+        </section>
 
       {/* Divider Line */}
       <div className="border-t border-gray-200 mx-auto w-full my-10" />
 
+      <section id="community" className="scroll-mt-24">
       {/* Community Centers */}
       <section className="bg-gray-50 px-6 py-16">
         <div className="max-w-7xl mx-auto text-center space-y-6">
@@ -186,7 +202,7 @@ export default function TeachingRomaPage() {
                 target="_blank"
                 href={center.link}
                 rel="noopener noreferrer"
-                className="p-6 rounded-xl border bg-white hover:shadow-lg transition-all border-gray-200 shadow-sm"
+                className="p-6 rounded-xl border bg-white transition-all border-gray-200 shadow-sm hover:shadow-xl hover:scale-[1.02] hover:border-yellow-500 hover:bg-yellow-50 cursor-pointer group"
               >
                 <h3 className="font-semibold text-md text-gray-800">{center.name}</h3>
                 <div className="text-xs text-gray-500">{t("TeachingRoma.clickToView")}</div>
@@ -207,27 +223,30 @@ export default function TeachingRomaPage() {
               </div>
         </div>
       </section>
+      </section>
 
+      <section id="video" className="scroll-mt-24">
       {/* Learn More Video Section */}
-      <section className="px-6 py-16">
-        <div className="max-w-6xl mx-auto text-center space-y-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
-            {t("TeachingRoma.learnMoreTitle")}
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto text-base">
-            {t("TeachingRoma.learnMoreDescription")}
-          </p>
+        <section className="px-6 py-16">
+          <div className="max-w-6xl mx-auto text-center space-y-8">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
+              {t("TeachingRoma.learnMoreTitle")}
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto text-base">
+              {t("TeachingRoma.learnMoreDescription")}
+            </p>
 
-          {/* Responsive YouTube Embed */}
-          <div className="relative w-full pb-[56.25%] mt-8 rounded-xl overflow-hidden shadow-2xl">
-            <iframe
-              src="https://www.youtube.com/embed/W-BodPznjBY"
-              frameBorder="0"
-              allowFullScreen
-              className="absolute top-0 left-0 w-full h-full"
-            ></iframe>
+            {/* Responsive YouTube Embed */}
+            <div className="relative w-full pb-[56.25%] mt-8 rounded-xl overflow-hidden shadow-2xl">
+              <iframe
+                src="https://www.youtube.com/embed/W-BodPznjBY"
+                frameBorder="0"
+                allowFullScreen
+                className="absolute top-0 left-0 w-full h-full"
+              ></iframe>
+            </div>
           </div>
-        </div>
+        </section>
       </section>
 
 

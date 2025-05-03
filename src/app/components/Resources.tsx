@@ -48,11 +48,11 @@ type Resource = {
   
 
 export default function Resources({ selectedCategory, searchQuery }: Props) {
-    const [locale, setLocale] = useState("EN");
+    const [locale, setLocale] = useState("EL");
     useEffect(() => {
       if (typeof window !== "undefined") {
         const path = window.location.pathname;
-        const language = path.split("/")[1]?.toUpperCase() || "EN";
+        const language = path.split("/")[1]?.toUpperCase() || "EL";
         setLocale(language);
       }
     }, []);
@@ -60,6 +60,7 @@ export default function Resources({ selectedCategory, searchQuery }: Props) {
     const { data, loading, error } = useQuery(GET_RESOURCES, {
         variables: { language: locale },
         client,
+        skip: !locale || locale === "",
     });
   const resources: Resource[] = data?.resources?.nodes || [];
   const [visibleResources, setVisibleResources] = useState(8);

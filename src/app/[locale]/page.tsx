@@ -26,12 +26,23 @@ const carouselImages = [
 
 export default function Home() {
   const { t } = useTranslation();
-  const [locale, setLocale] = useState("EN");
+  const [locale, setLocale] = useState("EL");
   useEffect(() => {
     if (typeof window !== "undefined") {
       const path = window.location.pathname;
-      const language = path.split("/")[1]?.toUpperCase() || "EN";
+      const language = path.split("/")[1]?.toUpperCase() || "EL";
       setLocale(language);
+    }
+  }, []);
+
+  useEffect(() => {
+    const sectionId = sessionStorage.getItem("scrollToSection");
+    if (sectionId) {
+      const el = document.querySelector(sectionId);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      sessionStorage.removeItem("scrollToSection");
     }
   }, []);
 
@@ -86,6 +97,7 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="mission" className="scroll-mt-24">
       {/* Mission Section */}
       <section className="text-center">
       <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-2">
@@ -147,11 +159,14 @@ export default function Home() {
         </div>
       </div>
     </section>
+    </section>
 
 
+    <section id="statements" className="scroll-mt-24">
     {/* Teacher & Staff Statements */}
     <TeacherStatements />
-
+    </section>
+    
     {/* CTA Section */}
     <section className="bg-white px-6 py-16">
       <div className="max-w-3xl mx-auto text-center bg-gray-50 rounded-2xl p-10 shadow-sm">
@@ -160,17 +175,17 @@ export default function Home() {
         </h2>
 
         <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-          <Link href={`/${locale}/stories`}>
+          <Link href={`/${locale.toLowerCase()}/stories`}>
             <button className="px-6 py-3 rounded-lg bg-yellow-400 text-black font-semibold shadow hover:bg-yellow-500 transition">
               {t("HomePage.teachingRomaBtn")}
             </button>
           </Link>
-          <Link href={`/${locale}/resources`}>
+          <Link href={`/${locale.toLowerCase()}/resources`}>
             <button className="px-6 py-3 rounded-lg bg-yellow-400 text-black font-semibold shadow hover:bg-yellow-500 transition">
               {t("HomePage.resourceArchiveBtn")}
             </button>
           </Link>
-          <Link href={`/${locale}/info`}>
+          <Link href={`/${locale.toLowerCase()}/info`}>
             <button className="px-6 py-3 rounded-lg bg-yellow-400 text-black font-semibold shadow hover:bg-yellow-500 transition">
               {t("HomePage.infoBtn")}
             </button>

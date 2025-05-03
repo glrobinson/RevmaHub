@@ -2,13 +2,23 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "../context/TranslationContext";
+import ContactModal from "./ContactModal";
 
 
 export function Footer() {
   const [showContributors, setShowContributors] = useState(false);
   const { t } = useTranslation();
+  const [showContact, setShowContact] = useState(false);
+    const [locale, setLocale] = useState("EL");
+    useEffect(() => {
+      if (typeof window !== "undefined") {
+        const path = window.location.pathname;
+        const language = path.split("/")[1]?.toUpperCase() || "EL";
+        setLocale(language);
+      }
+    }, []);
 
 
   const contributors = [
@@ -43,10 +53,10 @@ export function Footer() {
     <div className="text-center sm:text-left">
       <h5 className="text-base font-semibold mb-4">{t("Footer.quickLinks")}</h5>
       <ul className="space-y-2">
-        <li><Link href="/" className="hover:underline">{t("NavBar.home")}</Link></li>
-        <li><Link href="/stories" className="hover:underline">{t("NavBar.teachingRoma")}</Link></li>
-        <li><Link href="/resources" className="hover:underline">{t("NavBar.resourceArchive")}</Link></li>
-        <li><Link href="/info" className="hover:underline">{t("NavBar.information")}</Link></li>
+      <li><Link href={`/${locale.toLowerCase()}/`} className="hover:underline">{t("NavBar.home")}</Link></li>
+      <li><Link href={`/${locale.toLowerCase()}/stories`} className="hover:underline">{t("NavBar.teachingRoma")}</Link></li>
+      <li><Link href={`/${locale.toLowerCase()}/resources`} className="hover:underline">{t("NavBar.resourceArchive")}</Link></li>
+      <li><Link href={`/${locale.toLowerCase()}/info`} className="hover:underline">{t("NavBar.information")}</Link></li>
         <li>
           <button onClick={() => setShowContributors(true)} className="hover:underline">
             {t("Footer.contributors")}
@@ -60,15 +70,33 @@ export function Footer() {
       <h5 className="text-base font-semibold mb-4">{t("Footer.getConnected")}</h5>
       <ul className="space-y-2">
         <li className="flex justify-center sm:justify-start items-center gap-2">
-          📞 <span>{t("Footer.phone")}: 694 388 4290</span>
+          <Image src="/telephone.png" alt="Phone icon" width={20} height={20} />
+          <span>{t("Footer.phone")}: 694 388 4290</span>
         </li>
         <li className="flex justify-center sm:justify-start items-center gap-2">
-          ✉️ <a href="mailto:revma.infothess@gmail.com" className="underline text-blue-300 hover:text-blue-400">revma.infothess@gmail.com</a>
+          <Image src="/mail.png" alt="Email icon" width={20} height={20} />
+          <a href="mailto:revma.infothess@gmail.com" className="underline text-blue-300 hover:text-blue-400">
+            revma.infothess@gmail.com
+          </a>
         </li>
         <li className="flex justify-center sm:justify-start items-center gap-2">
-          🔗 <a href="https://www.facebook.com/REVMA.AMKE/" target="_blank" rel="noopener noreferrer" className="underline text-blue-300 hover:text-blue-400">revmafacebook.org</a>
+          <Image src="/facebook.png" alt="Link icon" width={20} height={20} />
+          <a
+            href="https://www.facebook.com/REVMA.AMKE/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline text-blue-300 hover:text-blue-400"
+          >
+            revmafacebook.org
+          </a>
         </li>
       </ul>
+      <button
+          onClick={() => setShowContact(true)}
+          className="mt-4 px-4 py-2 bg-yellow-400 text-black font-semibold rounded hover:bg-yellow-500 transition"
+        >
+          {t("Footer.contactUs")}
+        </button>
     </div>
 
     {/* Logo */}
@@ -159,6 +187,9 @@ export function Footer() {
         </section>
       </div>
     )}
+
+    {/* Contact Modal */}
+    <ContactModal isOpen={showContact} onClose={() => setShowContact(false)} />
     </>
   );
 }

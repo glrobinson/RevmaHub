@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const GET_TEACHER_STATEMENTS = gql`
   query GetTeacherStatements($language: LanguageCodeFilterEnum!) {
-    statements(where: { language: $language }) {
+    statements(first: 1000, where: { language: $language }) {
       nodes {
         title
         teacherFields {
@@ -11,6 +11,8 @@ export const GET_TEACHER_STATEMENTS = gql`
           image {
             node {
               databaseId
+              sourceUrl
+              altText
             }
           }
         }
@@ -21,7 +23,7 @@ export const GET_TEACHER_STATEMENTS = gql`
 
 export const GET_STORIES_TESTIMONIALS = gql`
   query GetTestimonials($language: LanguageCodeFilterEnum!) {
-  testimonials(first: 1000, where: { language: $language }) {
+  testimonials(first: 2000, where: { language: $language }) {
     nodes {
       testimonialfields {
         name
@@ -34,7 +36,7 @@ export const GET_STORIES_TESTIMONIALS = gql`
 
 export const GET_RESOURCES = gql`
   query GetResources($language: LanguageCodeFilterEnum!) {
-    resources(first: 1000, where: { language: $language }) {
+    resources(first: 2000, where: { language: $language }) {
       nodes {
         title
         uri

@@ -5,7 +5,23 @@
       "resourceArchive": "Resource Archive",
       "information": "Learn More",
       "contactUs": "Contact Us",
-      "language": "Language"
+      "language": "Language",
+      "menu": "Menu",
+      "sections": {
+      "mission": "Mission Statement",
+      "statements": "Revma Staff Statements",
+      "testimonials": "Teacher Testimonials",
+      "submitAdvice": "Submit Advice",
+      "communityCenters": "Community Centers",
+      "video": "Learn More About Community Centers",
+      "categories": "Categories",
+      "search": "Search Resources",
+      "filters": "Filter Resources",
+      "results": "Resources",
+      "submitResources": "Submit Resources",
+      "stats": "Education Statistics",
+      "infographics": "Infographics"
+    }
     },
     "HomePage": {
       "heroTitle": "Roma Education Digital Hub",
@@ -48,7 +64,7 @@
       "ctaDescription": "If you’re a new teacher of Roma students, or simply looking for helpful educational materials and resources to better support your class, we’ve got you covered.",
       "ctaButton": "Explore Teaching Resources",
 
-      "formEmail": "Email",
+      "formEmail": "Your Email",
       "formRole": "Your Role (e.g. Teacher, Principal, etc.)",
       "formMessage": "Message",
       "formCancel": "Cancel",
@@ -91,13 +107,14 @@
       "modalInstructions": "If you have a link to a resource, please paste it below. If you don’t have a link but would like to upload a file instead, you can leave the download link field empty and submit the form. A member of the Revma team will reach out to you via email to coordinate getting the file.",
       "modalFirstName": "First name",
       "modalLastName": "Last name",
-      "modalEmail": "Email",
+      "modalEmail": "Your Email",
       "modalPhone": "Phone Number",
       "modalDescription": "Resource Description",
       "modalType": "Resource Type",
       "modalLink": "Paste a download link (Google Drive, Dropbox, etc.)",
       "modalCancel": "Cancel",
-      "modalSubmit": "Submit"
+      "modalSubmit": "Submit",
+      "filterSubtitle": "You may select multiple categories."
   },
     "Resources": {
       "loading": "Loading resources...",
@@ -147,7 +164,7 @@
       "download": "Download"
   },
     "ContactModal": {
-      "email": "Email",
+      "email": "Your Email",
       "message": "Message",
       "cancel": "Cancel",
       "submit": "Submit",
@@ -160,6 +177,7 @@
       "quickLinks": "Quick Links",
       "contributors": "Contributors",
       "getConnected": "Get Connected",
+      "contactUs": "Contact Us",
       "meetContributors": "Meet the Contributors from WPI",
       "close": "Close",
       "phone": "Phone",

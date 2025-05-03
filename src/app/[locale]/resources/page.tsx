@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Resources from "../../components/Resources";
 import { useQuery } from "@apollo/client";
@@ -51,6 +51,18 @@ export default function ResourcesPage() {
     }
   };
 
+  useEffect(() => {
+    const sectionId = sessionStorage.getItem("scrollToSection");
+    if (sectionId) {
+      const el = document.querySelector(sectionId);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      sessionStorage.removeItem("scrollToSection");
+    }
+  }, []);
+  
+
   return (
     <main className="space-y-5 text-sm">
       {/* Hero */}
@@ -74,6 +86,7 @@ export default function ResourcesPage() {
         </div>
       </section>
 
+      <section id="categories" className="scroll-mt-24">
       {/* Category Icons */}
       <section className="max-w-8xl mx-auto px-4">
         <div className="flex justify-center flex-wrap gap-x-16 gap-y-8 text-center text-xs">
@@ -86,10 +99,22 @@ export default function ResourcesPage() {
                     ? prev.filter((tag) => tag !== item.tag)
                     : [...prev, item.tag]
                 );
+              
+                if (typeof window !== "undefined" && window.innerWidth < 768) {
+                  setTimeout(() => {
+                    const resultsEl = document.querySelector("#filters");
+                    if (resultsEl) {
+                      resultsEl.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
+                  }, 50);
+                }                
               }}
               
-              className={`flex flex-col items-center w-[160px] p-4 rounded transition transform hover:bg-yellow-50 ${
-                selectedCategories.includes(item.tag) ? "bg-gray-200" : ""
+              
+              className={`flex flex-col items-center w-[160px] p-4 rounded transition transform ${
+                selectedCategories.includes(item.tag)
+                  ? "bg-yellow-100"
+                  : "hover:bg-yellow-100"
               }`}
             >
               <img
@@ -104,7 +129,9 @@ export default function ResourcesPage() {
           ))}
         </div>
       </section>
+      </section>
 
+      <section id="search" className="scroll-mt-24">
       {/* Search */}
       <section className="px-6 max-w-6xl mx-auto">
         <div className="relative w-full max-w-xl mx-auto">
@@ -122,10 +149,15 @@ export default function ResourcesPage() {
           </button>
         </div>
       </section>
+      </section>
 
+      <section id="filters" className="scroll-mt-24">
       {/* Filter Tags */}
       <section className="px-6 max-w-6xl mx-auto space-y-6 text-sm">
         <h2 className="text-lg font-bold">{t("ResourcesPage.filterTitle")}</h2>
+        <p className="text-sm text-gray-600">
+          {t("ResourcesPage.filterSubtitle")}
+        </p>
         <div className="flex flex-wrap gap-2 mt-4">
           <button
             onClick={() => setSelectedCategories([])}
@@ -168,8 +200,9 @@ export default function ResourcesPage() {
           )}
         </div>
       </section>
+      </section>
 
-
+      <section id="results" className="scroll-mt-24">
       {/* Dynamic Resources from WP */}
       <section className="px-4 py-5">
         <div className="max-w-6xl mx-auto">
@@ -183,7 +216,9 @@ export default function ResourcesPage() {
       />
         </div>
       </section>
+      </section>
 
+      <section id="submit" className="scroll-mt-24">
       {/* Submit CTA */}
       <section className="bg-white px-6 py-16">
         <div className="max-w-3xl mx-auto text-center bg-gray-50 rounded-2xl p-10 shadow-sm">
@@ -197,6 +232,7 @@ export default function ResourcesPage() {
             {t("ResourcesPage.submitButton")}
           </button>
         </div>
+      </section>
       </section>
 
 
