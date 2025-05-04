@@ -50,15 +50,17 @@ export default function TeacherStatements() {
           if (!id) return { id: null, url: "", alt: "Image not found" };
   
           try {
-            const res = await fetch(
-              `${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wp-json/wp/v2/media/${id}`
-            );
-            if (!res.ok) throw new Error("Failed to fetch image");
+            const res = await fetch(`${process.env.NEXT_PUBLIC_WORDPRESS_API_URL}/wp-json/wp/v2/media/${id}`);
+            if (!res.ok) {
+              console.error(`Failed to fetch image ${id}`, res.status, await res.text());
+              throw new Error("Failed to fetch image");
+            }
             const data = await res.json();
             return { id, url: data.source_url, alt: data.alt_text || "Image" };
-          } catch {
+          } catch (err) {
+            console.error("Error loading image:", err);
             return { id, url: "", alt: "Failed to load" };
-          }
+          }          
         })
       );
   
@@ -95,17 +97,21 @@ export default function TeacherStatements() {
             key={index}
             className="bg-white border border-gray-200 p-6 shadow-md hover:shadow-lg rounded-xl transition-all duration-200"
             >
-            {img?.url && (
-                <div className="h-40 w-full relative mb-4">
+            <div className="h-40 w-full relative mb-4">
+            {img?.url ? (
                 <Image
-                    src={img.url}
-                    alt={img.alt}
-                    width={300}
-                    height={200}
-                    className="object-cover w-full h-40 rounded"
+                src={img.url}
+                alt={img.alt}
+                width={300}
+                height={200}
+                className="object-cover w-full h-40 rounded"
                 />
+            ) : (
+                <div className="h-full w-full bg-gray-100 flex items-center justify-center rounded text-gray-500 text-sm">
+                No Image
                 </div>
             )}
+            </div>
             <p className="italic text-gray-800 mb-4 flex items-start gap-2">
                 <span className="text-yellow-500 text-2xl leading-none">“</span>
                 <span>{text}</span>
