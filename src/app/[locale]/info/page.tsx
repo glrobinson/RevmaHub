@@ -54,11 +54,13 @@ export default function InfoPage() {
   useEffect(() => {
     const sectionId = sessionStorage.getItem("scrollToSection");
     if (sectionId) {
-      const el = document.querySelector(sectionId);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-      sessionStorage.removeItem("scrollToSection");
+      setTimeout(() => {
+        const el = document.querySelector(sectionId);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+        sessionStorage.removeItem("scrollToSection");
+      }, 250);
     }
   }, []);
 
