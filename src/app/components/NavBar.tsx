@@ -303,11 +303,11 @@ useEffect(() => {
           <div className="font-semibold mb-2">{t("NavBar.language")}</div>
           <div className="flex gap-4 text-base">
             <button onClick={() => switchLanguage("en")} className="flex items-center gap-2">
-              <Image src="/united-kingdom.png" alt="English" width={24} height={16} />
+              <Image src="/united-kingdom.png" alt="English" width={24} height={16} priority unoptimized />
               English
             </button>
             <button onClick={() => switchLanguage("el")} className="flex items-center gap-2">
-              <Image src="/greece.png" alt="Greek" width={24} height={16} />
+              <Image src="/greece.png" alt="Greek" width={24} height={16} priority unoptimized />
               Ελληνικά
             </button>
           </div>
