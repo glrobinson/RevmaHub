@@ -111,10 +111,12 @@
       "modalPhone": "Phone Number",
       "modalDescription": "Resource Description",
       "modalType": "Resource Type",
-      "modalLink": "Paste a download link (Google Drive, Dropbox, etc.)",
+      "modalLink": "Paste a download link (Google Drive, etc.)",
       "modalCancel": "Cancel",
       "modalSubmit": "Submit",
-      "filterSubtitle": "You may select multiple categories."
+      "filterSubtitle": "You may select multiple categories.",
+      "submissionSuccess": "Submission sent!",
+      "submissionFailure": "Failed to send submission."
   },
     "Resources": {
       "loading": "Loading resources...",

@@ -119,10 +119,12 @@
       "modalPhone": "Τηλέφωνο",
       "modalDescription": "Περιγραφή Πόρου",
       "modalType": "Τύπος Πόρου",
-      "modalLink": "Επικολλήστε έναν σύνδεσμο λήψης (Google Drive, Dropbox, κ.λπ.)",
+      "modalLink": "Επικολλήστε έναν σύνδεσμο λήψης (Google Drive, κ.λπ.)",
       "modalCancel": "Ακύρωση",
       "modalSubmit": "Υποβολή",
-      "filterSubtitle": "Μπορείτε να επιλέξετε πολλαπλές κατηγορίες."
+      "filterSubtitle": "Μπορείτε να επιλέξετε πολλαπλές κατηγορίες.",
+      "submissionSuccess": "Η υποβολή εστάλη!",
+      "submissionFailure": "Αποτυχία αποστολής υποβολής."
   },
     "Resources": {
       "loading": "Φόρτωση πόρων...",

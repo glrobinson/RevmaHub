@@ -15,6 +15,7 @@ export default function ResourcesPage() {
   const formRef = useRef<HTMLFormElement>(null);
   const { data, loading, error, refetch } = useQuery(GET_RESOURCES, { client });
   const { t } = useTranslation();
+  const [selectedModalCategories, setSelectedModalCategories] = useState<string[]>([]);
 
 
   const categories = [
@@ -38,17 +39,18 @@ export default function ResourcesPage() {
         email: formData.get("email"),
         phone: formData.get("phone"),
         description: formData.get("description"),
-        resource_type: formData.get("resource_type"),
+        resource_type: selectedModalCategories.join(", "),
         file_link: formData.get("file_link"),
       }),
       headers: { "Content-Type": "application/json" },
     });
     if (response.ok) {
-      alert("Submission sent!");
+      alert(t("ResourcesPage.submissionSuccess"));
       setIsModalOpen(false);
+      setSelectedModalCategories([]);
     } else {
-      alert("Failed to send submission.");
-    }
+      alert(t("ResourcesPage.submissionFailure"));
+    }    
   };
 
   useEffect(() => {
@@ -61,6 +63,11 @@ export default function ResourcesPage() {
       sessionStorage.removeItem("scrollToSection");
     }
   }, []);
+  useEffect(() => {
+    if (!isModalOpen) {
+      setSelectedModalCategories([]);
+    }
+  }, [isModalOpen]);
   
 
   return (
@@ -289,12 +296,28 @@ export default function ResourcesPage() {
                 required
                 className="w-full border p-2 rounded h-24"
               />
-              <input
-                type="text"
-                name="resource_type"
-                placeholder={t("ResourcesPage.modalType")}
-                className="w-full border p-2 rounded"
-              />
+              <div>
+  <p className="text-sm font-semibold text-gray-700 mb-1">{t("ResourcesPage.modalType")}</p>
+  <div className="grid grid-cols-2 gap-2">
+    {categories.map((cat, idx) => (
+      <label key={idx} className="flex items-center gap-2 text-sm">
+        <input
+          type="checkbox"
+          value={cat.tag}
+          checked={selectedModalCategories.includes(cat.tag)}
+          onChange={(e) => {
+            const tag = e.target.value;
+            setSelectedModalCategories((prev) =>
+              prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
+            );
+          }}
+        />
+        {cat.title}
+      </label>
+    ))}
+  </div>
+</div>
+
               <input
                 type="text"
                 name="file_link"

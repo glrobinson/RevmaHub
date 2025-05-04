@@ -65,11 +65,11 @@ export default function TeachingRomaPage() {
         const result = await res.json();
   
         if (result.success) {
-          alert('Submission sent!');
+          alert(t("ResourcesPage.submissionSuccess"));
           setIsModalOpen(false);
         } else {
-          alert('Failed to send submission.');
-        }
+          alert(t("ResourcesPage.submissionFailure"));
+        }    
       } catch (error) {
         console.error('Error submitting form:', error);
         alert('An error occurred. Please try again.');

@@ -33,7 +33,7 @@ export default function ContactModal({ isOpen, onClose }: Props) {
         alert(t('ContactModal.success'));
         onClose();
       } else {
-        throw new Error('Email failed');
+        alert(t("ResourcesPage.submissionFailure"));
       }
     } catch (err) {
       console.error('API Error:', err);
