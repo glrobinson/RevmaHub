@@ -161,7 +161,8 @@
       "tapToView": "Tap to View",
       "loadMore": "Load More",
       "showLess": "Show Less",
-      "download": "Download"
+      "download": "Download",
+      "scrollToView": "Scroll to view full image"
   },
     "ContactModal": {
       "email": "Your Email",

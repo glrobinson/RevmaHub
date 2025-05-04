@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useQuery } from "@apollo/client";
 import { GET_INFOGRAPHICS } from "../../../../lib/queries";
 import client from "../../../../lib/apollo";
-import { useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useTranslation } from "../../context/TranslationContext";
 import TimelinePreviewCard from "../../components/TimelinePreviewCard";
 
@@ -129,22 +129,36 @@ export default function InfoPage() {
               if (!image?.sourceUrl) return null;
 
               return (
-                  <div
+                <div
                   key={image.databaseId || index}
-                  className="relative rounded overflow-hidden shadow cursor-pointer transform transition duration-300 hover:scale-[1.02] hover:shadow-lg group"
+                  className="relative rounded shadow cursor-pointer transform transition duration-300 hover:scale-[1.02] hover:shadow-lg group"
                   onClick={() => setModalImage(image.sourceUrl)}
                 >
-                  {/* Image */}
-                  <Image
-                    src={image.sourceUrl}
-                    alt={image.altText || `Infographic ${index + 1}`}
-                    width={700}
-                    height={700}
-                    className="object-cover w-full h-full transition duration-300 group-hover:opacity-90"
-                  />
+                  {/* Scrollable image container */}
+                  <div
+                    className="h-[920px] overflow-y-scroll w-full bg-white rounded relative"
+                    style={{
+                      scrollbarWidth: 'auto',
+                      WebkitOverflowScrolling: 'touch',
+                    }}
+                  >
+                    {/* Scroll hint at top */}
+                    <div className="absolute top-2 left-1/2 transform -translate-x-1/2 z-10 md:hidden text-xs text-black pointer-events-none">
+                      {t("InfoPage.scrollToView")}
+                    </div>
+
+                    {/* Image itself */}
+                    <Image
+                      src={image.sourceUrl}
+                      alt={image.altText || `Infographic ${index + 1}`}
+                      width={700}
+                      height={700}
+                      className="object-contain w-full"
+                    />
+                  </div>
 
                   {/* Tap to view message for mobile */}
-                  <div className="absolute inset-0 flex items-end justify-center md:hidden pointer-events-none z-10">
+                  <div className="absolute inset-0 flex items-end justify-center md:hidden pointer-events-none z-30">
                     <div className="text-black text-sm font-semibold px-4 py-2 rounded-t-md w-full text-center shadow-lg tracking-wide">
                       {t("InfoPage.tapToView")}
                     </div>
