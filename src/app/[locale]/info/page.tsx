@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useQuery } from "@apollo/client";
 import { GET_INFOGRAPHICS } from "../../../../lib/queries";
 import client from "../../../../lib/apollo";
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "../../context/TranslationContext";
 import TimelinePreviewCard from "../../components/TimelinePreviewCard";
 
