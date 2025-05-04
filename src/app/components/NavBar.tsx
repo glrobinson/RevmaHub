@@ -249,15 +249,19 @@ useEffect(() => {
 
           return (
             <div key={link.href}>
-              <Link
-                href={href}
-                onClick={() => setMenuOpen(false)}
-                className={`block text-lg font-semibold mb-2 ${
-                  isActive ? "text-yellow-400" : "hover:text-yellow-400"
-                }`}
-              >
-                {t(link.labelKey)}
-              </Link>
+              <div className="mb-2">
+                <Link
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  className={`flex justify-between items-center w-full px-3 py-2 text-lg font-semibold rounded border transition ${
+                    isActive
+                      ? "bg-yellow-400 text-black border-white"
+                      : "bg-white/10 text-white border-white hover:bg-white/20"
+                  }`}
+                >
+                  {t(link.labelKey)}
+                </Link>
+              </div>
               <div className="space-y-2 pl-3">
                 {link.sections.map((section) => (
                   <button
