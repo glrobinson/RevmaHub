@@ -205,7 +205,7 @@ export default function InfoPage() {
         {/* X Close Button */}
         <button
           onClick={() => setModalImage(null)}
-          className="absolute top-4 right-4 text-gray-700 text-3xl font-bold hover:text-black z-10"
+          className="absolute top-4 right-4 text-black text-3xl font-bold hover:text-black z-10"
         >
           &times;
         </button>
