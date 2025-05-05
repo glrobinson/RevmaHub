@@ -138,27 +138,24 @@ export default function InfoPage() {
                 >
                   {/* Scrollable image container */}
                   <div
-                    className="h-[920px] overflow-y-scroll w-full bg-white rounded relative"
-                    style={{
-                      scrollbarWidth: 'auto',
-                      WebkitOverflowScrolling: 'touch',
-                    }}
-                  >
-                    {/* Scroll hint at top */}
-                    <div className="absolute top-2 left-1/2 transform -translate-x-1/2 z-10 md:hidden text-xs text-black pointer-events-none px-3 py-1 rounded text-center w-max max-w-[90%]">
-                      {t("InfoPage.scrollToView")}
-                    </div>
-
-                    {/* Image itself */}
-                    <Image
-                      src={image.sourceUrl}
-                      alt={image.altText || `Infographic ${index + 1}`}
-                      width={700}
-                      height={700}
-                      className="object-contain w-full"
-                    />
+                  className="h-[920px] overflow-y-auto overscroll-auto w-full bg-white rounded relative"
+                  style={{
+                    scrollbarWidth: 'auto',
+                    WebkitOverflowScrolling: 'touch',
+                  }}
+                >
+                  <div className="absolute top-2 left-1/2 transform -translate-x-1/2 z-10 md:hidden text-xs text-black pointer-events-none px-3 py-1 rounded text-center w-max max-w-[90%]">
+                    {t("InfoPage.scrollToView")}
                   </div>
 
+                  <Image
+                    src={image.sourceUrl}
+                    alt={image.altText || `Infographic ${index + 1}`}
+                    width={700}
+                    height={700}
+                    className="object-contain w-full"
+                  />
+                </div>
                   {/* Tap to view message for mobile */}
                   <div className="absolute inset-0 flex items-end justify-center md:hidden pointer-events-none z-30">
                     <div className="text-black text-sm font-semibold px-4 py-2 rounded-t-md w-full text-center shadow-lg tracking-wide">
