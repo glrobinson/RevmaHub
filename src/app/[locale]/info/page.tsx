@@ -145,7 +145,7 @@ export default function InfoPage() {
                     }}
                   >
                     {/* Scroll hint at top */}
-                    <div className="absolute top-2 left-1/2 transform -translate-x-1/2 z-10 md:hidden text-xs text-black pointer-events-none">
+                    <div className="absolute top-2 left-1/2 transform -translate-x-1/2 z-10 md:hidden text-xs text-black pointer-events-none px-3 py-1 rounded text-center w-max max-w-[90%]">
                       {t("InfoPage.scrollToView")}
                     </div>
 
