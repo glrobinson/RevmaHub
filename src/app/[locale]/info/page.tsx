@@ -138,16 +138,33 @@ export default function InfoPage() {
                 >
                   {/* Scrollable image container */}
                   <div
-                  className="h-[920px] overflow-y-auto overscroll-auto w-full bg-white rounded relative"
-                  style={{
-                    scrollbarWidth: 'auto',
-                    WebkitOverflowScrolling: 'touch',
-                  }}
-                >
+                    className="h-[920px] overflow-y-auto overscroll-auto w-full bg-white rounded relative"
+                    style={{
+                      scrollbarWidth: 'auto',
+                      WebkitOverflowScrolling: 'touch',
+                    }}
+                    onWheel={(e) => {
+                      const el = e.currentTarget;
+                      const atTop = el.scrollTop === 0;
+                      const atBottom = el.scrollHeight - el.scrollTop === el.clientHeight;
+                      const scrollingDown = e.deltaY > 0;
+
+                      if ((atTop && !scrollingDown) || (atBottom && scrollingDown)) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        window.scrollBy({ top: e.deltaY, behavior: "smooth" });
+                      }
+                    }}
+                    onTouchEnd={(e) => {
+                      const el = e.currentTarget;
+                      if (el.scrollTop + el.clientHeight >= el.scrollHeight || el.scrollTop === 0) {
+                        document.body.style.overflow = "auto";
+                      }
+                    }}
+                  >
                   <div className="absolute top-2 left-1/2 transform -translate-x-1/2 z-10 md:hidden text-xs text-black pointer-events-none px-3 py-1 rounded text-center w-max max-w-[90%]">
                     {t("InfoPage.scrollToView")}
                   </div>
-
                   <Image
                     src={image.sourceUrl}
                     alt={image.altText || `Infographic ${index + 1}`}
