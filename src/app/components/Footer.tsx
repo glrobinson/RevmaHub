@@ -164,15 +164,15 @@ export function Footer() {
           </div>
 
           {/* Report Button */}
-    <div className="mt-4 sm:mt-5">
-            <a
-              href="https://wpi0-my.sharepoint.com/:w:/g/personal/mzekavat_wpi_edu/EXitGuFrN3NBrrhNllyCKXYBs0IEsTMtR34zZ-RQDNRUeA?e=j2CEuH"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block px-6 py-3 bg-gray-100 hover:bg-gray-200 text-black rounded hover:bg-yellow-500 transition"
-            >
-              {t("Footer.reportText")}
-            </a>
+          <div className="mt-4 sm:mt-5">
+          <a
+            href="/Roma Education Digital Hub Final Report 05_05_25.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-6 py-3 bg-gray-100 hover:bg-gray-200 text-black rounded hover:bg-yellow-500 transition"
+          >
+            {t("Footer.reportText")}
+          </a>
           </div>
 
           {/* Bottom Close Button */}
