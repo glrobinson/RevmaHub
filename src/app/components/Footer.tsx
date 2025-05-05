@@ -114,8 +114,6 @@ export function Footer() {
   </div>
 </footer>
 
-
-
       {/* Contributors Modal */}
     {showContributors && (
       <div className="fixed inset-0 z-50 flex flex-col items-center sm:justify-center px-8 py-10 sm:py-16 overflow-y-auto backdrop-blur-md">
