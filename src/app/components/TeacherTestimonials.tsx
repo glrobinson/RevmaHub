@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_STORIES_TESTIMONIALS } from "../../../lib/queries";
 import client from "../../../lib/apollo";
 import { useTranslation } from "../context/TranslationContext";
 import { Dialog } from "@headlessui/react";
+import { usePathname } from "next/navigation";
 
 type Testimonial = {
     testimonialfields?: {
@@ -15,23 +16,18 @@ type Testimonial = {
   };  
 
 export default function TeacherTestimonials() {
-  const [locale, setLocale] = useState("EL");
   const [visibleTestimonials, setVisibleTestimonials] = useState(2);
   const [expandedTestimonial, setExpandedTestimonial] = useState<string | null>(null);
   const { t } = useTranslation();
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const path = window.location.pathname;
-      const language = path.split("/")[1]?.toUpperCase() || "EL";
-      setLocale(language);
-    }
-  }, []);
+  const pathname = usePathname();
+const rawLocale = pathname?.split("/")[1]?.toUpperCase();
+const locale = rawLocale === "EN" ? "EN" : "EL";
 
   const { data, loading, error } = useQuery(GET_STORIES_TESTIMONIALS, {
     variables: { language: locale },
     client,
-    skip: !locale || locale === "",
+    skip: !locale,
   });
 
   const testimonials = data?.testimonials?.nodes || [];

@@ -9,6 +9,7 @@ import client from "../../../lib/apollo";
 import { GET_MEDIA_ITEMS, GET_HOMEPAGE_CAROUSEL_IMAGES, } from "../../../lib/queries";
 import TeacherStatements from "../components/TeacherStatements";
 import { useTranslation } from "../context/TranslationContext";
+import { usePathname } from "next/navigation";
 
 interface ImageFieldNode {
   node?: {
@@ -18,14 +19,9 @@ interface ImageFieldNode {
 
 export default function Home() {
   const { t } = useTranslation();
-  const [locale, setLocale] = useState("EL");
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const path = window.location.pathname;
-      const language = path.split("/")[1]?.toUpperCase() || "EL";
-      setLocale(language);
-    }
-  }, []);
+  const pathname = usePathname();
+const rawLocale = pathname?.split("/")[1]?.toUpperCase();
+const locale = rawLocale === "EN" ? "EN" : "EL";
 
   useEffect(() => {
     const sectionId = sessionStorage.getItem("scrollToSection");

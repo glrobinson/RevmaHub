@@ -7,6 +7,8 @@ import client from "../../../lib/apollo";
 import { useEffect, useState } from "react";
 import { useTranslation } from "../context/TranslationContext";
 import { useMemo } from "react";
+import { usePathname } from "next/navigation";
+
 
 type TeacherStatement = {
     teacherFields?: {
@@ -21,19 +23,15 @@ type TeacherStatement = {
   };  
 
 export default function TeacherStatements() {
-    const [locale, setLocale] = useState("EL");
-    useEffect(() => {
-        if (typeof window !== "undefined") {
-          const path = window.location.pathname;
-          const language = path.split("/")[1]?.toUpperCase() || "EL";
-          setLocale(language);
-        }
-      }, []);      
+    const pathname = usePathname();
+const rawLocale = pathname?.split("/")[1]?.toUpperCase();
+const locale = rawLocale === "EN" ? "EN" : "EL";
   const { t } = useTranslation();
+
   const { data, error, loading } = useQuery(GET_TEACHER_STATEMENTS, {
     variables: { language: locale },
     client,
-    skip: !locale || locale === "",
+    skip: !locale,
   });
   const statements: TeacherStatement[] = useMemo(() => data?.statements?.nodes || [], [data]);
   const [visibleStatements, setVisibleStatements] = useState(3);

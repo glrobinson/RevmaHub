@@ -4,8 +4,9 @@ import Image from "next/image";
 import { useQuery } from "@apollo/client";
 import { GET_RESOURCES } from "../../../lib/queries";
 import client from "../../../lib/apollo";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "../context/TranslationContext";
+import { usePathname } from "next/navigation";
 
 type Props = {
     selectedCategory: string[];
@@ -48,19 +49,14 @@ type Resource = {
   
 
 export default function Resources({ selectedCategory, searchQuery }: Props) {
-    const [locale, setLocale] = useState("EL");
-    useEffect(() => {
-      if (typeof window !== "undefined") {
-        const path = window.location.pathname;
-        const language = path.split("/")[1]?.toUpperCase() || "EL";
-        setLocale(language);
-      }
-    }, []);
+    const pathname = usePathname();
+const rawLocale = pathname?.split("/")[1]?.toUpperCase();
+const locale = rawLocale === "EN" ? "EN" : "EL";
     const { t } = useTranslation();
     const { data, loading, error } = useQuery(GET_RESOURCES, {
         variables: { language: locale },
         client,
-        skip: !locale || locale === "",
+        skip: !locale,
     });
   const resources: Resource[] = data?.resources?.nodes || [];
   const [visibleResources, setVisibleResources] = useState(8);

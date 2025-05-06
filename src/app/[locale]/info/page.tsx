@@ -7,6 +7,7 @@ import client from "../../../../lib/apollo";
 import { useEffect, useState } from "react";
 import { useTranslation } from "../../context/TranslationContext";
 import TimelinePreviewCard from "../../components/TimelinePreviewCard";
+import { usePathname } from "next/navigation";
 
 interface InfographicImageNode {
   sourceUrl: string;
@@ -24,19 +25,14 @@ interface InfographicItem {
 
 
 export default function InfoPage() {
-  const [locale, setLocale] = useState("EL");
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const path = window.location.pathname;
-      const language = path.split("/")[1]?.toUpperCase() || "EL";
-      setLocale(language);
-    }
-  }, []);
+  const pathname = usePathname();
+const rawLocale = pathname?.split("/")[1]?.toUpperCase();
+const locale = rawLocale === "EN" ? "EN" : "EL";
   const { t } = useTranslation();
   const { data  } = useQuery(GET_INFOGRAPHICS, {
       variables: { language: locale },
       client,
-      skip: !locale || locale === "",
+      skip: !locale,
   });
   const infographics = data?.infographics?.nodes || [];
   const [visibleInfographics, setVisibleInfographics] = useState(6);
