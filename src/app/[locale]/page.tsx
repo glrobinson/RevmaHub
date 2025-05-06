@@ -16,14 +16,6 @@ interface ImageFieldNode {
   };
 }
 
-const carouselImages = [
-  "/activities4.jpg",
-  "/activities2.jpg",
-  "/activities3.jpg",
-  "/activities1.jpg",
-  "/activities5.jpg",
-];
-
 export default function Home() {
   const { t } = useTranslation();
   const [locale, setLocale] = useState("EL");
@@ -149,7 +141,7 @@ export default function Home() {
 
         {/* Dots */}
         <div className="flex justify-center gap-2 mt-4">
-          {carouselImages.map((_, index) => (
+        {images.map((_: { sourceUrl: string; databaseId: number }, index: number) => (
             <button
               key={index}
               onClick={() => scrollTo(index)}
